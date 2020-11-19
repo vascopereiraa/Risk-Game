@@ -139,11 +139,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Jogador.cpp" />
     <ClCompile Include="Mundo.cpp" />
     <ClCompile Include="Territorio.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Jogador.h" />
     <ClInclude Include="Mundo.h" />
     <ClInclude Include="Territorio.h" />
   </ItemGroup>
