@@ -3,10 +3,13 @@
 
 #include <iostream>
 #include <sstream>
+#include <fstream>
 
 using std::cout;
 using std::endl;
 using std::ostringstream;
+using std::ifstream;
+using std::getline;
 
 Mundo::Mundo()
 {
@@ -20,7 +23,7 @@ Mundo::Mundo()
 	indTerr["pescaria"] = 0;
 }
 
-void Mundo::criaTerritorio(string tipo)
+void Mundo::criaTerritorio(string& tipo)
 {
 	ostringstream oss;
 	for (auto it = indTerr.begin(); it != indTerr.end(); it++) {
@@ -30,6 +33,16 @@ void Mundo::criaTerritorio(string tipo)
 			territorios.emplace_back(Territorio(oss.str(), 1, 1, 1, 1));
 		}
 	}
+}
+
+void Mundo::criaTerritorioFicheiro(const string& nomeFicheiro)
+{
+	ifstream ficheiro(nomeFicheiro);
+	string tipo;
+	if (ficheiro.is_open() && ficheiro.good())
+		while (getline(ficheiro, tipo))
+			criaTerritorio(tipo);
+	ficheiro.close();
 }
 
 string Mundo::obtemTerritorios() const

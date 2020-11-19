@@ -23,9 +23,9 @@ public:
 
 	Mundo();
 	Mundo(const Mundo &outro) = delete;
-	void criaTerritorio(string tipo);
+	void criaTerritorio(string& tipo);
+	void criaTerritorioFicheiro(const string& nomeFicheiro);
 	string obtemTerritorios() const;
-
 
 };
 
