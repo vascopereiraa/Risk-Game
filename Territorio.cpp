@@ -5,3 +5,9 @@ Territorio::Territorio(string nome, int resist, int CriaPro, int CriaOu, int Pon
 {
 	
 }
+
+string Territorio::obtemNome() const
+{
+	return nome;
+}
+

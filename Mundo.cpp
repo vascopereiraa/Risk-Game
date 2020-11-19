@@ -54,3 +54,20 @@ string Mundo::obtemTerritorios() const
 	}
 	return oss.str();
 }
+
+bool Mundo::verificaExisteTerritorio(const string& nome) const
+{
+	for (auto it = territorios.begin(); it != territorios.end(); it++) {
+		if (it->obtemNome() == nome)
+			return true;
+	}
+	return false;
+}
+
+void Mundo::conquistaTerritorio(string territorio)
+{
+	if (verificaExisteTerritorio(territorio))
+		cout << "Parte a conquista!" << endl;
+	else
+		cout << "Nao existe nenhum territorio com esse nome" << endl;
+}

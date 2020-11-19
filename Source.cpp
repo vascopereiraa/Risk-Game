@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-#include <cctype>
 
 #include "Mundo.h"
 
@@ -11,7 +10,6 @@ using std::getline;
 using std::string;
 using std::istringstream;
 using std::endl;
-using std::tolower;
 
 int main() {
 
@@ -39,6 +37,12 @@ int main() {
 				mundo->criaTerritorio(tipo);
 		}
 
+		if (comando == "conquista") {
+			string nome;
+			iss >> nome;
+			mundo->conquistaTerritorio(nome);
+		}
+
 		cout << endl;
 		cout << mundo->obtemTerritorios() << endl;
 
@@ -47,3 +51,13 @@ int main() {
 
 	return 0;
 }
+
+// Perguntas:
+
+/*
+* 
+*  Como guardar os diferentes grupos de territorios?
+*  Como gerir o jogador? (Guardar dados do jogador, criação do Terr Ini)
+*  Como declarar Territorio Inicial ?
+*  
+*/

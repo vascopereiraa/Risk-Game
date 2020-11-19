@@ -19,6 +19,7 @@ class Mundo{
 
 	vector<Territorio> territorios;
 
+
 public:
 
 	Mundo();
@@ -26,7 +27,8 @@ public:
 	void criaTerritorio(string& tipo);
 	void criaTerritorioFicheiro(const string& nomeFicheiro);
 	string obtemTerritorios() const;
-
+	bool verificaExisteTerritorio(const string& nome) const;
+	void conquistaTerritorio(string territorio);
 };
 
 #endif 
