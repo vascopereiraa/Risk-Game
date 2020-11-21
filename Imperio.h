@@ -11,6 +11,7 @@ using std::vector;
 
 class Imperio
 {
+
 	vector<Territorio*> imperio;
 	int armazem;
 	int cofre;
@@ -19,7 +20,9 @@ public:
 	Imperio();
 	void adicionaTerr(Territorio* novo);
 	string obtemImperio() const;
+	bool procura(const string &terrAtaque) const;
 
+	
 };
 
 

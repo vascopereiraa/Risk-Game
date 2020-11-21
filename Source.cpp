@@ -16,11 +16,9 @@ int main() {
 	/* Fase de Configuracao */
 	Mundo* mundo = new Mundo();
 	
-	string linha, comando;
-
 	mundo->criaTerritorio("Novo");
-	mundo->criaTerritorio("Novo");
-	mundo->criaTerritorio("Novo");
+	mundo->criaTerritorio("Teste1");
+	mundo->criaTerritorio("Teste2");
 
 	cout << "Todos os territorios" << endl; 
 
@@ -30,36 +28,46 @@ int main() {
 
 	cout << mundo->jogador->obtemImperio() << endl;
 
-	/*do {
-		cout << "Comando: ";
-		getline(cin, linha);
-		istringstream iss(linha);
-		iss >> comando;
-		
-		if (comando == "carrega") {
-			string nomeFicheiro;
-			iss >> nomeFicheiro;
-			mundo->criaTerritorioFicheiro(nomeFicheiro);
-		}
+	mundo->conquistaTerr("Teste1");
+	cout << "ANGOLA E NOSSA: " << endl << endl;
+	cout << mundo->jogador->obtemImperio() << endl;
+	
+	
+	//string linha, comando;
 
-		if (comando == "cria") {
-			string tipo;
-			int num;
-			iss >> tipo >> num;
-			for (int i = 0; i < num; i++)
-				mundo->criaTerritorio(tipo);
-		}
+	//do {
+	//	cout << "Comando: ";
+	//	getline(cin, linha);
+	//	istringstream iss(linha);
+	//	iss >> comando;
 
-		if (comando == "conquista") {
-			string nome;
-			iss >> nome;
-			mundo->conquistaTerritorio(nome);
-		}
+	//	if (comando == "carrega") {
+	//		string nomeFicheiro;
+	//		iss >> nomeFicheiro;
+	//		mundo->criaTerritorioFicheiro(nomeFicheiro);
+	//	}
 
-		cout << endl;
-		cout << mundo->obtemTerritorios() << endl;
+	//	if (comando == "cria") {
+	//		string tipo;
+	//		int num;
+	//		iss >> tipo >> num;
+	//		for (int i = 0; i < num; i++)
+	//			mundo->criaTerritorio(tipo);
+	//	}
 
-	} while (comando != "sair");*/
+	//	if (comando == "conquista") {
+	//		string nome;
+	//		iss >> nome;
+	//		//mundo->conquistaTerritorio(nome);
+	//	}
+
+	//	cout << endl;
+	//	cout << mundo->obtemTerritorios() << endl;
+
+	//} while (comando != "sair");
+
+
+
 
 
 	return 0;

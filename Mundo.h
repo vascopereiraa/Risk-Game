@@ -24,10 +24,13 @@ public:
 	Mundo(const Mundo &outro) = delete;
 	Territorio* criaTerritorio(const string& tipo);
 	string obtemTerritorios() const;
+	
+	bool verificaConq(const string& ataque) const;
+	void conquistaTerr(const string& ataque);
+	Territorio* obtemTerritorio(const string& tipo);
+	
 
 	//void criaTerritorioFicheiro(const string& nomeFicheiro);
-	//bool verificaExisteTerritorio(const string& nome) const;
-	//void conquistaTerritorio(string territorio);
 };
 
 #endif 

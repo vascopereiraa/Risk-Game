@@ -21,3 +21,12 @@ string Imperio::obtemImperio() const
 	return oss.str();
 }
 
+bool Imperio::procura(const string &terrAtaque) const
+{
+	for (auto it = imperio.begin(); it != imperio.end(); it++) {
+		if ((*it)->nome == terrAtaque)
+			return true;
+	}
+	return false;
+}
+

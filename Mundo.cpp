@@ -8,6 +8,7 @@
 using std::cout;
 using std::endl;
 using std::ostringstream;
+using std::istringstream;
 using std::ifstream;
 using std::getline;
 
@@ -36,6 +37,39 @@ string Mundo::obtemTerritorios() const
 			" " << (*it)->CriaProd << " " << (*it)->PontosVit << endl;
 	}
 	return oss.str();
+}
+
+bool Mundo::verificaConq(const string& ataque) const
+{
+	int flag = 0;
+
+	for (auto it = territorios.begin(); it != territorios.end(); it++) {
+		if ((*it)->nome == ataque)
+			++flag;
+	}
+	if (jogador->procura(ataque))
+		++flag;
+
+	if (flag == 1)
+		return true;
+	else
+		return false;
+}
+
+void Mundo::conquistaTerr(const string& ataque)
+{
+	if (verificaConq(ataque)){
+		jogador->adicionaTerr(obtemTerritorio(ataque));
+	}
+}
+
+Territorio* Mundo::obtemTerritorio(const string& tipo)
+{
+	for (auto it = territorios.begin(); it != territorios.end(); it++) {
+		if ((*it)->nome == tipo)
+			return (*it);
+	}
+	return nullptr;
 }
 
 

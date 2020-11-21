@@ -21,7 +21,6 @@ public:
 public:
 
 	Territorio(const string& nome, int resist, int CriaPro, int CriaOu, int PontosV);
-	string obtemNome() const;
 };
 
 
