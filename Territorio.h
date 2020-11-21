@@ -1,11 +1,10 @@
+
 #ifndef TERRITORIO_H
 #define TERRITORIO_H
 
 #include <string>
-#include <vector>
 
 using std::string;
-using std::vector;
 
 class Territorio
 {
@@ -26,6 +25,7 @@ public:
 	int obtemCriacaoProdutos() const;
 	int obtemCriacaoOuro() const;
 	int obtemPontosVitoria() const;
+	string obtemTerritorioString() const;
 };
 
 

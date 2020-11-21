@@ -1,101 +1,81 @@
+
 #include "Mundo.h"
 #include "Imperio.h"
 
 #include <iostream>
 #include <sstream>
-#include <fstream>
+#include <random>
 
-using std::cout;
 using std::endl;
 using std::ostringstream;
-using std::istringstream;
-using std::ifstream;
-using std::getline;
 
+/* FUNCOES PRIVADAS */
+Territorio* Mundo::procuraTerritorioMundo(const string& nome)
+{
+	// Procura no mundo um territorio com o nome passado por argumento
+	for (auto it = territorios.begin(); it != territorios.end(); it++)
+		if ((*it)->obtemNome() == nome)
+			return (*it);
+
+	// Caso o territorio nao exista no Mundo
+	return nullptr;
+}
+
+Territorio* Mundo::procuraTerritorioImperio(const string& nome)
+{
+	return jogador->procuraTerritorio(nome);
+}
+
+/* FUNCOES PUBLICAS */
 Mundo::Mundo(){
-	Imperio* novoJog = new Imperio();
-	jogador = novoJog;
-	Territorio* terrInicial = criaTerritorio("Inicial");
-	jogador->adicionaTerr(terrInicial);
+	jogador = new Imperio();
+	jogador->adicionaTerritorio(criaTerritorio("Territorio Inicial"));
 }
 
 Territorio* Mundo::criaTerritorio(const string& tipo)
 {
 	Territorio* novo = new Territorio(tipo,1,1,1,1);
-
 	territorios.emplace_back(novo);
-
 	return novo;
 }
 
-string Mundo::obtemTerritorios() const
+string Mundo::obtemTerritoriosMundoString() const
 {
-
 	ostringstream oss;
 	for (auto it = territorios.begin(); it != territorios.end(); it++) {
-		oss << (*it)->nome << " " << (*it)->resist << " " << (*it)->CriaOuro <<
-			" " << (*it)->CriaProd << " " << (*it)->PontosVit << endl;
+		oss << (*it)->obtemNome() << (*it)->obtemResistencia() <<
+			(*it)->obtemCriacaoProdutos() << (*it)->obtemCriacaoOuro() <<
+			(*it)->obtemPontosVitoria() << endl;
 	}
 	return oss.str();
 }
 
-bool Mundo::verificaConq(const string& ataque) const
+void Mundo::conquistaTerritorio(const string& territorio)
 {
-	int flag = 0;
+	// Se o territorio existir no Mundo
+	Territorio* procuraMundo = procuraTerritorioMundo(territorio);
+	if (procuraMundo != nullptr) {
+		// Se o territorio nao pertencer ao imperio
+		if (jogador->procuraTerritorio(territorio) == nullptr) {
+			int resAtacado = procuraMundo->obtemResistencia();
+			
+			// Inicia o gerador aleatorio entre 1 e 6
+			std::default_random_engine gerador;
+			std::uniform_int_distribution<int> randomInt(1, 6);
+			int forcaAtaque = randomInt(gerador) + jogador->obtemForcaMilitar();
 
-	for (auto it = territorios.begin(); it != territorios.end(); it++) {
-		if ((*it)->nome == ataque)
-			++flag;
+			if (forcaAtaque >= resAtacado) {
+				// Conquista o territorio
+				jogador->adicionaTerritorio(procuraMundo);
+			}
+			else
+				jogador->perderForcaMilitar(1);
+		}
 	}
-	if (jogador->procura(ataque))
-		++flag;
-
-	if (flag == 1)
-		return true;
-	else
-		return false;
 }
 
-void Mundo::conquistaTerr(const string& ataque)
+string Mundo::obtemTerritoriosImperioString() const
 {
-	if (verificaConq(ataque)){
-		jogador->adicionaTerr(obtemTerritorio(ataque));
-	}
+	return jogador->obtemImperioString();
 }
 
-Territorio* Mundo::obtemTerritorio(const string& tipo)
-{
-	for (auto it = territorios.begin(); it != territorios.end(); it++) {
-		if ((*it)->nome == tipo)
-			return (*it);
-	}
-	return nullptr;
-}
-
-
-//void Mundo::criaTerritorioFicheiro(const string& nomeFicheiro)
-//{
-//	ifstream ficheiro(nomeFicheiro);
-//	string tipo;
-//	if (ficheiro.is_open() && ficheiro.good())
-//		while (getline(ficheiro, tipo))
-//			criaTerritorio(tipo);
-//	ficheiro.close();
-//}
-
-//bool Mundo::verificaExisteTerritorio(const string& nome) const
-//{
-//	for (auto it = territorios.begin(); it != territorios.end(); it++) {
-//		if (it->obtemNome() == nome)
-//			return true;
-//	}
-//	return false;
-//}
-
-//void Mundo::conquistaTerritorio(string territorio)
-//{
-//	if (verificaExisteTerritorio(territorio))
-//		cout << "Parte a conquista!" << endl;
-//	else
-//		cout << "Nao existe nenhum territorio com esse nome" << endl;
-//}

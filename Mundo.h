@@ -1,36 +1,32 @@
+
 #ifndef MUNDO_H
 #define MUNDO_H
 
-#include <vector>
-#include <map>
-
+#include "Territorio.h"
 #include "Imperio.h"
 
-#include "Territorio.h"
+#include <vector>
+#include <string>
 
 using std::vector;
-using std::map;
+using std::string;
 
-
-class Mundo{
-	
+class Mundo
+{
 	vector<Territorio*> territorios;
-public:
 	Imperio* jogador;
 
+private:
+	Territorio* procuraTerritorioMundo(const string& nome);
+	Territorio* procuraTerritorioImperio(const string& nome);
+
 public:
-
 	Mundo();
-	Mundo(const Mundo& copia) = delete;
+	Mundo(const Mundo& copia) = delete;		// Apagar o construtor por copia
 	Territorio* criaTerritorio(const string& tipo);
-	string obtemTerritorios() const;
-	
-	bool verificaConq(const string& ataque) const;
-	void conquistaTerr(const string& ataque);
-	Territorio* obtemTerritorio(const string& tipo);
-	
-
-	//void criaTerritorioFicheiro(const string& nomeFicheiro);
+	string obtemTerritoriosMundoString() const;
+	void conquistaTerritorio(const string& territorio);
+	string obtemTerritoriosImperioString() const;
 };
 
 #endif 

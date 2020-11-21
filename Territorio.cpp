@@ -1,8 +1,10 @@
+
 #include "Imperio.h"
 
 #include <sstream>
 
 using std::ostringstream;
+using std::endl;
 
 int Territorio::numTerritorios = 0;
 
@@ -10,7 +12,8 @@ Territorio::Territorio(const string& territorio, int r, int cProd, int cOuro, in
 	:  resistencia(r), criacaoProdutos(cProd), criacaoOuro(cOuro), pontosVitoria(ptVit)
 {
 	ostringstream oss;
-	oss << territorio << numTerritorios++;
+	numTerritorios++;
+	oss << territorio << numTerritorios;
 	nome = oss.str();
 }
 
@@ -37,5 +40,13 @@ int Territorio::obtemCriacaoOuro() const
 int Territorio::obtemPontosVitoria() const
 {
 	return pontosVitoria;
+}
+
+string Territorio::obtemTerritorioString() const
+{
+	ostringstream oss;
+	oss << obtemNome() << obtemResistencia() << obtemCriacaoProdutos() <<
+		obtemCriacaoOuro() << obtemPontosVitoria() << endl;
+	return oss.str();
 }
 

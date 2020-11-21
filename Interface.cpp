@@ -48,3 +48,12 @@ using std::endl;
 //	} while (comando != "sair");
 //
 //}
+
+/* Mostrar Territorios
+	oss << "Nome: " << (*it)->obtemNome() << endl <<
+	"Resistencia: " << (*it)->obtemResistencia() <<
+	"Criacao Produtos: " << (*it)->obtemCriacaoProdutos() <<
+	"Criacao Outro: " << (*it)->obtemCriacaoOuro() << endl <<
+	"Pontos Vitoria" << (*it)->obtemPontosVitoria() << endl << endl;
+*/
+
