@@ -21,7 +21,7 @@ public:
 public:
 
 	Mundo();
-	Mundo(const Mundo &outro) = delete;
+	Mundo(const Mundo& copia) = delete;
 	Territorio* criaTerritorio(const string& tipo);
 	string obtemTerritorios() const;
 	

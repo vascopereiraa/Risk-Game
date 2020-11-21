@@ -7,20 +7,25 @@
 using std::string;
 using std::vector;
 
-class Territorio{
+class Territorio
+{
+	static int numTerritorios;
 
-	static int numTerr;
 	// Caracteristicas do Territorio
-public:
 	string nome;
-	int resist;
-	int CriaProd;
-	int CriaOuro;
-	int PontosVit;
+	int resistencia;
+	int criacaoProdutos;
+	int criacaoOuro;
+	int pontosVitoria;
 
 public:
-
-	Territorio(const string& nome, int resist, int CriaPro, int CriaOu, int PontosV);
+	Territorio(const string& territorio, int resist, int CriaPro, int CriaOu, int PontosV);
+	Territorio(const Territorio& copia) = delete;
+	string obtemNome() const;
+	int obtemResistencia() const;
+	int obtemCriacaoProdutos() const;
+	int obtemCriacaoOuro() const;
+	int obtemPontosVitoria() const;
 };
 
 

@@ -1,10 +1,41 @@
 #include "Imperio.h"
 
-int Territorio::numTerr = 0;
+#include <sstream>
 
-Territorio::Territorio(const string& nome, int resist, int CriaPro, int CriaOu, int PontosV)
-	: nome(nome), resist(resist), CriaProd(CriaPro), CriaOuro(CriaOu), PontosVit(PontosV)
+using std::ostringstream;
+
+int Territorio::numTerritorios = 0;
+
+Territorio::Territorio(const string& territorio, int r, int cProd, int cOuro, int ptVit)
+	:  resistencia(r), criacaoProdutos(cProd), criacaoOuro(cOuro), pontosVitoria(ptVit)
 {
-	
+	ostringstream oss;
+	oss << territorio << numTerritorios++;
+	nome = oss.str();
+}
+
+string Territorio::obtemNome() const
+{
+	return nome;
+}
+
+int Territorio::obtemResistencia() const
+{
+	return resistencia;
+}
+
+int Territorio::obtemCriacaoProdutos() const
+{
+	return criacaoProdutos;
+}
+
+int Territorio::obtemCriacaoOuro() const
+{
+	return criacaoOuro;
+}
+
+int Territorio::obtemPontosVitoria() const
+{
+	return pontosVitoria;
 }
 
