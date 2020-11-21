@@ -1,5 +1,5 @@
 #include "Mundo.h"
-#include "Territorio.h"
+#include "Imperio.h"
 
 #include <iostream>
 #include <sstream>
@@ -11,63 +11,57 @@ using std::ostringstream;
 using std::ifstream;
 using std::getline;
 
-Mundo::Mundo()
-{
-	indTerr["planicie"] = 0;
-	indTerr["montanha"] = 0;
-	indTerr["fortaleza"] = 0;
-	indTerr["mina"] = 0;
-	indTerr["duna"] = 0;
-	indTerr["castelo"] = 0;
-	indTerr["refpiratas"] = 0;
-	indTerr["pescaria"] = 0;
+Mundo::Mundo(){
+	Imperio* novoJog = new Imperio();
+	jogador = novoJog;
+	Territorio* terrInicial = criaTerritorio("Inicial");
+	jogador->adicionaTerr(terrInicial);
 }
 
-void Mundo::criaTerritorio(string& tipo)
+Territorio* Mundo::criaTerritorio(const string& tipo)
 {
-	ostringstream oss;
-	for (auto it = indTerr.begin(); it != indTerr.end(); it++) {
-		if (it->first == tipo) {
-			it->second++;
-			oss << tipo << it->second;
-			territorios.emplace_back(Territorio(oss.str(), 1, 1, 1, 1));
-		}
-	}
-}
+	Territorio* novo = new Territorio(tipo,1,1,1,1);
 
-void Mundo::criaTerritorioFicheiro(const string& nomeFicheiro)
-{
-	ifstream ficheiro(nomeFicheiro);
-	string tipo;
-	if (ficheiro.is_open() && ficheiro.good())
-		while (getline(ficheiro, tipo))
-			criaTerritorio(tipo);
-	ficheiro.close();
+	territorios.emplace_back(novo);
+
+	return novo;
 }
 
 string Mundo::obtemTerritorios() const
 {
+
 	ostringstream oss;
 	for (auto it = territorios.begin(); it != territorios.end(); it++) {
-		oss << it->nome << " " << it->resist << " " << it->CriaOuro <<
-			" " << it->CriaProd << " " << it->PontosVit << endl;
+		oss << (*it)->nome << " " << (*it)->resist << " " << (*it)->CriaOuro <<
+			" " << (*it)->CriaProd << " " << (*it)->PontosVit << endl;
 	}
 	return oss.str();
 }
 
-bool Mundo::verificaExisteTerritorio(const string& nome) const
-{
-	for (auto it = territorios.begin(); it != territorios.end(); it++) {
-		if (it->obtemNome() == nome)
-			return true;
-	}
-	return false;
-}
 
-void Mundo::conquistaTerritorio(string territorio)
-{
-	if (verificaExisteTerritorio(territorio))
-		cout << "Parte a conquista!" << endl;
-	else
-		cout << "Nao existe nenhum territorio com esse nome" << endl;
-}
+//void Mundo::criaTerritorioFicheiro(const string& nomeFicheiro)
+//{
+//	ifstream ficheiro(nomeFicheiro);
+//	string tipo;
+//	if (ficheiro.is_open() && ficheiro.good())
+//		while (getline(ficheiro, tipo))
+//			criaTerritorio(tipo);
+//	ficheiro.close();
+//}
+
+//bool Mundo::verificaExisteTerritorio(const string& nome) const
+//{
+//	for (auto it = territorios.begin(); it != territorios.end(); it++) {
+//		if (it->obtemNome() == nome)
+//			return true;
+//	}
+//	return false;
+//}
+
+//void Mundo::conquistaTerritorio(string territorio)
+//{
+//	if (verificaExisteTerritorio(territorio))
+//		cout << "Parte a conquista!" << endl;
+//	else
+//		cout << "Nao existe nenhum territorio com esse nome" << endl;
+//}

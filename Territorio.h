@@ -9,8 +9,9 @@ using std::vector;
 
 class Territorio{
 
-public:
+	static int numTerr;
 	// Caracteristicas do Territorio
+public:
 	string nome;
 	int resist;
 	int CriaProd;
@@ -19,7 +20,7 @@ public:
 
 public:
 
-	Territorio(string nome, int resist, int CriaPro, int CriaOu, int PontosV);
+	Territorio(const string& nome, int resist, int CriaPro, int CriaOu, int PontosV);
 	string obtemNome() const;
 };
 

@@ -9,13 +9,17 @@
 using std::string;
 using std::vector;
 
-class Jogador
+class Imperio
 {
-	string nome;
 	vector<Territorio*> imperio;
+	int armazem;
+	int cofre;
 
 public:
-	Jogador(string nome);
+	Imperio();
+	void adicionaTerr(Territorio* novo);
+	string obtemImperio() const;
+
 };
 
 

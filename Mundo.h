@@ -4,7 +4,7 @@
 #include <vector>
 #include <map>
 
-#include "Jogador.h"
+#include "Imperio.h"
 
 #include "Territorio.h"
 
@@ -14,21 +14,20 @@ using std::map;
 
 class Mundo{
 	
-	// Indice para territorio
-	map<string, int> indTerr;
-
-	vector<Territorio> territorios;
-
+	vector<Territorio*> territorios;
+public:
+	Imperio* jogador;
 
 public:
 
 	Mundo();
 	Mundo(const Mundo &outro) = delete;
-	void criaTerritorio(string& tipo);
-	void criaTerritorioFicheiro(const string& nomeFicheiro);
+	Territorio* criaTerritorio(const string& tipo);
 	string obtemTerritorios() const;
-	bool verificaExisteTerritorio(const string& nome) const;
-	void conquistaTerritorio(string territorio);
+
+	//void criaTerritorioFicheiro(const string& nomeFicheiro);
+	//bool verificaExisteTerritorio(const string& nome) const;
+	//void conquistaTerritorio(string territorio);
 };
 
 #endif 

@@ -17,7 +17,20 @@ int main() {
 	Mundo* mundo = new Mundo();
 	
 	string linha, comando;
-	do {
+
+	mundo->criaTerritorio("Novo");
+	mundo->criaTerritorio("Novo");
+	mundo->criaTerritorio("Novo");
+
+	cout << "Todos os territorios" << endl; 
+
+	cout << mundo->obtemTerritorios() << endl;
+
+	cout << "Territorios do imperio" << endl;
+
+	cout << mundo->jogador->obtemImperio() << endl;
+
+	/*do {
 		cout << "Comando: ";
 		getline(cin, linha);
 		istringstream iss(linha);
@@ -46,7 +59,7 @@ int main() {
 		cout << endl;
 		cout << mundo->obtemTerritorios() << endl;
 
-	} while (comando != "sair");
+	} while (comando != "sair");*/
 
 
 	return 0;
@@ -56,8 +69,8 @@ int main() {
 
 /*
 * 
-*  Como guardar os diferentes grupos de territorios?
-*  Como gerir o jogador? (Guardar dados do jogador, criação do Terr Ini)
+*  Como guardar os diferentes grupos de territorios?  //class "tipo de territorio"
+*  Como gerir o jogador? (Guardar dados do jogador, criação do Terr Ini) // 
 *  Como declarar Territorio Inicial ?
 *  
 */
