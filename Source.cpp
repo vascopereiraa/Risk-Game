@@ -1,5 +1,6 @@
 
 #include "Mundo.h"
+#include "Interface.h"
 
 #include <iostream>
 #include <string>
@@ -16,6 +17,7 @@ int main()
 {
 	/* Fase de Configuracao */
 	Mundo* mundo = new Mundo();
+	Interface teste;
 
 	mundo->criaTerritorio("Portugal");
 	mundo->criaTerritorio("Espanha");
@@ -30,6 +32,10 @@ int main()
 
 	mundo->conquistaTerritorio("Portugal2");
 	cout << mundo->obtemTerritoriosImperioString() << endl;
+
+	cout << endl << endl << endl;
+
+	teste.inicio(*mundo);
 
 	return 0;
 }
