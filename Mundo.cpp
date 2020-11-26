@@ -27,7 +27,8 @@ Territorio* Mundo::procuraTerritorioImperio(const string& nome)
 }
 
 /* FUNCOES PUBLICAS */
-Mundo::Mundo(){
+Mundo::Mundo()
+{
 	jogador = new Imperio();
 	jogador->adicionaTerritorio(criaTerritorio("Territorio Inicial"));
 }

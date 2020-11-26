@@ -18,7 +18,7 @@ class Territorio
 	int pontosVitoria;
 
 public:
-	Territorio(const string& territorio, int resist, int CriaPro, int CriaOu, int PontosV);
+	Territorio(const string& territorio, int r, int cProd, int cOuro, int ptVit);
 	Territorio(const Territorio& copia) = delete;
 	string obtemNome() const;
 	int obtemResistencia() const;
