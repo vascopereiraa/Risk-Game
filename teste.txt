@@ -1,10 +1,7 @@
-planicie
-montanha
-montanha
-mina
-duna
-planicie
-castelo
-refpiratas
-pescaria
-castelo
+lista
+cria abc 3
+lista
+conquista abc2
+lista
+lista abc4
+sair

@@ -3,6 +3,7 @@
 #include <string>
 #include <iostream>
 #include <sstream>
+#include <fstream>
 
 using std::cout;
 using std::cin;
@@ -10,74 +11,80 @@ using std::getline;
 using std::string;
 using std::istringstream;
 using std::endl;
+using std::ifstream;
 
-
-void Interface::inicio(Mundo& mundo)
+void Interface::cmdCarrega(istringstream& iss) 
 {
-	string linha, comando;
-	do {
-		cout << "Comando: ";
-		getline(cin, linha);
-		istringstream iss(linha);
-		iss >> comando;
+	string nomeFicheiro;
+	iss >> nomeFicheiro;
+	if (iss.fail())
+		std::cerr << "[FAIL] Impossivel obter nome de ficheiro" << endl;
 
-		if (comando == "carrega") { cmdCarrega(linha,mundo);}
-
-		if (comando == "cria") { cmdCria(linha, mundo); }
-
-		if (comando == "conquista") { cmdConquista(linha,mundo);	}
-
-		if (comando == "lista") { cmdLista(linha,mundo); }
-
-		cout << endl;
-		//cout << "Territorios do Imperio " << mundo.obtemTerritoriosImperioString() << endl;
-
-	} while (comando != "sair");
-
+	// ABRIR FICHEIRO E LER LINHA A LINHA
+	abreFicheiro(nomeFicheiro);
 }
 
-void Interface::cmdCarrega(string linha, Mundo &mundo) 
+void Interface::abreFicheiro(const string& nome)
 {
-	istringstream iss(linha);
-	string nomeFicheiro, lixo;
-	iss >> lixo >> nomeFicheiro;
-	//mundo->criaTerritorioFicheiro(nomeFicheiro);
+	ifstream ficheiro(nome);
+	string linha, tipo;
+
+	if (ficheiro.is_open() && ficheiro.good())
+		while (getline(ficheiro, linha)) {
+			menu(linha);
+		}
+	ficheiro.close();
 }
 
-void Interface::cmdCria(string linha, Mundo &mundo) 
+void Interface::cmdCria(istringstream& iss)
 {
-	istringstream iss(linha);
-	string tipo, lixo;
+	string tipo;
 	int num;
-	iss >> lixo >> tipo >> num;
-	// foi criado lixo pois a funcao recebe a linha desde o inicio
-	// ainda com o comando nela como 1º palavra
+	iss >> tipo >> num;
 	for (int i = 0; i < num; i++)
-		mundo.criaTerritorio(tipo);
+		mundo->criaTerritorio(tipo);
 }
 
-void Interface::cmdConquista(string linha, Mundo& mundo) 
+void Interface::cmdConquista(istringstream& iss)
 {
+	string nome;
+	iss >> nome;
+	mundo->conquistaTerritorio(nome);
+}
+
+void Interface::cmdLista(istringstream& iss)
+{
+	string nome;
+	iss >> nome;
+	if (iss.fail()) {
+		cout << "Territorios do Mundo: " << endl;
+		cout << mundo->obtemTerritoriosMundoString() << endl;
+		
+		cout << "Territorios do Imperio: " << endl;
+		cout << mundo->obtemTerritoriosImperioString() << endl;
+	}
+	else
+		cout << mundo->obtemDadosTerritorioMundoString(nome) << endl;
+}
+
+Interface::Interface(Mundo* m) : mundo(m)
+{
+}
+
+void Interface::menu(const string& linha)
+{
+	string comando;
 	istringstream iss(linha);
-	string nome, lixo;
-	iss >> lixo >> nome;
-	mundo.conquistaTerritorio(nome);
-}
+	iss >> comando;
 
-void Interface::cmdLista(string linha, Mundo& mundo) 
-{
-	cout << "Territorios do Imperio:" << endl << mundo.obtemTerritoriosImperioString() << endl;
-	cout << "Territorios do Mundo:" << endl << mundo.obtemTerritoriosMundoString() << endl;
-}
+	if (comando == "carrega") { cmdCarrega(iss); }
 
-void Interface::mostraTerritoriosMundo(Mundo& mundo) const
-{
-	cout << "Territórios do Mundo: " << mundo.obtemTerritoriosMundoString() << endl;
-}
+	if (comando == "cria") { cmdCria(iss); }
 
-void Interface::mostraTerritoriosImperio(Mundo& mundo) const
-{
-	cout << "Territórios do Império: " << mundo.obtemTerritoriosImperioString() << endl;
+	if (comando == "conquista") { cmdConquista(iss); }
+
+	if (comando == "lista") { cmdLista(iss); }
+
 }
 
 /* Mostrar Territorios
@@ -88,3 +95,9 @@ void Interface::mostraTerritoriosImperio(Mundo& mundo) const
 	"Pontos Vitoria" << (*it)->obtemPontosVitoria() << endl << endl;
 */
 
+//ifstream ficheiro(nomeFicheiro);
+//string tipo;
+//if (ficheiro.is_open() && ficheiro.good())
+//while (getline(ficheiro, tipo))
+//criaTerritorio(tipo);
+//ficheiro.close();

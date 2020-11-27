@@ -45,8 +45,11 @@ int Territorio::obtemPontosVitoria() const
 string Territorio::obtemTerritorioString() const
 {
 	ostringstream oss;
-	oss << obtemNome() << obtemResistencia() << obtemCriacaoProdutos() <<
-		obtemCriacaoOuro() << obtemPontosVitoria() << endl;
+	oss << "Nome: " << obtemNome() << endl; 
+	oss << "Resistencia: " << obtemResistencia() << "\n" <<
+		"Criacao Produtos: " << obtemCriacaoProdutos() << "\n" <<
+		"Criacao Ouro: " << obtemCriacaoOuro() << "\n"<<
+		"Pontos Vitoria: " << obtemPontosVitoria() << endl;
 	return oss.str();
 }
 

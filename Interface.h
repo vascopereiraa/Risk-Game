@@ -1,24 +1,24 @@
 #ifndef INTERFACE_H
 #define INTERFACE_H
 
+#include <sstream>
 
+using std::istringstream;
 
 class Interface
 {
+	Mundo* mundo;
 
+private:
+	void cmdCarrega(istringstream& iss);
+	void abreFicheiro(const string& nome);
+	void cmdCria(istringstream& iss);
+	void cmdConquista(istringstream& iss);
+	void cmdLista(istringstream& iss);
 
 public:
-
-	void mostraTerritoriosMundo(Mundo & mundo) const;
-	void mostraTerritoriosImperio(Mundo& mundo) const;
-
-	//comandos
-	void inicio(Mundo& mundo);
-	void cmdCarrega(string linha,Mundo& mundo) ;
-	void cmdCria(string linha, Mundo& mundo) ;
-	void cmdConquista(string linha, Mundo& mundo) ;
-	void cmdLista(string linha, Mundo& mundo) ;
-
+	Interface(Mundo* m);
+	void menu(const string& linha);
 };
 
 

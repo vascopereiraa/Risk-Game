@@ -30,8 +30,9 @@ Territorio* Mundo::procuraTerritorioImperio(const string& nome)
 Mundo::Mundo()
 {
 	jogador = new Imperio();
-	jogador->adicionaTerritorio(criaTerritorio("Territorio Inicial"));
+	jogador->adicionaTerritorio(criaTerritorio("TerritorioInicial"));
 }
+
 
 Territorio* Mundo::criaTerritorio(const string& tipo)
 {
@@ -44,11 +45,18 @@ string Mundo::obtemTerritoriosMundoString() const
 {
 	ostringstream oss;
 	for (auto it = territorios.begin(); it != territorios.end(); it++) {
-		oss << (*it)->obtemNome() << (*it)->obtemResistencia() <<
-			(*it)->obtemCriacaoProdutos() << (*it)->obtemCriacaoOuro() <<
-			(*it)->obtemPontosVitoria() << endl;
+		oss << (*it)->obtemTerritorioString() << endl;
 	}
 	return oss.str();
+}
+
+string Mundo::obtemDadosTerritorioMundoString(const string& nome)
+{
+	Territorio* procura = procuraTerritorioMundo(nome);
+	if (procura == nullptr)
+		return string{ "Nao existe nenhum territorio com o nome introduzido!\n" };
+	else
+		return procura->obtemTerritorioString();
 }
 
 void Mundo::conquistaTerritorio(const string& territorio)

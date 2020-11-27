@@ -17,25 +17,14 @@ int main()
 {
 	/* Fase de Configuracao */
 	Mundo* mundo = new Mundo();
-	Interface teste;
-
-	mundo->criaTerritorio("Portugal");
-	mundo->criaTerritorio("Espanha");
-	mundo->criaTerritorio("Franca");
-	mundo->criaTerritorio("Italia");
-
-	cout << "Todos os territorios" << endl;
-	cout << mundo->obtemTerritoriosMundoString() << endl;
-
-	cout << "Territorios do imperio" << endl;
-	cout << mundo->obtemTerritoriosImperioString() << endl;
-
-	mundo->conquistaTerritorio("Portugal2");
-	cout << mundo->obtemTerritoriosImperioString() << endl;
-
-	cout << endl << endl << endl;
-
-	teste.inicio(*mundo);
+	Interface interface{ mundo };
+	
+	string linha, comando;
+	do {
+		cout << "Comando: ";
+		getline(cin, linha);
+		interface.menu(linha);
+	} while (linha != "sair");
 
 	return 0;
 }

@@ -47,7 +47,7 @@ string Imperio::obtemImperioString() const
 {
 	ostringstream oss;
 	for (auto it = imperio.begin(); it != imperio.end(); it++) {
-		oss << (*it)->obtemTerritorioString();
+		oss << (*it)->obtemTerritorioString() << endl;
 	}
 	return oss.str();
 }
