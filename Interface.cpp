@@ -86,18 +86,3 @@ void Interface::menu(const string& linha)
 	if (comando == "lista") { cmdLista(iss); }
 
 }
-
-/* Mostrar Territorios
-	oss << "Nome: " << (*it)->obtemNome() << endl <<
-	"Resistencia: " << (*it)->obtemResistencia() <<
-	"Criacao Produtos: " << (*it)->obtemCriacaoProdutos() <<
-	"Criacao Outro: " << (*it)->obtemCriacaoOuro() << endl <<
-	"Pontos Vitoria" << (*it)->obtemPontosVitoria() << endl << endl;
-*/
-
-//ifstream ficheiro(nomeFicheiro);
-//string tipo;
-//if (ficheiro.is_open() && ficheiro.good())
-//while (getline(ficheiro, tipo))
-//criaTerritorio(tipo);
-//ficheiro.close();
