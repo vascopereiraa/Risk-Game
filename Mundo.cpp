@@ -88,3 +88,13 @@ string Mundo::obtemTerritoriosImperioString() const
 	return jogador->obtemImperioString();
 }
 
+ostream& operator<<(ostream& out, const Mundo& novoM) {
+
+	out << "Territorios do Mundo: " << endl;
+	out << novoM.obtemTerritoriosMundoString() << endl;
+
+	out << "Territorios do Imperio: " << endl;
+	out << novoM.obtemTerritoriosImperioString() << endl;
+
+	return out;
+}

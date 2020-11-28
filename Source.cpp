@@ -18,7 +18,9 @@ int main()
 	/* Fase de Configuracao */
 	Mundo* mundo = new Mundo();
 	Interface interface{ mundo };
-	
+
+	//cout << *mundo << endl;
+
 	string linha, comando;
 	do {
 		cout << "Comando: ";

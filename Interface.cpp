@@ -54,7 +54,7 @@ void Interface::cmdConquista(istringstream& iss)
 
 void Interface::cmdLista(istringstream& iss)
 {
-	string nome;
+	/*string nome;
 	iss >> nome;
 	if (iss.fail()) {
 		cout << "Territorios do Mundo: " << endl;
@@ -64,7 +64,9 @@ void Interface::cmdLista(istringstream& iss)
 		cout << mundo->obtemTerritoriosImperioString() << endl;
 	}
 	else
-		cout << mundo->obtemDadosTerritorioMundoString(nome) << endl;
+		cout << mundo->obtemDadosTerritorioMundoString(nome) << endl;*/
+	
+	cout << *mundo << endl;
 }
 
 Interface::Interface(Mundo* m) : mundo(m)
