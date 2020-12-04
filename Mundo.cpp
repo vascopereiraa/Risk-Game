@@ -4,7 +4,6 @@
 
 #include <iostream>
 #include <sstream>
-#include <random>
 
 using std::endl;
 using std::ostringstream;
@@ -69,28 +68,18 @@ string Mundo::obtemDadosTerritorioMundoString(const string& nome)
 		return procura->obtemTerritorioString();
 }
 
-void Mundo::conquistaTerritorio(const string& territorio)
+string Mundo::verificaTerritorioConquista(const string& territorio)
 {
 	// Se o territorio existir no Mundo
 	Territorio* procuraMundo = procuraTerritorioMundo(territorio);
 	if (procuraMundo != nullptr) {
-		// Se o territorio nao pertencer ao imperio
-		if (jogador->procuraTerritorio(territorio) == nullptr) {
-			int resAtacado = procuraMundo->obtemResistencia();
-			
-			// Inicia o gerador aleatorio entre 1 e 6
-			std::default_random_engine gerador;
-			std::uniform_int_distribution<int> randomInt(1, 6);
-			int forcaAtaque = randomInt(gerador) + jogador->obtemForcaMilitar();
-
-			if (forcaAtaque >= resAtacado) {
-				// Conquista o territorio
-				jogador->adicionaTerritorio(procuraMundo);
-			}
-			else
-				jogador->perderForcaMilitar(1);
-		}
+		if (jogador->conquistaTerritorio(procuraMundo))
+			return string{ "O territorio " + territorio + " foi conquistado!\n" };
+		else
+			return string{ "Nao foi possivel conquistar o territorio " + territorio + "\n" };
 	}
+	else
+		return string{ "O Territorio " + territorio + " nao existe no mundo\n" };
 }
 
 string Mundo::obtemTerritoriosImperioString() const

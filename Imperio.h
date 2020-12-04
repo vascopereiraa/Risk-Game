@@ -20,7 +20,7 @@ class Imperio
 	int armazem;
 	int cofre;
 	int forcaMilitar;
-
+	
 public:
 	Imperio();
 	int obtemArmazem() const;
@@ -30,9 +30,10 @@ public:
 	int obtemCapacidadeCofre() const;
 	int obtemMaxForcaMilitar() const;
 	string obtemImperioString() const;
-	void adicionaTerritorio(Territorio* novo);
 	Territorio* procuraTerritorio(const string& nome);
+	void adicionaTerritorio(Territorio* novo);
 	void perderForcaMilitar(const int factor);
+	bool conquistaTerritorio(Territorio* territorioConquista);
 };
 
 

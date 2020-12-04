@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <sstream>
+#include <random>
 
 using std::endl;
 using std::ostringstream;
@@ -74,5 +75,30 @@ void Imperio::perderForcaMilitar(const int factor)
 		forcaMilitar = 0;
 	else
 		forcaMilitar -= factor;
+}
+
+bool Imperio::conquistaTerritorio(Territorio* territorioConquista)
+{
+	// Se o territorio nao pertencer ao imperio
+	if (procuraTerritorio(territorioConquista->obtemNome()) == nullptr) {
+		int resAtacado = territorioConquista->obtemResistencia();
+
+		// Inicia o gerador aleatorio entre 1 e 6
+		std::default_random_engine gerador;
+		std::uniform_int_distribution<int> randomInt(1, 6);
+		int forcaAtaque = randomInt(gerador) + obtemForcaMilitar();
+
+		if (forcaAtaque >= resAtacado) {
+			// Conquista o territorio
+			adicionaTerritorio(territorioConquista);
+			return true;
+		}
+		else {
+			perderForcaMilitar(1);
+			return false;
+		}
+	}
+	else
+		return false;
 }
 

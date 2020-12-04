@@ -49,7 +49,7 @@ void Interface::cmdConquista(istringstream& iss)
 {
 	string nome;
 	iss >> nome;
-	mundo->conquistaTerritorio(nome);
+	cout << mundo->verificaTerritorioConquista(nome);
 }
 
 void Interface::cmdLista(istringstream& iss)

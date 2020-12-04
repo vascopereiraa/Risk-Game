@@ -26,13 +26,10 @@ public:
 	Mundo();
 	Mundo(const Mundo& copia) = delete;		// Apagar o construtor por copia
 	~Mundo();
-
 	Territorio* criaTerritorio(const string& tipo);
-
 	string obtemTerritoriosMundoString() const;
 	string obtemDadosTerritorioMundoString(const string& nome);
-
-	void conquistaTerritorio(const string& territorio);
+	string verificaTerritorioConquista(const string& territorio);
 	string obtemTerritoriosImperioString() const;
 };
 
