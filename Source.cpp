@@ -17,16 +17,13 @@ int main()
 {
 	/* Fase de Configuracao */
 	Mundo* mundo = new Mundo();
-	Interface interface{ mundo };
+	Interface* interface = new Interface{ mundo };
 
-	//cout << *mundo << endl;
+	interface->menu();
 
-	string linha, comando;
-	do {
-		cout << "Comando: ";
-		getline(cin, linha);
-		interface.menu(linha);
-	} while (linha != "sair");
+	// Apagar objetos em memoria dinâmica
+	delete mundo;
+	delete interface;
 
 	return 0;
 }

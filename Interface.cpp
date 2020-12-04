@@ -31,7 +31,7 @@ void Interface::abreFicheiro(const string& nome)
 
 	if (ficheiro.is_open() && ficheiro.good())
 		while (getline(ficheiro, linha)) {
-			menu(linha);
+			comandos(linha);
 		}
 	ficheiro.close();
 }
@@ -56,30 +56,20 @@ void Interface::cmdLista(istringstream& iss)
 {
 	string nome;
 	iss >> nome;
-	if (iss.fail()) {
-
+	if (iss.fail()) 
 		cout << *mundo << endl;
-		/*cout << "Territorios do Mundo: " << endl;
-		cout << mundo->obtemTerritoriosMundoString() << endl;
-		
-		cout << "Territorios do Imperio: " << endl;
-		cout << mundo->obtemTerritoriosImperioString() << endl;*/
-	}
 	else
 		cout << mundo->obtemDadosTerritorioMundoString(nome) << endl;
 	
 }
 
-Interface::Interface(Mundo* m) : mundo(m)
-{
-}
-
-void Interface::menu(const string& linha)
+void Interface::comandos(const string& linha)
 {
 	string comando;
 	istringstream iss(linha);
 	iss >> comando;
 
+	// Seletor de comandos
 	if (comando == "carrega") { cmdCarrega(iss); }
 
 	if (comando == "cria") { cmdCria(iss); }
@@ -87,5 +77,21 @@ void Interface::menu(const string& linha)
 	if (comando == "conquista") { cmdConquista(iss); }
 
 	if (comando == "lista") { cmdLista(iss); }
+}
 
+Interface::Interface(Mundo* m) : mundo(m)
+{
+}
+
+void Interface::menu()
+{
+	string linha;
+	do 
+	{
+		cout << "Comando: ";
+		getline(cin, linha);
+		comandos(linha);
+	} while (linha != "sair");
+
+	return;
 }

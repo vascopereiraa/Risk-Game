@@ -33,6 +33,16 @@ Mundo::Mundo()
 	jogador->adicionaTerritorio(criaTerritorio("TerritorioInicial"));
 }
 
+Mundo::~Mundo()
+{
+	// Apagar os territórios que pertencem ao mundo (composição)
+	for (int i = 0; i < territorios.size(); i++)
+		delete territorios[i];
+
+	// Apagar o jogador
+	delete jogador;
+}
+
 
 Territorio* Mundo::criaTerritorio(const string& tipo)
 {
