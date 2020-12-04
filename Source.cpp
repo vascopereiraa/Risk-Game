@@ -15,10 +15,11 @@ using std::endl;
 
 int main() 
 {
-	/* Fase de Configuracao */
+	// Inicializacao dos objetos do jogo
 	Mundo* mundo = new Mundo();
 	Interface* interface = new Interface{ mundo };
 
+	// Chamada a interface
 	interface->menu();
 
 	// Apagar objetos em memoria dinâmica
