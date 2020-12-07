@@ -89,10 +89,13 @@ string Mundo::obtemTerritoriosImperioString() const
 
 ostream& operator<<(ostream& out, const Mundo& novoM) {
 
-	out << "Territorios do Mundo: " << endl;
-	out << novoM.obtemTerritoriosMundoString() << endl;
+	out << "\nTerritorios do Mundo: " << endl;
+	out << novoM.obtemTerritoriosMundoString();
 
-	out << "Territorios do Imperio: " << endl;
+	out << "-----------------------------------------------------------"
+		   "-----------------------------------------------------------\n\n";
+
+	out << "Informacoes sobre o Imperio e seus territorios: " << endl;
 	out << novoM.obtemTerritoriosImperioString() << endl;
 
 	return out;

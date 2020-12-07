@@ -47,9 +47,21 @@ int Imperio::obtemMaxForcaMilitar() const
 string Imperio::obtemImperioString() const
 {
 	ostringstream oss;
+
+
+	oss << "Armazem: " << obtemArmazem()
+		<< "   Capacidade do Armazem: " << obtemCapacidadeArmazem()
+		<< "   Cofre: " << obtemCofre()
+		<< "   Capacidade do Cofre: " << obtemCapacidadeCofre()
+		<< "   Forca Militar: " << obtemForcaMilitar()
+		<< "   Forca Militar Maxima: " << obtemMaxForcaMilitar() << endl;
+
+	oss << "\nTerritorios do Imperio: " << endl;
+
 	for (auto it = imperio.begin(); it != imperio.end(); it++) {
 		oss << (*it)->obtemTerritorioString() << endl;
 	}
+
 	return oss.str();
 }
 
