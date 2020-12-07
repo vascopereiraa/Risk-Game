@@ -63,20 +63,24 @@ void Interface::cmdLista(istringstream& iss)
 	
 }
 
-void Interface::comandos(const string& linha)
+bool Interface::comandos(const string& linha)
 {
 	string comando;
 	istringstream iss(linha);
 	iss >> comando;
+	int a = 0;
 
 	// Seletor de comandos
-	if (comando == "carrega") { cmdCarrega(iss); }
+	if (comando == "carrega") { cmdCarrega(iss); return true; }
 
-	if (comando == "cria") { cmdCria(iss); }
+	if (comando == "cria") { cmdCria(iss); return true; }
 
-	if (comando == "conquista") { cmdConquista(iss); }
+	if (comando == "conquista") { cmdConquista(iss); return true; }
 
-	if (comando == "lista") { cmdLista(iss); }
+	if (comando == "lista") { cmdLista(iss); return true; }
+
+	return false;
+
 }
 
 Interface::Interface(Mundo* m) : mundo(m)
@@ -90,7 +94,10 @@ void Interface::menu()
 	{
 		cout << "Comando: ";
 		getline(cin, linha);
-		comandos(linha);
+		if (comandos(linha) == false) {
+			cout << "[AVISO] O comando que introduziu nao existe!" << endl;
+			cout << "Comando: " << linha << endl << endl;
+		}
 	} while (linha != "sair");
 
 	return;

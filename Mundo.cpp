@@ -96,7 +96,7 @@ ostream& operator<<(ostream& out, const Mundo& novoM) {
 		   "-----------------------------------------------------------\n\n";
 
 	out << "Informacoes sobre o Imperio e seus territorios: " << endl;
-	out << novoM.obtemTerritoriosImperioString() << endl;
+	out << novoM.obtemTerritoriosImperioString();
 
 	return out;
 }

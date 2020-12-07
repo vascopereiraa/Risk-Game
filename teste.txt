@@ -1,7 +1,3 @@
-lista
 cria abc 3
-lista
-conquista abc2
-lista
-lista abc4
-sair
+cria lol 4
+cria pef 1

@@ -15,7 +15,7 @@ private:
 	void cmdCria(istringstream& iss);
 	void cmdConquista(istringstream& iss);
 	void cmdLista(istringstream& iss);
-	void comandos(const string& iss);
+	bool comandos(const string& iss);
 
 public:
 	Interface(Mundo* m);
