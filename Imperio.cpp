@@ -74,7 +74,7 @@ Territorio* Imperio::procuraTerritorio(const string& nome)
 {
 	// Procura no Imperio um territorio com o nome passado por argumento
 	for (auto it = imperio.begin(); it != imperio.end(); it++)
-		if ((*it)->obtemNome() == nome)
+		if ((*it)-> == nome)
 			return (*it);
 
 	// Caso o territorio nao exista no Imperio

@@ -139,6 +139,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Continente.cpp" />
+    <ClCompile Include="Duna.cpp" />
     <ClCompile Include="Imperio.cpp" />
     <ClCompile Include="Interface.cpp" />
     <ClCompile Include="Mundo.cpp" />
@@ -146,6 +148,8 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Continente.h" />
+    <ClInclude Include="Duna.h" />
     <ClInclude Include="Imperio.h" />
     <ClInclude Include="Interface.h" />
     <ClInclude Include="Mundo.h" />
