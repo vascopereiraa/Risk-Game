@@ -3,6 +3,7 @@
 #define Jogador_H
 
 #include "Territorio.h"
+#include "tecnologias.h"
 
 #include <string>
 #include <vector>
@@ -15,6 +16,7 @@ class Imperio
 	int capacidadeArmazem;
 	int capacidadeCofre;
 	int maxForcaMilitar;
+	Tecnologias* tecno;
 
 	vector<Territorio*> imperio;
 	int armazem;

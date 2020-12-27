@@ -36,6 +36,9 @@
     <ClCompile Include="Duna.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Tecnologias.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Territorio.h">
@@ -54,6 +57,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Duna.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tecnologias.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

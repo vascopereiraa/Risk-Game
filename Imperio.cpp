@@ -11,7 +11,8 @@ using std::ostringstream;
 Imperio::Imperio() : armazem(0), cofre(0), forcaMilitar(0),
 		capacidadeArmazem(0), capacidadeCofre(0), maxForcaMilitar(0)
 {
-
+	Tecnologias* novo = new Tecnologias();
+	tecno = novo;
 }
 
 int Imperio::obtemArmazem() const
