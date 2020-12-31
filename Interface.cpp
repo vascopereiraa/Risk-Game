@@ -70,43 +70,32 @@ bool Interface::comandos(const string& linha)
 	iss >> comando;
 	int a = 0;
 
-	if (comando == "avanca") { ++turno; ++fases; }
+	// Seletor de comandos
+	if (comando == "avanca") { return true; }
 
-	if (comando == "passa") {
-		++fases;
-		if (fases == 5) {
-			++turno;
-			fases = 1;
-		}
-		if (turno == 2) { //Jogo vai terminar, mostrar pontuação
-			exit(1);
-		}
-	}
-	if (turno == 0) {
-		// Seletor de comandos
-		if (comando == "carrega") { cmdCarrega(iss); return true; }
+	if (comando == "passa") { return true; }
+	
+	if (comando == "carrega") { cmdCarrega(iss); return true; }
 
-		if (comando == "cria") { cmdCria(iss); return true; }
-	} 
-	if (fases == 1) {
-		if (comando == "conquista") { cmdConquista(iss); return true; }
-		if (comando == "passar") { cout << "O jogador passou o turno!" << endl; }
+	if (comando == "cria") { cmdCria(iss); return true; }
+	 
+	if (comando == "conquista") { cmdConquista(iss); return true; }
+	
+	if (comando == "passar") { 
+		cout << "O jogador passou o turno!" << endl; 
+		return true; 
 	}
-	if (fases == 2) {//Fase de recolha de produtos e ouro criados
-	}
-	if (fases == 3) {//Fase de compra de unidades militares e de tecnologia
-		if(comando == "maismilitar") {}
-		if(comando == "adquire") {}
-	}
-	if (fases == 4) {//Ocorrência de um Evento
-	}
-		if (comando == "lista") { cmdLista(iss); return true; }
+
+	if(comando == "maismilitar") { return true; }
+
+	if(comando == "adquire") { return true; }
+
+	if (comando == "lista") { cmdLista(iss); return true; }
 
 	return false;
-
 }
 
-Interface::Interface(Mundo* m) : mundo(m),turno(0),fases(0)
+Interface::Interface(Mundo* m) : mundo(m)
 {
 }
 

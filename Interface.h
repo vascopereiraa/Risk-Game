@@ -8,8 +8,6 @@ using std::istringstream;
 class Interface
 {
 	Mundo* mundo;
-	int turno;
-	int fases;
 
 private:
 	void cmdCarrega(istringstream& iss);
