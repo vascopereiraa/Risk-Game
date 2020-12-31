@@ -9,26 +9,7 @@ using std::endl;
 Territorio::Territorio(int r, int cProd, int cOuro, int ptVit)
 	:  resistencia(r), criacaoProdutos(cProd), criacaoOuro(cOuro), pontosVitoria(ptVit)
 {
-}
 
-int Territorio::obtemResistencia() const
-{
-	return resistencia;
-}
-
-int Territorio::obtemCriacaoProdutos() const
-{
-	return criacaoProdutos;
-}
-
-int Territorio::obtemCriacaoOuro() const
-{
-	return criacaoOuro;
-}
-
-int Territorio::obtemPontosVitoria() const
-{
-	return pontosVitoria;
 }
 
 string Territorio::obtemTerritorioString() const

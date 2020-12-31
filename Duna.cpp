@@ -1,3 +1,4 @@
+
 #include "Duna.h"
 #include <sstream>
 
@@ -17,4 +18,19 @@ Duna::Duna(const string& tipo, int r, int cProd, int cOuro, int ptVit)
 string Duna::obtemNome() const
 {
 	return nome;
+}
+
+int Duna::obtemResistencia() const
+{
+	return 4;
+}
+
+int Duna::obtemCriacaoProdutos(int ano, int fase) const
+{
+	return 0;
+}
+
+int Duna::obtemCriacaoOuro(int ano, int fase) const
+{
+	return fase >= 3 ? 2 : 0;
 }

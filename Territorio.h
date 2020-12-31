@@ -8,24 +8,22 @@ using std::string;
 
 class Territorio
 {
-	// Caracteristicas do Territorio
-	int resistencia;
-	int criacaoProdutos;
-	int criacaoOuro;
-
-protected:
-	int pontosVitoria;
 
 public:
+	// Construtores
 	Territorio(int r, int cProd, int cOuro, int ptVit);
 	Territorio(const Territorio& copia) = delete;
-	int obtemResistencia() const;
-	int obtemCriacaoProdutos() const;
-	int obtemCriacaoOuro() const;
-	int obtemPontosVitoria() const;
+
+	// Obter dados da Classe
+	virtual string obtemNome() const = 0;
+	virtual int obtemResistencia() const = 0;
+	virtual int obtemCriacaoProdutos(int ano, int fase) const = 0;
+	virtual int obtemCriacaoOuro(int ano, int fase) const = 0;
+	virtual int obtemPontosVitoria() const = 0;
+
 	string obtemTerritorioString() const;
-	virtual ~Territorio() = default;
+
 };
 
 
-#endif 
+#endif

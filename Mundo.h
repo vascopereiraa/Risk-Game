@@ -15,6 +15,10 @@ using std::ostream;
 
 class Mundo
 {
+	// Calendario do Jogo
+	int fase;
+	int ano;
+
 	vector<Territorio*> territorios;
 	Imperio* jogador;
 
