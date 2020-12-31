@@ -45,7 +45,7 @@ int Imperio::obtemMaxForcaMilitar() const
 	return maxForcaMilitar;
 }
 
-string Imperio::obtemImperioString() const
+string Imperio::obtemImperioString(const int& ano, const int& fase) const
 {
 	ostringstream oss;
 
@@ -60,7 +60,7 @@ string Imperio::obtemImperioString() const
 	oss << "\nTerritorios do Imperio: " << endl;
 
 	for (auto it = imperio.begin(); it != imperio.end(); it++) {
-		oss << (*it)->obtemTerritorioString() << endl;
+		oss << (*it)->obtemTerritorioString(ano, fase) << endl;
 	}
 
 	return oss.str();
@@ -75,7 +75,7 @@ Territorio* Imperio::procuraTerritorio(const string& nome)
 {
 	// Procura no Imperio um territorio com o nome passado por argumento
 	for (auto it = imperio.begin(); it != imperio.end(); it++)
-		if ((*it)-> == nome)
+		if ((*it)->obtemNome() == nome)
 			return (*it);
 
 	// Caso o territorio nao exista no Imperio

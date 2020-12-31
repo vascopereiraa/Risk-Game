@@ -10,12 +10,12 @@ int TerritorioInicial::obtemResistencia() const
     return 9;
 }
 
-int TerritorioInicial::obtemCriacaoProdutos(int ano, int fase) const
+int TerritorioInicial::obtemCriacaoProdutos(const int& ano, const int& fase) const
 {
     return 1;
 }
 
-int TerritorioInicial::obtemCriacaoOuro(int ano, int fase) const
+int TerritorioInicial::obtemCriacaoOuro(const int& ano, const int& fase) const
 {
     return 1;
 }

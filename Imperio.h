@@ -31,7 +31,7 @@ public:
 	int obtemCapacidadeArmazem() const;
 	int obtemCapacidadeCofre() const;
 	int obtemMaxForcaMilitar() const;
-	string obtemImperioString() const;
+	string obtemImperioString(const int& ano, const int& fase) const;
 	Territorio* procuraTerritorio(const string& nome);
 	void adicionaTerritorio(Territorio* novo);
 	void perderForcaMilitar(const int factor);

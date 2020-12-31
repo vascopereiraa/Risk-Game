@@ -1,17 +1,18 @@
 
-#include "Imperio.h"
+#include "Territorio.h"
 
 #include <sstream>
 
 using std::ostringstream;
 using std::endl;
 
-string Territorio::obtemTerritorioString() const
+string Territorio::obtemTerritorioString(int ano, int fase) const
 {
 	ostringstream oss;
-	oss << "Resistencia: " << obtemResistencia() << 
-		"    Criacao Produtos: " << obtemCriacaoProdutos() << 
-		"    Criacao Ouro: " << obtemCriacaoOuro() << 
+	oss << "Nome: " << obtemNome() <<
+		"    Resistencia: " << obtemResistencia() << 
+		"    Criacao Produtos: " << obtemCriacaoProdutos(ano, fase) << 
+		"    Criacao Ouro: " << obtemCriacaoOuro(ano, fase) << 
 		"    Pontos Vitoria: " << obtemPontosVitoria() << endl;
 	return oss.str();
 }

@@ -24,12 +24,12 @@ int Duna::obtemResistencia() const
 	return 4;
 }
 
-int Duna::obtemCriacaoProdutos(int ano, int fase) const
+int Duna::obtemCriacaoProdutos(const int& ano, const int& fase) const
 {
 	return 0;
 }
 
-int Duna::obtemCriacaoOuro(int ano, int fase) const
+int Duna::obtemCriacaoOuro(const int& ano, const int& fase) const
 {
 	return fase >= 3 ? 2 : 0;
 }

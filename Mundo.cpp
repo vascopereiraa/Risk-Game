@@ -58,6 +58,9 @@ Territorio* Mundo::criaTerritorio(const string& tipo)
 		territorios.emplace_back(novo);
 		return novo;
 	}
+	else {
+		std::cout << "\nTIPO: " << tipo << " AINDA NAO CRIADO\n";
+	}
 	
 }
 
@@ -65,7 +68,7 @@ string Mundo::obtemTerritoriosMundoString() const
 {
 	ostringstream oss;
 	for (auto it = territorios.begin(); it != territorios.end(); it++) {
-		oss << (*it)->obtemTerritorioString() << endl;
+		oss << (*it)->obtemTerritorioString(ano, fase) << endl;
 	}
 	return oss.str();
 }
@@ -76,7 +79,7 @@ string Mundo::obtemDadosTerritorioMundoString(const string& nome)
 	if (procura == nullptr)
 		return string{ "Nao existe nenhum territorio com o nome introduzido!\n" };
 	else
-		return procura->obtemTerritorioString();
+		return procura->obtemTerritorioString(ano, fase);
 }
 
 string Mundo::verificaTerritorioConquista(const string& territorio)
@@ -95,7 +98,7 @@ string Mundo::verificaTerritorioConquista(const string& territorio)
 
 string Mundo::obtemTerritoriosImperioString() const
 {
-	return jogador->obtemImperioString();
+	return jogador->obtemImperioString(ano, fase);
 }
 
 void Mundo::avancaTempo()

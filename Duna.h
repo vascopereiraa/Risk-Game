@@ -19,8 +19,8 @@ public:
 	// Obter dados da Classe
 	string obtemNome() const;
 	int obtemResistencia() const;
-	int obtemCriacaoProdutos(int ano, int fase) const;
-	int obtemCriacaoOuro(int ano, int fase) const;
+	int obtemCriacaoProdutos(const int& ano, const int& fase) const;
+	int obtemCriacaoOuro(const int& ano, const int& fase) const;
 };
 
 #endif //__Duna__
