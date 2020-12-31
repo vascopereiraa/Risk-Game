@@ -11,7 +11,6 @@ class Territorio
 
 public:
 	// Construtores
-	Territorio(const Territorio& copia) = delete;
 
 	// Obter dados da Classe
 	virtual string obtemNome() const = 0;

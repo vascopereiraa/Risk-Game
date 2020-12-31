@@ -1,6 +1,8 @@
 
 #include "Mundo.h"
 #include "Imperio.h"
+#include "TerritorioInicial.h"
+#include "Duna.h"
 
 #include <iostream>
 #include <sstream>
@@ -48,9 +50,15 @@ Territorio* Mundo::criaTerritorio(const string& tipo)
 	Territorio* novo;
 	if (tipo == "Territorio Inicial") {
 		novo = new TerritorioInicial;
+		territorios.emplace_back(novo);
+		return novo;
 	}
-	territorios.emplace_back(novo);
-	return novo;
+	if (tipo == "Duna") {
+		novo = new Duna;
+		territorios.emplace_back(novo);
+		return novo;
+	}
+	
 }
 
 string Mundo::obtemTerritoriosMundoString() const

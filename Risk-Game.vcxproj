@@ -147,6 +147,7 @@
     <ClCompile Include="Tecnologias.cpp" />
     <ClCompile Include="Territorio.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="TerritorioInicial.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Continente.h" />
@@ -156,6 +157,7 @@
     <ClInclude Include="Mundo.h" />
     <ClInclude Include="Tecnologias.h" />
     <ClInclude Include="Territorio.h" />
+    <ClInclude Include="TerritorioInicial.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

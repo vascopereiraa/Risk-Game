@@ -9,7 +9,6 @@ class Continente : public Territorio
 
 public:
 	// Construtores
-	Continente(int r, int cProd, int cOuro, int ptVit);
 
 	// Obter dados da Classe
 	int obtemPontosVitoria() const;

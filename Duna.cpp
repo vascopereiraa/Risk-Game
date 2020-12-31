@@ -6,11 +6,11 @@ using std::ostringstream;
 
 int Duna::numDuna = 0;
 
-Duna::Duna(const string& tipo)
+Duna::Duna()
 {
 	ostringstream oss;
 	++numDuna;
-	oss << tipo << numDuna;
+	oss << "Duna" << numDuna;
 	nome = oss.str();
 }
 

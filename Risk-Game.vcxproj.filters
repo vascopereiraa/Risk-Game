@@ -39,6 +39,9 @@
     <ClCompile Include="Tecnologias.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TerritorioInicial.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Territorio.h">
@@ -60,6 +63,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Tecnologias.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TerritorioInicial.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

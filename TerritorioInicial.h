@@ -1,26 +1,22 @@
 
-#ifndef __Duna__
-#define __Duna__ 
+#ifndef TERRITORIO_INICIAL_H
+#define TERRITORIO_INICIAL_H
 
-#include "Continente.h"
-#include <string>
+#include "Territorio.h"
 
-using std::string;
-
-class Duna : public Continente
+class TerritorioInicial : public Territorio
 {
-	static int numDuna;
-	string nome;
 
 public:
 	// Construtores
-	Duna();
 
 	// Obter dados da Classe
 	string obtemNome() const;
 	int obtemResistencia() const;
 	int obtemCriacaoProdutos(int ano, int fase) const;
 	int obtemCriacaoOuro(int ano, int fase) const;
+	int obtemPontosVitoria() const;
 };
 
-#endif //__Duna__
+
+#endif // TERRITORIO_INICIAL_H
