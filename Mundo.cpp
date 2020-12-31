@@ -29,7 +29,7 @@ Territorio* Mundo::procuraTerritorioImperio(const string& nome)
 Mundo::Mundo() : ano(1), fase(1)
 {
 	jogador = new Imperio();
-	jogador->adicionaTerritorio(criaTerritorio("TerritorioInicial"));
+	jogador->adicionaTerritorio(criaTerritorio("Territorio Inicial"));
 }
 
 Mundo::~Mundo()
@@ -45,7 +45,10 @@ Mundo::~Mundo()
 
 Territorio* Mundo::criaTerritorio(const string& tipo)
 {
-	Territorio* novo = new Territorio(tipo,1,1,1,1);
+	Territorio* novo;
+	if (tipo == "Territorio Inicial") {
+		novo = new TerritorioInicial;
+	}
 	territorios.emplace_back(novo);
 	return novo;
 }
@@ -85,6 +88,16 @@ string Mundo::verificaTerritorioConquista(const string& territorio)
 string Mundo::obtemTerritoriosImperioString() const
 {
 	return jogador->obtemImperioString();
+}
+
+void Mundo::avancaTempo()
+{
+	if (fase == 6) {
+		++ano;
+		fase = 1;
+	}
+	else
+		++fase;
 }
 
 ostream& operator<<(ostream& out, const Mundo& novoM) {

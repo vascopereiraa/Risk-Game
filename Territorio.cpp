@@ -6,12 +6,6 @@
 using std::ostringstream;
 using std::endl;
 
-Territorio::Territorio(int r, int cProd, int cOuro, int ptVit)
-	:  resistencia(r), criacaoProdutos(cProd), criacaoOuro(cOuro), pontosVitoria(ptVit)
-{
-
-}
-
 string Territorio::obtemTerritorioString() const
 {
 	ostringstream oss;

@@ -13,7 +13,10 @@ class Duna : public Continente
 	string nome;
 
 public:
-	Duna(const string& nome, int r, int cProd, int cOuro, int ptVit);
+	// Construtores
+	Duna(const string& nome);
+
+	// Obter dados da Classe
 	string obtemNome() const;
 	int obtemResistencia() const;
 	int obtemCriacaoProdutos(int ano, int fase) const;

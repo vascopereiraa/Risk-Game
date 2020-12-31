@@ -11,7 +11,6 @@ class Territorio
 
 public:
 	// Construtores
-	Territorio(int r, int cProd, int cOuro, int ptVit);
 	Territorio(const Territorio& copia) = delete;
 
 	// Obter dados da Classe

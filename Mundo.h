@@ -35,6 +35,7 @@ public:
 	string obtemDadosTerritorioMundoString(const string& nome);
 	string verificaTerritorioConquista(const string& territorio);
 	string obtemTerritoriosImperioString() const;
+	void avancaTempo();
 };
 
 ostream& operator<<(ostream& out, const Mundo& novoM);
