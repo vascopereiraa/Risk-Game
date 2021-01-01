@@ -1,21 +1,22 @@
 
-#ifndef CONTINENTE_H
-#define CONTINENTE_H
+#ifndef __ILHA_H__
+#define __ILHA_H__
 
-#include "Territorio.h"
 #include "Imperio.h"
 
-class Continente : public Territorio
+class Ilha : public Territorio
 {
 
 public:
 	// Construtores
-
-	// Obter dados da Classe
+	
+	// Obter dados das Classes
+	int obtemResistencia() const;
 	int obtemPontosVitoria() const;
 
 	// Logica do Jogo
 	bool podeConquistar(const Imperio& jogador);
 };
 
-#endif //CONTINENTE_H
+#endif //__ILHA_H__
+

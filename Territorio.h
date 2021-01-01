@@ -18,8 +18,10 @@ public:
 	virtual int obtemCriacaoProdutos(const int& ano, const int& fase) const = 0;
 	virtual int obtemCriacaoOuro(const int& ano, const int& fase) const = 0;
 	virtual int obtemPontosVitoria() const = 0;
-
 	string obtemTerritorioString(int ano, int fase) const;
+
+	// Logica do Jogo
+	virtual bool podeConquistar(const Imperio& jogador) = 0;
 
 };
 

@@ -24,7 +24,10 @@ class Imperio
 	int forcaMilitar;
 	
 public:
+	// Construtores
 	Imperio();
+
+	// Obter dados da Classe
 	int obtemArmazem() const;
 	int obtemCofre() const;
 	int obtemForcaMilitar() const;
@@ -32,6 +35,8 @@ public:
 	int obtemCapacidadeCofre() const;
 	int obtemMaxForcaMilitar() const;
 	string obtemImperioString(const int& ano, const int& fase) const;
+
+	// Logica do Jogo
 	Territorio* procuraTerritorio(const string& nome);
 	void adicionaTerritorio(Territorio* novo);
 	void perderForcaMilitar(const int factor);

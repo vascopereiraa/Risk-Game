@@ -27,9 +27,12 @@ private:
 	Territorio* procuraTerritorioImperio(const string& nome);
 
 public:
+	// Construtores & Destrutor
 	Mundo();
 	Mundo(const Mundo& copia) = delete;		// Apagar o construtor por copia
 	~Mundo();
+	
+	// Logica do Jogo
 	Territorio* criaTerritorio(const string& tipo);
 	string obtemTerritoriosMundoString() const;
 	string obtemDadosTerritorioMundoString(const string& nome);
