@@ -3,7 +3,7 @@
 #define Jogador_H
 
 #include "Territorio.h"
-#include "tecnologias.h"
+#include "Tecnologias.h"
 
 #include <string>
 #include <vector>

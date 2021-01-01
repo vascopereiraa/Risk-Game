@@ -16,6 +16,9 @@ public:
 	int obtemCriacaoProdutos(const int& ano, const int& fase) const;
 	int obtemCriacaoOuro(const int& ano, const int& fase) const;
 	int obtemPontosVitoria() const;
+
+	// Logica do Jogo
+	bool podeConquistar(const Imperio& jogador);
 };
 
 

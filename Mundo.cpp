@@ -60,8 +60,8 @@ Territorio* Mundo::criaTerritorio(const string& tipo)
 	}
 	else {
 		std::cout << "\nTIPO: " << tipo << " AINDA NAO CRIADO\n";
+		return nullptr;
 	}
-	
 }
 
 string Mundo::obtemTerritoriosMundoString() const

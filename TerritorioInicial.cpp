@@ -24,3 +24,8 @@ int TerritorioInicial::obtemPontosVitoria() const
 {
     return 0;
 }
+
+bool TerritorioInicial::podeConquistar(const Imperio& jogador)
+{
+    return false;
+}

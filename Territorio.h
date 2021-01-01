@@ -6,6 +6,8 @@
 
 using std::string;
 
+class Imperio;
+
 class Territorio
 {
 

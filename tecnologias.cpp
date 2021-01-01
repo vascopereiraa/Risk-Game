@@ -1,4 +1,5 @@
-#include "tecnologias.h"
+
+#include "Tecnologias.h"
 #include <iostream>
 
 using std::cout;
