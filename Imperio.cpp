@@ -45,6 +45,16 @@ int Imperio::obtemMaxForcaMilitar() const
 	return maxForcaMilitar;
 }
 
+int Imperio::obtemNumeroTerritorios() const
+{
+	return imperio.size();
+}
+
+bool Imperio::verificaTecnologia(const string& nomeTecno) const
+{
+	return tecno->verificaTecnologia(nomeTecno);
+}
+
 string Imperio::obtemImperioString(const int& ano, const int& fase) const
 {
 	ostringstream oss;

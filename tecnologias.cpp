@@ -5,19 +5,18 @@ using std::cout;
 
 Tecnologias::Tecnologias()
 {
-	tecnologias["drones"] = 0;
-	tecnologias["misseis"] = 0;
-	tecnologias["defesas"] = 0;
-	tecnologias["bolsa"] = 0;
-	tecnologias["banco"] = 0;
+	tecnologias["drones"] = false;
+	tecnologias["misseis"] = false;
+	tecnologias["defesas"] = false;
+	tecnologias["bolsa"] = false;
+	tecnologias["banco"] = false;
 
 }
 
-void Tecnologias::percorreMapa() const
+bool Tecnologias::verificaTecnologia(const string& nomeTecno) const
 {
-	for (auto tecnologia : tecnologias)
-	{
-		std::cout << tecnologia.first << " "
-			<< tecnologia.second << std::endl;
-	}
+	for (auto it = tecnologias.cbegin(); it != tecnologias.cend(); ++it)
+		if (it->first == nomeTecno)
+			return it->second;
+	return false;
 }

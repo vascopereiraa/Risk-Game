@@ -34,6 +34,8 @@ public:
 	int obtemCapacidadeArmazem() const;
 	int obtemCapacidadeCofre() const;
 	int obtemMaxForcaMilitar() const;
+	int obtemNumeroTerritorios() const;
+	bool verificaTecnologia(const string& nomeTecno) const;
 	string obtemImperioString(const int& ano, const int& fase) const;
 
 	// Logica do Jogo

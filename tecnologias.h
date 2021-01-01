@@ -7,12 +7,12 @@ using std::map;
 
 class Tecnologias
 {
-	map<string, int> tecnologias;
+	map<string, bool> tecnologias;
 
 public:
 
 	Tecnologias();
-	void percorreMapa() const;
+	bool verificaTecnologia(const string& nomeTecno) const;
 
 };
 
