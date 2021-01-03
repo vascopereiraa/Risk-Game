@@ -3,6 +3,13 @@
 #include "Imperio.h"
 #include "TerritorioInicial.h"
 #include "Duna.h"
+#include "Montanha.h"
+#include "Mina.h"
+#include "Planicie.h"
+#include "Castelo.h"
+#include "Fortaleza.h"
+#include "Pescaria.h"
+#include "Refugio.h"
 
 #include <iostream>
 #include <sstream>
@@ -28,7 +35,7 @@ Territorio* Mundo::procuraTerritorioImperio(const string& nome)
 }
 
 /* FUNCOES PUBLICAS */
-Mundo::Mundo() : ano(1), fase(1)
+Mundo::Mundo() : ano(1), fase(1), turno(1)
 {
 	jogador = new Imperio();
 	jogador->adicionaTerritorio(criaTerritorio("Territorio Inicial"));
@@ -53,8 +60,45 @@ Territorio* Mundo::criaTerritorio(const string& tipo)
 		territorios.emplace_back(novo);
 		return novo;
 	}
+	//Continentes
 	if (tipo == "Duna") {
 		novo = new Duna;
+		territorios.emplace_back(novo);
+		return novo;
+	}
+	if (tipo == "Planicie") {
+		novo = new Planicie;
+		territorios.emplace_back(novo);
+		return novo;
+	}
+	if (tipo == "Castelo") {
+		novo = new Castelo;
+		territorios.emplace_back(novo);
+		return novo;
+	}
+	if (tipo == "Fortaleza") {
+		novo = new Fortaleza;
+		territorios.emplace_back(novo);
+		return novo;
+	}
+	if (tipo == "Mina") {
+		novo = new Mina;
+		territorios.emplace_back(novo);
+		return novo;
+	}
+	if (tipo == "Montanha") {
+		novo = new Montanha;
+		territorios.emplace_back(novo);
+		return novo;
+	}
+	//Ilhas
+	if (tipo == "Pescaria") {
+		novo = new Pescaria;
+		territorios.emplace_back(novo);
+		return novo;
+	}
+	if (tipo == "Refugio") {
+		novo = new Refugio;
 		territorios.emplace_back(novo);
 		return novo;
 	}
@@ -98,17 +142,21 @@ string Mundo::verificaTerritorioConquista(const string& territorio)
 
 string Mundo::obtemTerritoriosImperioString() const
 {
-	return jogador->obtemImperioString(ano, fase);
+	return jogador->obtemImperioString(ano, turno);
 }
 
 void Mundo::avancaTempo()
 {
-	if (fase == 6) {
-		++ano;
+	++fase;
+	if (fase == 4) {
+		++turno;
 		fase = 1;
 	}
-	else
-		++fase;
+	if (turno == 6) {
+		++ano;
+		turno = 1;
+	}
+
 }
 
 ostream& operator<<(ostream& out, const Mundo& novoM) {

@@ -1,26 +1,24 @@
+#ifndef __Refugio__
+#define __Refugio__ 
 
-#ifndef __Duna__
-#define __Duna__ 
-
-#include "Continente.h"
+#include "Ilha.h"
 #include <string>
 
 using std::string;
 
-class Duna : public Continente
+class Refugio : public Ilha
 {
-	static int numDuna;
+	static int numRefugio;
 	string nome;
 
 public:
 	// Construtores
-	Duna();
+	Refugio();
 
 	// Obter dados da Classe
 	string obtemNome() const;
-	int obtemResistencia() const;
 	int obtemCriacaoProdutos(const int& ano, const int& turno) const;
 	int obtemCriacaoOuro(const int& ano, const int& turno) const;
 };
 
-#endif //__Duna__
+#endif //__Refugio__

@@ -1,17 +1,11 @@
 
 #include "Duna.h"
-#include <sstream>
-
-using std::ostringstream;
 
 int Duna::numDuna = 0;
 
 Duna::Duna()
 {
-	ostringstream oss;
-	++numDuna;
-	oss << "Duna" << numDuna;
-	nome = oss.str();
+	nome = "Duna" + std::to_string(++numDuna);
 }
 
 string Duna::obtemNome() const
@@ -24,12 +18,12 @@ int Duna::obtemResistencia() const
 	return 4;
 }
 
-int Duna::obtemCriacaoProdutos(const int& ano, const int& fase) const
+int Duna::obtemCriacaoProdutos(const int& ano, const int& turno) const
 {
-	return 0;
+	return 1;
 }
 
-int Duna::obtemCriacaoOuro(const int& ano, const int& fase) const
+int Duna::obtemCriacaoOuro(const int& ano, const int& turno) const
 {
-	return fase >= 3 ? 2 : 0;
+	return 0;
 }

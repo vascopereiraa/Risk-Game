@@ -139,24 +139,38 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Castelo.cpp" />
     <ClCompile Include="Continente.cpp" />
     <ClCompile Include="Duna.cpp" />
+    <ClCompile Include="Fortaleza.cpp" />
     <ClCompile Include="Ilha.cpp" />
     <ClCompile Include="Imperio.cpp" />
     <ClCompile Include="Interface.cpp" />
+    <ClCompile Include="Mina.cpp" />
+    <ClCompile Include="Montanha.cpp" />
     <ClCompile Include="Mundo.cpp" />
+    <ClCompile Include="Pescaria.cpp" />
+    <ClCompile Include="Planicie.cpp" />
+    <ClCompile Include="Refugio.cpp" />
     <ClCompile Include="Tecnologias.cpp" />
     <ClCompile Include="Territorio.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="TerritorioInicial.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Castelo.h" />
     <ClInclude Include="Continente.h" />
     <ClInclude Include="Duna.h" />
+    <ClInclude Include="Fortaleza.h" />
     <ClInclude Include="Ilha.h" />
     <ClInclude Include="Imperio.h" />
     <ClInclude Include="Interface.h" />
+    <ClInclude Include="Mina.h" />
+    <ClInclude Include="Montanha.h" />
     <ClInclude Include="Mundo.h" />
+    <ClInclude Include="Pescaria.h" />
+    <ClInclude Include="Planicie.h" />
+    <ClInclude Include="Refugio.h" />
     <ClInclude Include="Tecnologias.h" />
     <ClInclude Include="Territorio.h" />
     <ClInclude Include="TerritorioInicial.h" />

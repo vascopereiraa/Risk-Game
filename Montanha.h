@@ -1,20 +1,20 @@
 
-#ifndef __Duna__
-#define __Duna__ 
+#ifndef __Montanha__
+#define __Montanha__ 
 
 #include "Continente.h"
 #include <string>
 
 using std::string;
 
-class Duna : public Continente
+class Montanha : public Continente
 {
-	static int numDuna;
+	static int numMontanha;
 	string nome;
 
 public:
 	// Construtores
-	Duna();
+	Montanha();
 
 	// Obter dados da Classe
 	string obtemNome() const;
@@ -23,4 +23,4 @@ public:
 	int obtemCriacaoOuro(const int& ano, const int& turno) const;
 };
 
-#endif //__Duna__
+#endif //__Montanha__

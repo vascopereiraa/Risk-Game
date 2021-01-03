@@ -18,6 +18,7 @@ class Mundo
 	// Calendario do Jogo
 	int fase;
 	int ano;
+	int turno;
 
 	vector<Territorio*> territorios;
 	Imperio* jogador;
