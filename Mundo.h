@@ -39,6 +39,7 @@ public:
 	string obtemDadosTerritorioMundoString(const string& nome);
 	string verificaTerritorioConquista(const string& territorio);
 	string obtemTerritoriosImperioString() const;
+	string verificaTecnologiaAdquirir(const string& nomeTecno);
 	void avancaTempo();
 };
 

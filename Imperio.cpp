@@ -9,7 +9,7 @@ using std::endl;
 using std::ostringstream;
 
 Imperio::Imperio() : armazem(0), cofre(0), forcaMilitar(0),
-		capacidadeArmazem(0), capacidadeCofre(0), maxForcaMilitar(0)
+		capacidadeArmazem(3), capacidadeCofre(3), maxForcaMilitar(3)
 {
 	Tecnologias* novo = new Tecnologias();
 	tecno = novo;
@@ -125,5 +125,17 @@ bool Imperio::conquistaTerritorio(Territorio* territorioConquista)
 	}
 	else
 		return false;
+}
+
+bool Imperio::adquireTecnologia(const string& nomeTecno)
+{
+	int preco = tecno->obterPrecoTecnologia(nomeTecno);
+	if (cofre >= preco) {
+		std::cout << "ADQUIRE 2" << endl;
+		tecno->adicionaTecnologia(nomeTecno);
+		cofre -= preco;
+		return true;
+	}
+	return false;
 }
 

@@ -43,6 +43,9 @@ public:
 	void adicionaTerritorio(Territorio* novo);
 	void perderForcaMilitar(const int factor);
 	bool conquistaTerritorio(Territorio* territorioConquista);
+
+	//
+	bool adquireTecnologia(const string& nomeTecno);
 };
 
 

@@ -63,6 +63,13 @@ void Interface::cmdLista(istringstream& iss)
 	
 }
 
+void Interface::cmdAdquire(istringstream& iss)
+{
+	string nome;
+	iss >> nome;
+	cout << mundo->verificaTecnologiaAdquirir(nome) << endl;
+}
+
 bool Interface::comandos(const string& linha)
 {
 	string comando;
@@ -88,7 +95,7 @@ bool Interface::comandos(const string& linha)
 
 	if(comando == "maismilitar") { return true; }
 
-	if(comando == "adquire") { return true; }
+	if (comando == "adquire") { cmdAdquire(iss);  return true; }
 
 	if (comando == "lista") { cmdLista(iss); return true; }
 

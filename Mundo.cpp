@@ -145,6 +145,17 @@ string Mundo::obtemTerritoriosImperioString() const
 	return jogador->obtemImperioString(ano, turno);
 }
 
+string Mundo::verificaTecnologiaAdquirir(const string& nomeTecno)
+{
+	if (jogador->verificaTecnologia(nomeTecno) == 0) {
+		std::cout << "\nENTREI AQUIIIIIII \n\n";
+		if(jogador->adquireTecnologia(nomeTecno))
+			return string{ "A tecnologia " + nomeTecno + " foi adicionada ao imperio\n" };
+	}
+	else
+		return string{ "A tecnologia " + nomeTecno + " nao foi adicionada ao imperio\n" };
+}
+
 void Mundo::avancaTempo()
 {
 	++fase;
@@ -156,7 +167,6 @@ void Mundo::avancaTempo()
 		++ano;
 		turno = 1;
 	}
-
 }
 
 ostream& operator<<(ostream& out, const Mundo& novoM) {
