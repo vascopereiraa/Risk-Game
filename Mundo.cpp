@@ -147,13 +147,20 @@ string Mundo::obtemTerritoriosImperioString() const
 
 string Mundo::verificaTecnologiaAdquirir(const string& nomeTecno)
 {
-	if (jogador->verificaTecnologia(nomeTecno) == 0) {
-		std::cout << "\nENTREI AQUIIIIIII \n\n";
-		if(jogador->adquireTecnologia(nomeTecno))
-			return string{ "A tecnologia " + nomeTecno + " foi adicionada ao imperio\n" };
+	switch (jogador->verificaTecnologia(nomeTecno))
+	{
+	case 0: 
+		if (jogador->adquireTecnologia(nomeTecno))
+			return string{ "A tecnologia " + nomeTecno + " foi adquirida pelo imperio\n" };
+		else
+			return string{ "O imperio nao conseguiu adquirir a tecnologia " + nomeTecno + "\n" };
+	
+	case 1:
+		return string{ "A tecnologia " + nomeTecno + " ja tinha sido adquirida pelo imperio\n" };
+	
+	default:
+		return string{ "A tecnologia " + nomeTecno + " nao existe no jogo!\n" };
 	}
-	else
-		return string{ "A tecnologia " + nomeTecno + " nao foi adicionada ao imperio\n" };
 }
 
 void Mundo::avancaTempo()

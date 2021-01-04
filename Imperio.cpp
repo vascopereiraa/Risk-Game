@@ -50,7 +50,7 @@ int Imperio::obtemNumeroTerritorios() const
 	return imperio.size();
 }
 
-bool Imperio::verificaTecnologia(const string& nomeTecno) const
+int Imperio::verificaTecnologia(const string& nomeTecno) const
 {
 	return tecno->verificaTecnologia(nomeTecno);
 }
@@ -130,6 +130,8 @@ bool Imperio::conquistaTerritorio(Territorio* territorioConquista)
 bool Imperio::adquireTecnologia(const string& nomeTecno)
 {
 	int preco = tecno->obterPrecoTecnologia(nomeTecno);
+	if (preco == -1) return false;
+	std::cout << "\n\n" << preco << " -- " << cofre << "\n\n";
 	if (cofre >= preco) {
 		std::cout << "ADQUIRE 2" << endl;
 		tecno->adicionaTecnologia(nomeTecno);

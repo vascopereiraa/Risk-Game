@@ -61,11 +61,13 @@ int Tecnologias::obtemPrecoBanco() const
 
 int Tecnologias::obterPrecoTecnologia(const string& nomeTecno) const
 {
-	if(nomeTecno == "drone") return obtemPrecoDrone();
+	if(nomeTecno == "drones") return obtemPrecoDrone();
 	if(nomeTecno == "misseis") return obtemPrecoMisseis();
 	if(nomeTecno == "defesas") return obtemPrecoDefesas();
 	if(nomeTecno == "bolsa") return obtemPrecoBolsa();
 	if(nomeTecno == "banco") return obtemPrecoBanco();
+
+	return -1;
 }
 
 void Tecnologias::adicionaTecnologia(const string& nomeTecno)

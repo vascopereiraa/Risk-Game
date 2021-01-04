@@ -35,7 +35,7 @@ public:
 	int obtemCapacidadeCofre() const;
 	int obtemMaxForcaMilitar() const;
 	int obtemNumeroTerritorios() const;
-	bool verificaTecnologia(const string& nomeTecno) const;
+	int verificaTecnologia(const string& nomeTecno) const;
 	string obtemImperioString(const int& ano, const int& fase) const;
 
 	// Logica do Jogo
@@ -43,8 +43,6 @@ public:
 	void adicionaTerritorio(Territorio* novo);
 	void perderForcaMilitar(const int factor);
 	bool conquistaTerritorio(Territorio* territorioConquista);
-
-	//
 	bool adquireTecnologia(const string& nomeTecno);
 };
 
