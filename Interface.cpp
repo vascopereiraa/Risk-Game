@@ -74,40 +74,78 @@ void Interface::cmdFevento(istringstream& iss)
 {
 	string nome;
 	iss >> nome;
-		mundo->geraEvento();
+	//
 }
+
+void Interface::cmdMaisMilitar()
+{
+	if (mundo->adquireForcaMilitar())
+		cout << "Forca Militar aumentada!" << endl;
+	else
+		cout << "Nao foi possivel aumentar a forca militar" << endl;
+}
+
+void Interface::cmdMaisOuro()
+{
+	if (mundo->adquireOuro())
+		cout << "Ouro adquirido!" << endl;
+	else
+		cout << "Nao foi possivel adquirir ouro" << endl;
+}
+
+void Interface::cmdMaisProd()
+{
+	if (mundo->adquireForcaMilitar())
+		cout << "Produto adquirido!" << endl;
+	else
+		cout << "Nao foi possivel adquirir produto" << endl;
+}
+
+void Interface::cmdRecolha()
+{
+	mundo->recolheProdutosOuro();
+}
+
+void Interface::cmdOcorreEvento()
+{
+	mundo->geraEvento();
+}
+
 
 bool Interface::comandos(const string& linha)
 {
 	string comando;
 	istringstream iss(linha);
 	iss >> comando;
-	int a = 0;
 
 	// Seletor de comandos
-	if (comando == "avanca") { return true; }
-
-	if (comando == "passa") { return true; }
-	
-	if (comando == "carrega") { cmdCarrega(iss); return true; }
-
-	if (comando == "cria") { cmdCria(iss); return true; }
-	 
-	if (comando == "conquista") { cmdConquista(iss); return true; }
-	
-	if (comando == "passar") { 
-		cout << "O jogador passou o turno!" << endl; 
-		return true; 
+	switch (mundo->obtemFase()) {
+		if (comando == "avanca" || comando == "passar") { 
+			mundo->avancaTempo();
+			cout << "O jogador passou o turno!" << endl;
+			return true; 
+		}
+		if (comando == "lista") { cmdLista(iss); return true; }
+		if (comando == "fevento") { cmdFevento(iss); return true; }
+	case 0:
+		if (comando == "carrega") { cmdCarrega(iss); return true; }
+		if (comando == "cria") { cmdCria(iss); return true; }
+	case 1:
+		if (comando == "conquista") { cmdConquista(iss); return true; }
+	case 2:
+		cmdRecolha();
+		mundo->avancaTempo();
+	case 3:
+		if (comando == "maismilitar") { cmdMaisMilitar(); return true; }
+		if (comando == "maisouro") { cmdMaisOuro(); return true; }
+		if (comando == "maisprod") { cmdMaisProd(); return true; }
+		if (comando == "adquire") { cmdAdquire(iss);  return true; }
+	case 4:
+		cmdOcorreEvento();
+		mundo->avancaTempo();
+	default: 
+		break;
 	}
-
-	if (comando == "maismilitar") { return true; }
-
-	if (comando == "adquire") { cmdAdquire(iss);  return true; }
-
-	if (comando == "lista") { cmdLista(iss); return true; }
-
-	if (comando == "fevento") { cmdFevento(iss); return true; }
-
 	return false;
 }
 

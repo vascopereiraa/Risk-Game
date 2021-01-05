@@ -17,6 +17,11 @@ private:
 	void cmdLista(istringstream& iss);
 	void cmdAdquire(istringstream& iss);
 	void cmdFevento(istringstream& iss);
+	void cmdMaisMilitar();
+	void cmdMaisOuro();
+	void cmdMaisProd();
+	void cmdRecolha();
+	void cmdOcorreEvento();
 	bool comandos(const string& iss);
 
 public:

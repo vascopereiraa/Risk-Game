@@ -17,9 +17,9 @@ using std::ostream;
 class Mundo
 {
 	// Calendario do Jogo
-	int fase;
 	int ano;
 	int turno;
+	int fase;
 
 	vector<Territorio*> territorios;
 	Imperio* jogador;
@@ -35,6 +35,11 @@ public:
 	Mundo(const Mundo& copia) = delete;		// Apagar o construtor por copia
 	~Mundo();
 	
+	// Dados da classe
+	int obtemAno() const;
+	int obtemTurno() const;
+	int obtemFase() const;
+
 	// Logica do Jogo
 	Territorio* criaTerritorio(const string& tipo);
 	string obtemTerritoriosMundoString() const;
@@ -42,8 +47,12 @@ public:
 	string verificaTerritorioConquista(const string& territorio);
 	string obtemTerritoriosImperioString() const;
 	string verificaTecnologiaAdquirir(const string& nomeTecno);
+	bool adquireForcaMilitar();
+	bool adquireOuro();
+	bool adquireProduto();
 	void avancaTempo();
 	void geraEvento();
+	void recolheProdutosOuro();
 	bool verificaFimJogo() const;
 };
 

@@ -59,7 +59,6 @@ string Imperio::obtemImperioString(const int& ano, const int& fase) const
 {
 	ostringstream oss;
 
-
 	oss << "Armazem: " << obtemArmazem()
 		<< "   Capacidade do Armazem: " << obtemCapacidadeArmazem()
 		<< "   Cofre: " << obtemCofre()
@@ -72,7 +71,6 @@ string Imperio::obtemImperioString(const int& ano, const int& fase) const
 	for (auto it = imperio.begin(); it != imperio.end(); it++) {
 		oss << (*it)->obtemTerritorioString(ano, fase) << endl;
 	}
-
 	return oss.str();
 }
 
@@ -185,4 +183,58 @@ void Imperio::acrescentaProduto(const int& produto)
 		armazem = capacidadeArmazem;
 	else
 		armazem += produto;
+}
+
+void Imperio::recolheProdutos(const int& ano, const int& turno)
+{
+	int recolha = 0;
+	for (auto it = imperio.begin(); it != imperio.end(); it++)
+		(*it)->obtemCriacaoProdutos(ano,turno);
+	acrescentaProduto(recolha);
+}
+
+void Imperio::recolheOuro(const int& ano, const int& turno)
+{
+	int recolha = 0;
+	for (auto it = imperio.begin(); it != imperio.end(); it++)
+		recolha += (*it)->obtemCriacaoOuro(ano, turno);
+	acrescentaOuro(recolha);
+}
+
+bool Imperio::maisMilitar()
+{
+	if (forcaMilitar + 1 <= maxForcaMilitar) {
+		if (cofre >= 1)
+			if (armazem >= 1) {
+				++forcaMilitar;
+				--cofre;
+				--armazem;
+				return true;
+			}
+	}
+	return false;
+}
+
+bool Imperio::maisProduto()
+{
+	if (armazem + 1 < capacidadeArmazem) {
+		if (cofre >= 2) {
+			cofre -= 2;
+			++armazem;
+			return true;
+		}
+	}
+	return false;
+}
+
+bool Imperio::maisOuro()
+{
+	if (cofre + 1 < capacidadeCofre) {
+		if (armazem >= 2) {
+			armazem -= 2;
+			++cofre;
+			return true;
+		}
+	}
+	return false;
 }

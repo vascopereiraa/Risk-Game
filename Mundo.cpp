@@ -54,6 +54,21 @@ Mundo::~Mundo()
 	delete jogador;
 }
 
+int Mundo::obtemAno() const
+{
+	return ano;
+}
+
+int Mundo::obtemTurno() const
+{
+	return turno;
+}
+
+int Mundo::obtemFase() const
+{
+	return fase;
+}
+
 
 Territorio* Mundo::criaTerritorio(const string& tipo)
 {
@@ -166,6 +181,27 @@ string Mundo::verificaTecnologiaAdquirir(const string& nomeTecno)
 	}
 }
 
+bool Mundo::adquireForcaMilitar()
+{
+	if (jogador->maisMilitar())
+		return true;
+	return false;
+}
+
+bool Mundo::adquireOuro()
+{
+	if (jogador->maisOuro())
+		return true;
+	return false;
+}
+
+bool Mundo::adquireProduto()
+{
+	if (jogador->maisProduto())
+		return true;
+	return false;
+}
+
 void Mundo::avancaTempo()
 {
 	++fase;
@@ -196,6 +232,12 @@ void Mundo::geraEvento()
 	default:
 		break;
 	}
+}
+
+void Mundo::recolheProdutosOuro()
+{
+	jogador->recolheOuro(ano,turno);
+	jogador->recolheProdutos(ano,turno);
 }
 
 bool Mundo::verificaFimJogo() const
