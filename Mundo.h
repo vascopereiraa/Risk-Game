@@ -4,6 +4,7 @@
 
 #include "Territorio.h"
 #include "Imperio.h"
+#include "Eventos.h"
 
 #include <vector>
 #include <string>
@@ -22,6 +23,7 @@ class Mundo
 
 	vector<Territorio*> territorios;
 	Imperio* jogador;
+	Eventos* eventos;
 
 private:
 	Territorio* procuraTerritorioMundo(const string& nome);
@@ -41,6 +43,8 @@ public:
 	string obtemTerritoriosImperioString() const;
 	string verificaTecnologiaAdquirir(const string& nomeTecno);
 	void avancaTempo();
+	void geraEvento();
+	bool verificaFimJogo() const;
 };
 
 ostream& operator<<(ostream& out, const Mundo& novoM);

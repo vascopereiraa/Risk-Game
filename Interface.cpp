@@ -70,6 +70,13 @@ void Interface::cmdAdquire(istringstream& iss)
 	cout << mundo->verificaTecnologiaAdquirir(nome) << endl;
 }
 
+void Interface::cmdFevento(istringstream& iss)
+{
+	string nome;
+	iss >> nome;
+		mundo->geraEvento();
+}
+
 bool Interface::comandos(const string& linha)
 {
 	string comando;
@@ -93,11 +100,13 @@ bool Interface::comandos(const string& linha)
 		return true; 
 	}
 
-	if(comando == "maismilitar") { return true; }
+	if (comando == "maismilitar") { return true; }
 
 	if (comando == "adquire") { cmdAdquire(iss);  return true; }
 
 	if (comando == "lista") { cmdLista(iss); return true; }
+
+	if (comando == "fevento") { cmdFevento(iss); return true; }
 
 	return false;
 }

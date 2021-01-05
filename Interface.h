@@ -16,6 +16,7 @@ private:
 	void cmdConquista(istringstream& iss);
 	void cmdLista(istringstream& iss);
 	void cmdAdquire(istringstream& iss);
+	void cmdFevento(istringstream& iss);
 	bool comandos(const string& iss);
 
 public:

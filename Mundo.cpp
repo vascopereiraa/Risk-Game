@@ -13,7 +13,7 @@
 
 #include <iostream>
 #include <sstream>
-
+#include <random>
 using std::endl;
 using std::ostringstream;
 
@@ -37,8 +37,11 @@ Territorio* Mundo::procuraTerritorioImperio(const string& nome)
 /* FUNCOES PUBLICAS */
 Mundo::Mundo() : ano(1), fase(1), turno(1)
 {
+	//Imperio
 	jogador = new Imperio();
 	jogador->adicionaTerritorio(criaTerritorio("Territorio Inicial"));
+	//Eventos
+	eventos = new Eventos();
 }
 
 Mundo::~Mundo()
@@ -174,6 +177,32 @@ void Mundo::avancaTempo()
 		++ano;
 		turno = 1;
 	}
+}
+
+void Mundo::geraEvento()
+{
+	std::default_random_engine gerador;
+	std::uniform_int_distribution<int> randomInt(1, 4);
+	int numEvento = randomInt(gerador);
+
+	switch (numEvento)
+	{
+	case 1:
+		eventos->recursoAbandonado(jogador, ano);
+	case 2:
+		eventos->alianca(jogador);
+	case 3:
+		eventos->invasao(jogador,ano);
+	default:
+		break;
+	}
+}
+
+bool Mundo::verificaFimJogo() const
+{
+	if (jogador->obtemNumeroTerritorios() == 0)
+		return true;
+	return false;
 }
 
 ostream& operator<<(ostream& out, const Mundo& novoM) {

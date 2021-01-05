@@ -76,9 +76,34 @@ string Imperio::obtemImperioString(const int& ano, const int& fase) const
 	return oss.str();
 }
 
+string Imperio::obtemNomeUltimoTerritorio() const
+{
+	return imperio[imperio.size() - 1]->obtemNome();
+}
+
 void Imperio::adicionaTerritorio(Territorio* novo)
 {
 	imperio.emplace_back(novo);
+}
+
+bool Imperio::removeTerritorio(Territorio* apaga)
+{
+	vector<Territorio*>::iterator it;
+
+	it = imperio.begin();
+	while (it != imperio.end()) {
+		if ((*it)->obtemNome() == apaga->obtemNome()) {
+			it = imperio.erase(it);
+			std::cout << "Foi Eliminado o: " << (*it)->obtemNome();
+			return true;
+		}
+		else {
+			it++;
+		}
+	}
+	std::cout << "Nao foi eliminado territorio: " << apaga->obtemNome() << endl;
+
+	return false;
 }
 
 Territorio* Imperio::procuraTerritorio(const string& nome)
@@ -131,13 +156,33 @@ bool Imperio::adquireTecnologia(const string& nomeTecno)
 {
 	int preco = tecno->obterPrecoTecnologia(nomeTecno);
 	if (preco == -1) return false;
-	std::cout << "\n\n" << preco << " -- " << cofre << "\n\n";
 	if (cofre >= preco) {
-		std::cout << "ADQUIRE 2" << endl;
 		tecno->adicionaTecnologia(nomeTecno);
 		cofre -= preco;
+		alteraImperio(nomeTecno);
 		return true;
 	}
 	return false;
 }
 
+void Imperio::alteraImperio(const string& nomeTecno)
+{
+	if (nomeTecno == "drones") { maxForcaMilitar = 5; }
+	if (nomeTecno == "banco") { capacidadeArmazem = 5; capacidadeCofre = 5; }
+}
+
+void Imperio::acrescentaOuro(const int& ouro)
+{
+	if (cofre + ouro >= capacidadeCofre)
+		cofre = capacidadeCofre;
+	else
+		cofre += ouro;
+}
+
+void Imperio::acrescentaProduto(const int& produto)
+{
+	if (armazem + produto >= capacidadeArmazem)
+		armazem = capacidadeArmazem;
+	else
+		armazem += produto;
+}

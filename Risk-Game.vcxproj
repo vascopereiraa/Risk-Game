@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -142,6 +142,7 @@
     <ClCompile Include="Castelo.cpp" />
     <ClCompile Include="Continente.cpp" />
     <ClCompile Include="Duna.cpp" />
+    <ClCompile Include="Eventos.cpp" />
     <ClCompile Include="Fortaleza.cpp" />
     <ClCompile Include="Ilha.cpp" />
     <ClCompile Include="Imperio.cpp" />
@@ -161,6 +162,7 @@
     <ClInclude Include="Castelo.h" />
     <ClInclude Include="Continente.h" />
     <ClInclude Include="Duna.h" />
+    <ClInclude Include="Eventos.h" />
     <ClInclude Include="Fortaleza.h" />
     <ClInclude Include="Ilha.h" />
     <ClInclude Include="Imperio.h" />

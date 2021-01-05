@@ -37,13 +37,18 @@ public:
 	int obtemNumeroTerritorios() const;
 	int verificaTecnologia(const string& nomeTecno) const;
 	string obtemImperioString(const int& ano, const int& fase) const;
+	string obtemNomeUltimoTerritorio() const;
 
 	// Logica do Jogo
 	Territorio* procuraTerritorio(const string& nome);
 	void adicionaTerritorio(Territorio* novo);
+	bool removeTerritorio(Territorio* apaga);
 	void perderForcaMilitar(const int factor);
 	bool conquistaTerritorio(Territorio* territorioConquista);
 	bool adquireTecnologia(const string& nomeTecno);
+	void alteraImperio(const string& nomeTecno);
+	void acrescentaOuro(const int& ouro);
+	void acrescentaProduto(const int& produto);
 };
 
 
