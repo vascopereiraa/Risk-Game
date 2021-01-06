@@ -118,34 +118,41 @@ bool Interface::comandos(const string& linha)
 	istringstream iss(linha);
 	iss >> comando;
 
-	// Seletor de comandos
+	if (comando == "avanca" || comando == "passar") { 
+		mundo->avancaTempo();
+		cout << "O jogador passou o turno!" << endl;
+		return true; 
+	}
+	if (comando == "lista") { cmdLista(iss); return true; }
+	if (comando == "fevento") { cmdFevento(iss); return true; }
+	
+		// Seletor de comandos
 	switch (mundo->obtemFase()) {
-		if (comando == "avanca" || comando == "passar") { 
-			mundo->avancaTempo();
-			cout << "O jogador passou o turno!" << endl;
-			return true; 
-		}
-		if (comando == "lista") { cmdLista(iss); return true; }
-		if (comando == "fevento") { cmdFevento(iss); return true; }
 	case 0:
 		if (comando == "carrega") { cmdCarrega(iss); return true; }
 		if (comando == "cria") { cmdCria(iss); return true; }
+		break;
 	case 1:
 		if (comando == "conquista") { cmdConquista(iss); return true; }
+		break;
 	case 2:
 		cmdRecolha();
 		mundo->avancaTempo();
+		break;
 	case 3:
 		if (comando == "maismilitar") { cmdMaisMilitar(); return true; }
 		if (comando == "maisouro") { cmdMaisOuro(); return true; }
 		if (comando == "maisprod") { cmdMaisProd(); return true; }
 		if (comando == "adquire") { cmdAdquire(iss);  return true; }
+		break;
 	case 4:
 		cmdOcorreEvento();
 		mundo->avancaTempo();
-	default: 
+		break;
+	default:
 		break;
 	}
+
 	return false;
 }
 
