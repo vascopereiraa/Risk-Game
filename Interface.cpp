@@ -95,22 +95,25 @@ void Interface::cmdMaisOuro()
 
 void Interface::cmdMaisProd()
 {
-	if (mundo->adquireForcaMilitar())
+	if (mundo->adquireProduto())
 		cout << "Produto adquirido!" << endl;
 	else
 		cout << "Nao foi possivel adquirir produto" << endl;
 }
 
-void Interface::cmdRecolha()
+void Interface::cmdModifica(istringstream& iss)
 {
-	mundo->recolheProdutosOuro();
-}
+	string tipo;
+	int n;
+	iss >> tipo >> n;
 
-void Interface::cmdOcorreEvento()
-{
-	mundo->geraEvento();
-}
+	if (tipo == "ouro")
+		mundo->acrescentaOuroImperio(n);
+	
+	if (tipo == "prod")
+		mundo->acrescentaProdImperio(n);
 
+}
 
 bool Interface::comandos(const string& linha)
 {
@@ -118,15 +121,19 @@ bool Interface::comandos(const string& linha)
 	istringstream iss(linha);
 	iss >> comando;
 
+	// Comandos de Debug
+	if (comando == "modifica") { cmdModifica(iss); return true; }
+
+	// Comandos gerais do jogo
 	if (comando == "avanca" || comando == "passar") { 
-		mundo->avancaTempo();
-		cout << "O jogador passou o turno!" << endl;
+		cout << mundo->avancaTempo();
 		return true; 
 	}
 	if (comando == "lista") { cmdLista(iss); return true; }
 	if (comando == "fevento") { cmdFevento(iss); return true; }
+	// Comando sair --> mundo->fimJogo(); --> Mundo termina o jogo
 	
-		// Seletor de comandos
+	// Seletor de comandos das fases
 	switch (mundo->obtemFase()) {
 	case 0:
 		if (comando == "carrega") { cmdCarrega(iss); return true; }
@@ -135,19 +142,11 @@ bool Interface::comandos(const string& linha)
 	case 1:
 		if (comando == "conquista") { cmdConquista(iss); return true; }
 		break;
-	case 2:
-		cmdRecolha();
-		mundo->avancaTempo();
-		break;
 	case 3:
 		if (comando == "maismilitar") { cmdMaisMilitar(); return true; }
 		if (comando == "maisouro") { cmdMaisOuro(); return true; }
 		if (comando == "maisprod") { cmdMaisProd(); return true; }
 		if (comando == "adquire") { cmdAdquire(iss);  return true; }
-		break;
-	case 4:
-		cmdOcorreEvento();
-		mundo->avancaTempo();
 		break;
 	default:
 		break;
@@ -163,15 +162,16 @@ Interface::Interface(Mundo* m) : mundo(m)
 void Interface::menu()
 {
 	string linha;
+	cout << mundo->obtemTempo();
 	do 
 	{
-		cout << "Comando: ";
+		cout << "\nComando: ";
 		getline(cin, linha);
 		if (comandos(linha) == false) {
-			cout << "[AVISO] O comando que introduziu nao existe!" << endl;
+			cout << "[AVISO] O comando que introduziu nao esta disponivel!" << endl;
 			cout << "Comando: " << linha << endl << endl;
 		}
-	} while (linha != "sair");
+	} while (!mundo->verificaFimJogo() && linha != "sair");
 
 	return;
 }

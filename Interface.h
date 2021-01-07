@@ -20,8 +20,7 @@ private:
 	void cmdMaisMilitar();
 	void cmdMaisOuro();
 	void cmdMaisProd();
-	void cmdRecolha();
-	void cmdOcorreEvento();
+	void cmdModifica(istringstream& iss);
 	bool comandos(const string& iss);
 
 public:

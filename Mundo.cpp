@@ -14,8 +14,10 @@
 #include <iostream>
 #include <sstream>
 #include <random>
+
 using std::endl;
 using std::ostringstream;
+using std::istringstream;
 
 /* FUNCOES PRIVADAS */
 Territorio* Mundo::procuraTerritorioMundo(const string& nome)
@@ -35,13 +37,18 @@ Territorio* Mundo::procuraTerritorioImperio(const string& nome)
 }
 
 /* FUNCOES PUBLICAS */
-Mundo::Mundo() : ano(1), fase(1), turno(1)
+Mundo::Mundo() : ano(1), fase(0), turno(1)
 {
-	//Imperio
+	// Imperio
 	jogador = new Imperio();
 	jogador->adicionaTerritorio(criaTerritorio("Territorio Inicial"));
-	//Eventos
+	
+	// Eventos
 	eventos = new Eventos();
+
+	// Gerador de numeros aleatorios
+	// std::default_random_engine gerador;
+	// std::uniform_int_distribution<int> randomInt(1, 4);
 }
 
 Mundo::~Mundo()
@@ -202,42 +209,84 @@ bool Mundo::adquireProduto()
 	return false;
 }
 
-void Mundo::avancaTempo()
+string Mundo::avancaTempo()
 {
+	ostringstream out;
+
 	++fase;
-	if (fase == 4) {
+	if (fase > 4) {
 		++turno;
 		fase = 1;
 	}
-	if (turno == 6) {
+	if (turno > 6) {
 		++ano;
 		turno = 1;
 	}
+
+	out << obtemTempo();
+	if (fase == 2 || fase == 4) {
+		out << controlaFase();
+	}
+	return out.str();
 }
 
-void Mundo::geraEvento()
+string Mundo::controlaFase() 
 {
-	std::default_random_engine gerador;
-	std::uniform_int_distribution<int> randomInt(1, 4);
-	int numEvento = randomInt(gerador);
+	ostringstream out;
 
+	// Fases do Jogo
+	if (fase == 2) {
+		int ouro, prod;
+		out << "\nRecolha de Produtos!" << endl;
+		istringstream iss{ recolheOuroProdutos() };
+		iss >> ouro >> prod;
+		out << "Ouro recolhido: " << ouro << "\tProdutos recolhidos: " << prod << endl;
+		out << avancaTempo();
+	}
+	if (fase == 4) {
+		out << "\nFase aleatoria dos eventos!" << endl;
+		out << geraEvento();
+		if(verificaFimJogo() == false)
+			out << avancaTempo();
+
+	}
+	return out.str();
+}
+
+string Mundo::obtemTempo() const 
+{
+	return string{ "\nFase: " + std::to_string(fase) + "\tAno: " + std::to_string(ano) + "\tTurno: " + std::to_string(turno) };
+}
+
+string Mundo::geraEvento()
+{
+	int numEvento = rand() % (4 - 1 + 1) + 1;
 	switch (numEvento)
 	{
 	case 1:
 		eventos->recursoAbandonado(jogador, ano);
+		return string{"Ocorreu o evento \"Recurso Abandonado\"\n"};
+		break;
 	case 2:
 		eventos->alianca(jogador);
+		return string{ "Ocorreu o evento \"Alianca Diplomatica\"\n" };
+		break;
 	case 3:
 		eventos->invasao(jogador,ano);
+		return string{ "Ocorreu o evento \"Invasao\"\n" };
+		break;
 	default:
+		return string{ "Nao ocorreu nenhum evento neste turno!\n" };
 		break;
 	}
 }
 
-void Mundo::recolheProdutosOuro()
+string Mundo::recolheOuroProdutos()
 {
-	jogador->recolheOuro(ano,turno);
-	jogador->recolheProdutos(ano,turno);
+	ostringstream oss;
+	oss << jogador->recolheOuro(ano,turno) << " ";
+	oss << jogador->recolheProdutos(ano,turno);
+	return oss.str();
 }
 
 bool Mundo::verificaFimJogo() const
@@ -245,6 +294,16 @@ bool Mundo::verificaFimJogo() const
 	if (jogador->obtemNumeroTerritorios() == 0)
 		return true;
 	return false;
+}
+
+void Mundo::acrescentaOuroImperio(const int& valor)
+{
+	jogador->acrescentaOuro(valor);
+}
+
+void Mundo::acrescentaProdImperio(const int& valor)
+{
+	jogador->acrescentaProduto(valor);
 }
 
 ostream& operator<<(ostream& out, const Mundo& novoM) {

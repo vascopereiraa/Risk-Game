@@ -59,12 +59,12 @@ string Imperio::obtemImperioString(const int& ano, const int& fase) const
 {
 	ostringstream oss;
 
-	oss << "Armazem: " << obtemArmazem()
-		<< "   Capacidade do Armazem: " << obtemCapacidadeArmazem()
-		<< "   Cofre: " << obtemCofre()
-		<< "   Capacidade do Cofre: " << obtemCapacidadeCofre()
-		<< "   Forca Militar: " << obtemForcaMilitar()
-		<< "   Forca Militar Maxima: " << obtemMaxForcaMilitar() << endl;
+	oss << "Capacidade do Armazem: " << obtemCapacidadeArmazem()
+		<< "    Capacidade do Cofre: " << obtemCapacidadeCofre()
+		<< "    Forca Militar Maxima: " << obtemMaxForcaMilitar() << endl
+		<< "Armazem: " << obtemArmazem()
+		<< "\t\t    Cofre: " << obtemCofre()
+		<< "\t\t      Forca Militar: " << obtemForcaMilitar() << endl;
 
 	oss << "\nTerritorios do Imperio: " << endl;
 
@@ -87,20 +87,17 @@ void Imperio::adicionaTerritorio(Territorio* novo)
 bool Imperio::removeTerritorio(Territorio* apaga)
 {
 	vector<Territorio*>::iterator it;
-
 	it = imperio.begin();
 	while (it != imperio.end()) {
 		if ((*it)->obtemNome() == apaga->obtemNome()) {
-			it = imperio.erase(it);
-			std::cout << "Foi Eliminado o: " << (*it)->obtemNome();
+			std::cout << "\n\n[DEBUG]Foi Eliminado o territorio " << (*it)->obtemNome() << endl << endl;
+			imperio.erase(it);
 			return true;
 		}
 		else {
 			it++;
 		}
 	}
-	std::cout << "Nao foi eliminado territorio: " << apaga->obtemNome() << endl;
-
 	return false;
 }
 
@@ -130,10 +127,9 @@ bool Imperio::conquistaTerritorio(Territorio* territorioConquista)
 		if (territorioConquista->podeConquistar(*this) == true) {
 			int resAtacado = territorioConquista->obtemResistencia();
 
-			// Inicia o gerador aleatorio entre 1 e 6
-			std::default_random_engine gerador;
-			std::uniform_int_distribution<int> randomInt(1, 6);
-			int forcaAtaque = randomInt(gerador) + obtemForcaMilitar();
+			// Gera um numero aleatorio entre 1 e 6
+			int fatorRand = rand() % (6 - 1 + 1) + 1;
+			int forcaAtaque = fatorRand + obtemForcaMilitar();
 
 			if (forcaAtaque >= resAtacado) {
 				// Conquista o territorio
@@ -169,36 +165,45 @@ void Imperio::alteraImperio(const string& nomeTecno)
 	if (nomeTecno == "banco") { capacidadeArmazem = 5; capacidadeCofre = 5; }
 }
 
-void Imperio::acrescentaOuro(const int& ouro)
+int Imperio::acrescentaOuro(const int& ouro)
 {
-	if (cofre + ouro >= capacidadeCofre)
+	if (cofre + ouro >= capacidadeCofre) {
 		cofre = capacidadeCofre;
-	else
+		return capacidadeCofre - (cofre - ouro);
+	}
+	else {
 		cofre += ouro;
+		return ouro;
+	}
 }
 
-void Imperio::acrescentaProduto(const int& produto)
+int Imperio::acrescentaProduto(const int& produto)
 {
-	if (armazem + produto >= capacidadeArmazem)
+	if (armazem + produto >= capacidadeArmazem) {
 		armazem = capacidadeArmazem;
-	else
+		return capacidadeArmazem - (armazem - produto);
+	}
+	else {
 		armazem += produto;
+		return produto;
+	}
 }
 
-void Imperio::recolheProdutos(const int& ano, const int& turno)
+int Imperio::recolheProdutos(const int& ano, const int& turno)
 {
 	int recolha = 0;
 	for (auto it = imperio.begin(); it != imperio.end(); it++)
-		(*it)->obtemCriacaoProdutos(ano,turno);
-	acrescentaProduto(recolha);
+		recolha += (*it)->obtemCriacaoProdutos(ano,turno);
+	return acrescentaProduto(recolha);
 }
 
-void Imperio::recolheOuro(const int& ano, const int& turno)
+int Imperio::recolheOuro(const int& ano, const int& turno)
 {
 	int recolha = 0;
 	for (auto it = imperio.begin(); it != imperio.end(); it++)
 		recolha += (*it)->obtemCriacaoOuro(ano, turno);
-	acrescentaOuro(recolha);
+	return acrescentaOuro(recolha);
+	
 }
 
 bool Imperio::maisMilitar()
@@ -217,24 +222,26 @@ bool Imperio::maisMilitar()
 
 bool Imperio::maisProduto()
 {
-	if (armazem + 1 < capacidadeArmazem) {
+	if (armazem + 1 <= capacidadeArmazem) {
 		if (cofre >= 2) {
 			cofre -= 2;
 			++armazem;
 			return true;
 		}
+		return false;
 	}
 	return false;
 }
 
 bool Imperio::maisOuro()
 {
-	if (cofre + 1 < capacidadeCofre) {
+	if (cofre + 1 <= capacidadeCofre) {
 		if (armazem >= 2) {
 			armazem -= 2;
 			++cofre;
 			return true;
 		}
+		return false;
 	}
 	return false;
 }

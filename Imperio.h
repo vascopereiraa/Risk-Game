@@ -47,10 +47,10 @@ public:
 	bool conquistaTerritorio(Territorio* territorioConquista);
 	bool adquireTecnologia(const string& nomeTecno);
 	void alteraImperio(const string& nomeTecno);
-	void acrescentaOuro(const int& ouro);
-	void acrescentaProduto(const int& produto);
-	void recolheProdutos(const int& ano, const int& turno);
-	void recolheOuro(const int& ano, const int& turno);
+	int acrescentaOuro(const int& ouro);
+	int acrescentaProduto(const int& produto);
+	int recolheProdutos(const int& ano, const int& turno);
+	int recolheOuro(const int& ano, const int& turno);
 	bool maisMilitar();
 	bool maisProduto();
 	bool maisOuro();

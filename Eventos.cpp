@@ -1,5 +1,7 @@
 #include "Eventos.h"
 #include "Imperio.h"
+
+#include <iostream>
 #include <random>
 
 void Eventos::recursoAbandonado(Imperio* imp, const int& ano)
@@ -14,17 +16,14 @@ bool Eventos::invasao(Imperio* imp, const int& ano)
 {
 	Territorio* alvo = imp->procuraTerritorio(imp->obtemNomeUltimoTerritorio());
 	int forcaAtaque;
-
-	std::default_random_engine gerador;
-	std::uniform_int_distribution<int> randomInt(1, 6);
-	int random = randomInt(gerador);
+	int fatorRand = rand() % (6 - 1 + 1) + 1;
 	
 	if(ano == 1)
-		forcaAtaque = randomInt(gerador) + 2;
+		forcaAtaque = fatorRand + 2;
 	else
-		forcaAtaque = randomInt(gerador) + 3;
+		forcaAtaque = fatorRand + 3;
 
-	if (forcaAtaque > alvo->obtemResistencia() + imp->verificaTecnologia("defesas")) {
+	if (forcaAtaque >= alvo->obtemResistencia() + imp->verificaTecnologia("defesas")) {
 		if (imp->removeTerritorio(alvo))
 			return true;
 		else
@@ -35,4 +34,5 @@ bool Eventos::invasao(Imperio* imp, const int& ano)
 
 void Eventos::alianca(Imperio* imp)
 {
+	imp->maisMilitar();
 }

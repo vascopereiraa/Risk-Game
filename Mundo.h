@@ -50,10 +50,16 @@ public:
 	bool adquireForcaMilitar();
 	bool adquireOuro();
 	bool adquireProduto();
-	void avancaTempo();
-	void geraEvento();
-	void recolheProdutosOuro();
+	string avancaTempo();
+	string controlaFase();
+	string obtemTempo() const;
+	string geraEvento();
+	string recolheOuroProdutos();
 	bool verificaFimJogo() const;
+
+	// Funcoes para Debug
+	void acrescentaOuroImperio(const int& valor);
+	void acrescentaProdImperio(const int& valor);
 };
 
 ostream& operator<<(ostream& out, const Mundo& novoM);
