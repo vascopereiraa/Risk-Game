@@ -1,5 +1,8 @@
-#pragma once
-class Imperio;
+
+#ifndef __EVENTOS__
+#define __EVENTOS__
+
+#include "Imperio.h"
 
 class Eventos
 {
@@ -8,3 +11,4 @@ public:
 	virtual bool acaoEvento(Imperio* imp, const int& ano);
 };
 
+#endif //__EVENTOS__

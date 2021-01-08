@@ -45,10 +45,6 @@ Mundo::Mundo() : ano(1), fase(0), turno(1)
 	
 	// Eventos
 	eventos = new Eventos();
-
-	// Gerador de numeros aleatorios
-	// std::default_random_engine gerador;
-	// std::uniform_int_distribution<int> randomInt(1, 4);
 }
 
 Mundo::Mundo(const Mundo& orig)
@@ -287,7 +283,7 @@ string Mundo::obtemTempo() const
 
 string Mundo::geraEvento()
 {
-	eventos->lancaEvento(jogador, ano);
+	return eventos->lancaEvento(jogador, ano);
 }
 
 string Mundo::recolheOuroProdutos()

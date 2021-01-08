@@ -17,19 +17,19 @@ string Eventos::lancaEvento(Imperio* imp, const int& ano)
 	switch (numEvento)
 	{
 	case 1:
-		novo = new RecursoAbandonado();
+		novo = new RecursoAbandonado;
 		novo->acaoEvento(imp, ano);
 		delete novo;
 		return string{ "Ocorreu o evento \"Recurso Abandonado\"\n" };
 		break;
 	case 2:
-		novo = new Alianca();
+		novo = new Alianca;
 		novo->acaoEvento(imp, ano);
 		delete novo;
 		return string{ "Ocorreu o evento \"Alianca Diplomatica\"\n" };
 		break;
 	case 3:
-		novo = new Invasao();
+		novo = new Invasao;
 		novo->acaoEvento(imp, ano);
 		delete novo;
 		return string{ "Ocorreu o evento \"Invasao\"\n" };

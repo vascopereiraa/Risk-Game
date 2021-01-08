@@ -1,4 +1,7 @@
-#pragma once
+
+#ifndef __INVASAO__
+#define __INVASAO__
+
 #include "Eventos.h"
 
 class Invasao : public Eventos
@@ -8,3 +11,4 @@ public:
 
 };
 
+#endif //__INVASAO__
