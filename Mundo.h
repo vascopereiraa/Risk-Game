@@ -32,8 +32,10 @@ private:
 public:
 	// Construtores & Destrutor
 	Mundo();
-	Mundo(const Mundo& copia) = delete;		// Apagar o construtor por copia
+	Mundo(const Mundo& orig);
 	~Mundo();
+
+	Mundo& operator=(const Mundo& orig);
 	
 	// Dados da classe
 	int obtemAno() const;

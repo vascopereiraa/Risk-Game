@@ -29,3 +29,8 @@ bool TerritorioInicial::podeConquistar(const Imperio& jogador)
 {
     return false;
 }
+
+Territorio* TerritorioInicial::duplica() const
+{
+    return new TerritorioInicial(*this);
+}

@@ -15,12 +15,14 @@ class Castelo : public Continente
 public:
 	// Construtores
 	Castelo();
+	
 
 	// Obter dados da Classe
 	string obtemNome() const;
 	int obtemResistencia() const;
 	int obtemCriacaoProdutos(const int& ano, const int& turno) const;
 	int obtemCriacaoOuro(const int& ano, const int& turno) const;
+	Territorio* duplica() const;
 };
 
 #endif //__Castelo__

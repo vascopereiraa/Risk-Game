@@ -1,38 +1,46 @@
 #include "Eventos.h"
+#include "RecursoAbandonado.h"
+#include "Alianca.h"
+#include "Invasao.h"
 #include "Imperio.h"
 
 #include <iostream>
 #include <random>
 
-void Eventos::recursoAbandonado(Imperio* imp, const int& ano)
-{
-	if (ano == 1)
-		imp->acrescentaProduto(1);
-	else
-		imp->acrescentaOuro(1);
-}
 
-bool Eventos::invasao(Imperio* imp, const int& ano)
-{
-	Territorio* alvo = imp->procuraTerritorio(imp->obtemNomeUltimoTerritorio());
-	int forcaAtaque;
-	int fatorRand = rand() % (6 - 1 + 1) + 1;
-	
-	if(ano == 1)
-		forcaAtaque = fatorRand + 2;
-	else
-		forcaAtaque = fatorRand + 3;
+using std::string;
 
-	if (forcaAtaque >= alvo->obtemResistencia() + imp->verificaTecnologia("defesas")) {
-		if (imp->removeTerritorio(alvo))
-			return true;
-		else
-			return false;
+string Eventos::lancaEvento(Imperio* imp, const int& ano)
+{
+	Eventos* novo;
+	int numEvento = rand() % (4 - 1 + 1) + 1;
+	switch (numEvento)
+	{
+	case 1:
+		novo = new RecursoAbandonado();
+		novo->acaoEvento(imp, ano);
+		delete novo;
+		return string{ "Ocorreu o evento \"Recurso Abandonado\"\n" };
+		break;
+	case 2:
+		novo = new Alianca();
+		novo->acaoEvento(imp, ano);
+		delete novo;
+		return string{ "Ocorreu o evento \"Alianca Diplomatica\"\n" };
+		break;
+	case 3:
+		novo = new Invasao();
+		novo->acaoEvento(imp, ano);
+		delete novo;
+		return string{ "Ocorreu o evento \"Invasao\"\n" };
+		break;
+	default:
+		return string{ "Nao ocorreu nenhum evento neste turno!\n" };
+		break;
 	}
-
 }
 
-void Eventos::alianca(Imperio* imp)
+bool Eventos::acaoEvento(Imperio* imp, const int& ano)
 {
-	imp->maisMilitar();
+	return true;
 }

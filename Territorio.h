@@ -24,7 +24,7 @@ public:
 
 	// Logica do Jogo
 	virtual bool podeConquistar(const Imperio& jogador) = 0;
-
+	virtual Territorio* duplica() const = 0;
 };
 
 

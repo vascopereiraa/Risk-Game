@@ -19,6 +19,7 @@ public:
 
 	// Logica do Jogo
 	bool podeConquistar(const Imperio& jogador);
+	Territorio* duplica() const;
 };
 
 

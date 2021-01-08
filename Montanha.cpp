@@ -31,3 +31,8 @@ int Montanha::obtemCriacaoOuro(const int& ano, const int& turno) const
 {
 	return 0;
 }
+
+Territorio* Montanha::duplica() const
+{
+	return new Montanha(*this);
+}

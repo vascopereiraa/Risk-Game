@@ -21,6 +21,7 @@ public:
 	int obtemResistencia() const;
 	int obtemCriacaoProdutos(const int& ano, const int& fase) const;
 	int obtemCriacaoOuro(const int& ano, const int& fase) const;
+	Territorio* duplica() const;
 };
 
 #endif //__Fortaleza__

@@ -26,3 +26,8 @@ int Fortaleza::obtemCriacaoOuro(const int& ano, const int& turno) const
 {
 	return 0;
 }
+
+Territorio* Fortaleza::duplica() const
+{
+	return new Fortaleza(*this);
+}

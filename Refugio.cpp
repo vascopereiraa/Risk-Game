@@ -21,3 +21,8 @@ int Refugio::obtemCriacaoOuro(const int& ano, const int& turno) const
 {
 	return 1;
 }
+
+Territorio* Refugio::duplica() const
+{
+	return new Refugio(*this);
+}

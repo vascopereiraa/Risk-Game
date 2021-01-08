@@ -21,6 +21,8 @@ public:
 	int obtemResistencia() const;
 	int obtemCriacaoProdutos(const int& ano, const int& turno) const;
 	int obtemCriacaoOuro(const int& ano, const int& turno) const;
+
+	Territorio* duplica() const;
 };
 
 #endif //__Montanha__

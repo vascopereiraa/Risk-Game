@@ -26,3 +26,8 @@ int Castelo::obtemCriacaoOuro(const int& ano, const int& turno) const
 {
 	return 1;
 }
+
+Territorio* Castelo::duplica() const
+{
+	return new Castelo(*this);
+}

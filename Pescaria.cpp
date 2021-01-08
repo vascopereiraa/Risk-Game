@@ -21,3 +21,8 @@ int Pescaria::obtemCriacaoOuro(const int& ano, const int& turno) const
 {
 	return 1;
 }
+
+Territorio* Pescaria::duplica() const
+{
+	return new Pescaria(*this);
+}

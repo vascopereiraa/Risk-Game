@@ -27,3 +27,8 @@ int Duna::obtemCriacaoOuro(const int& ano, const int& turno) const
 {
 	return 0;
 }
+
+Territorio* Duna::duplica() const
+{
+	return new Duna(*this);
+}

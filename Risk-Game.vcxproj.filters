@@ -31,6 +31,12 @@
     <Filter Include="Source Files\Territorio">
       <UniqueIdentifier>{4dac1520-db5a-4288-8d82-1c2a3c41b500}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Eventos">
+      <UniqueIdentifier>{69d8b954-44b9-453a-a892-0c17092bc1af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Eventos">
+      <UniqueIdentifier>{bd1d0e7b-998d-471c-928f-b465634c6cf0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -84,12 +90,21 @@
     <ClCompile Include="Pescaria.cpp">
       <Filter>Source Files\Ilhas</Filter>
     </ClCompile>
+    <ClCompile Include="Eventos.cpp">
+      <Filter>Source Files\Eventos</Filter>
+    </ClCompile>
+    <ClCompile Include="Invasao.cpp">
+      <Filter>Source Files\Eventos</Filter>
+    </ClCompile>
+    <ClCompile Include="Alianca.cpp">
+      <Filter>Source Files\Eventos</Filter>
+    </ClCompile>
+    <ClCompile Include="RecursoAbandonado.cpp">
+      <Filter>Source Files\Eventos</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Mundo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Imperio.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Interface.h">
@@ -133,6 +148,21 @@
     </ClInclude>
     <ClInclude Include="Pescaria.h">
       <Filter>Header Files\Ilhas</Filter>
+    </ClInclude>
+    <ClInclude Include="Eventos.h">
+      <Filter>Header Files\Eventos</Filter>
+    </ClInclude>
+    <ClInclude Include="Invasao.h">
+      <Filter>Header Files\Eventos</Filter>
+    </ClInclude>
+    <ClInclude Include="Imperio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Alianca.h">
+      <Filter>Header Files\Eventos</Filter>
+    </ClInclude>
+    <ClInclude Include="RecursoAbandonado.h">
+      <Filter>Header Files\Eventos</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

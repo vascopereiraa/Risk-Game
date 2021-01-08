@@ -27,3 +27,8 @@ int Mina::obtemCriacaoOuro(const int& ano, const int& turno) const
 {
 	return turno <= 3 ? 1 : 2;
 }
+
+Territorio* Mina::duplica() const
+{
+	return new Mina(*this);
+}

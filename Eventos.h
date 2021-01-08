@@ -4,8 +4,7 @@ class Imperio;
 class Eventos
 {
 public:
-	void recursoAbandonado(Imperio* imp, const int& ano);
-	bool invasao(Imperio* imp, const int& ano);
-	void alianca(Imperio* imp);
+	string lancaEvento(Imperio* imp, const int& ano);
+	virtual bool acaoEvento(Imperio* imp, const int& ano);
 };
 

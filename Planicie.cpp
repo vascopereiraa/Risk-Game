@@ -30,3 +30,8 @@ int Planicie::obtemCriacaoOuro(const int& ano, const int& turno) const
 {
 	return 1;
 }
+
+Territorio* Planicie::duplica() const
+{
+	return new Planicie(*this);
+}

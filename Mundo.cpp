@@ -51,6 +51,11 @@ Mundo::Mundo() : ano(1), fase(0), turno(1)
 	// std::uniform_int_distribution<int> randomInt(1, 4);
 }
 
+Mundo::Mundo(const Mundo& orig)
+{
+	*this = orig;
+}
+
 Mundo::~Mundo()
 {
 	// Apagar os territórios que pertencem ao mundo (composição)
@@ -59,6 +64,28 @@ Mundo::~Mundo()
 
 	// Apagar o jogador
 	delete jogador;
+}
+
+Mundo& Mundo::operator=(const Mundo& orig)
+{
+	//prevencao de auto-atribuicao
+	if (this == &orig)
+		return *this;
+
+	//Libertar mem. din. velha
+	for (int i = 0; i < territorios.size(); i++) {
+		delete territorios[i];
+	}
+
+	//esvaziar o vector
+	territorios.clear();
+
+	//copiar a informacao de orig, deplucando o objeto
+	for (int i = 0; i < orig.territorios.size(); i++) {
+		Territorio* p = orig.territorios[i]->duplica();
+		territorios.push_back(p);
+	}
+	return *this;
 }
 
 int Mundo::obtemAno() const
@@ -260,25 +287,7 @@ string Mundo::obtemTempo() const
 
 string Mundo::geraEvento()
 {
-	int numEvento = rand() % (4 - 1 + 1) + 1;
-	switch (numEvento)
-	{
-	case 1:
-		eventos->recursoAbandonado(jogador, ano);
-		return string{"Ocorreu o evento \"Recurso Abandonado\"\n"};
-		break;
-	case 2:
-		eventos->alianca(jogador);
-		return string{ "Ocorreu o evento \"Alianca Diplomatica\"\n" };
-		break;
-	case 3:
-		eventos->invasao(jogador,ano);
-		return string{ "Ocorreu o evento \"Invasao\"\n" };
-		break;
-	default:
-		return string{ "Nao ocorreu nenhum evento neste turno!\n" };
-		break;
-	}
+	eventos->lancaEvento(jogador, ano);
 }
 
 string Mundo::recolheOuroProdutos()
