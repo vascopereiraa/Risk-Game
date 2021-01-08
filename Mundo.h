@@ -34,7 +34,6 @@ public:
 	Mundo();
 	Mundo(const Mundo& orig);
 	~Mundo();
-
 	Mundo& operator=(const Mundo& orig);
 	
 	// Dados da classe

@@ -74,7 +74,8 @@ void Interface::cmdFevento(istringstream& iss)
 {
 	string nome;
 	iss >> nome;
-	//
+	Mundo* a = mundo;
+	delete a;
 }
 
 void Interface::cmdMaisMilitar()

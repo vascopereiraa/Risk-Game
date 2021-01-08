@@ -64,23 +64,27 @@ Mundo::~Mundo()
 
 Mundo& Mundo::operator=(const Mundo& orig)
 {
-	//prevencao de auto-atribuicao
+	// Prevencao de auto-atribuicao
 	if (this == &orig)
 		return *this;
 
-	//Libertar mem. din. velha
+	// Libertar mem. din. velha
 	for (int i = 0; i < territorios.size(); i++) {
 		delete territorios[i];
 	}
 
-	//esvaziar o vector
+	// Esvaziar o vector e dados
 	territorios.clear();
+	delete jogador;
 
-	//copiar a informacao de orig, deplucando o objeto
+	// Copiar a informacao de orig, duplicando o objeto
+	jogador = orig.jogador;
+
 	for (int i = 0; i < orig.territorios.size(); i++) {
 		Territorio* p = orig.territorios[i]->duplica();
-		territorios.push_back(p);
+		territorios.emplace_back(p);
 	}
+
 	return *this;
 }
 

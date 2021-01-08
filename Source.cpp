@@ -15,6 +15,9 @@ using std::endl;
 
 int main() 
 {
+	// Inicializar o gerador de numeros aleatorios
+	srand(static_cast<unsigned int> (time(NULL)));
+
 	// Inicializacao dos objetos do jogo
 	Mundo* mundo = new Mundo();
 	Interface* interface = new Interface{ mundo };

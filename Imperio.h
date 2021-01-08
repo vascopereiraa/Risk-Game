@@ -26,6 +26,7 @@ class Imperio
 public:
 	// Construtores
 	Imperio();
+	Imperio(const Imperio& original) = delete;
 
 	// Obter dados da Classe
 	int obtemArmazem() const;
