@@ -23,6 +23,7 @@ private:
 	void cmdMaisProd();
 	void cmdModifica(istringstream& iss);
 	void cmdGrava(istringstream& iss);
+	void cmdAtiva(istringstream& iss);
 	void cmdListaGravacoes(istringstream& iss);
 	bool comandos(const string& iss);
 

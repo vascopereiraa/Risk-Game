@@ -120,6 +120,17 @@ void Interface::cmdGrava(istringstream& iss)
 	string nome;
 	iss >> nome;
 
+	if (iss.fail()) 
+	{
+		cout << "Introduza o nome pelo qual pretende guardar o jogo" << endl;
+		return;
+	}
+	if(gravacoes.find(nome) != gravacoes.end()) 
+	{
+		cout << "Ja existe uma gravacao com esse nome" << endl;
+		return;
+	}
+
 	Mundo* novo = new Mundo(*mundo);
 	gravacoes.insert(std::pair<string, Mundo*>(nome, novo));
 
@@ -127,6 +138,27 @@ void Interface::cmdGrava(istringstream& iss)
 
 	for (auto it = gravacoes.cbegin(); it != gravacoes.cend(); ++it)
 		cout << it->first << " " << *(it->second) << endl;
+}
+
+void Interface::cmdAtiva(istringstream& iss)
+{
+	string nome;
+	iss >> nome;
+
+	if (iss.fail()) {
+		cout << "Insira o nome da gravacao que pretende ativar" << endl;
+		return;
+	}
+
+	auto it = gravacoes.find(nome);
+	if(it != gravacoes.end())
+	{
+		delete mundo;
+		mundo = (it->second);
+		gravacoes.erase(nome);
+		return;
+	}
+	
 }
 
 void Interface::cmdListaGravacoes(istringstream& iss)
@@ -163,6 +195,7 @@ bool Interface::comandos(const string& linha)
 	if (comando == "fevento") { cmdFevento(iss); return true; }
 	if (comando == "grava") { cmdGrava(iss); return true; }
 	if (comando == "mostra") { cmdListaGravacoes(iss); return true; }
+	if (comando == "ativa") { cmdAtiva(iss); return true; }
 	
 	// Seletor de comandos das fases
 	switch (mundo->obtemFase()) {
