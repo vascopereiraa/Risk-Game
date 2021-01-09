@@ -15,6 +15,30 @@ Imperio::Imperio() : armazem(0), cofre(0), forcaMilitar(0),
 	tecno = novo;
 }
 
+Imperio::Imperio(const Imperio& original)
+{
+	*this = original;
+}
+
+Imperio& Imperio::operator=(const Imperio& outro)
+{
+	if (this == &outro)
+		return *this;
+
+	imperio.clear();
+	
+	capacidadeArmazem = outro.capacidadeArmazem;
+	capacidadeCofre = outro.capacidadeCofre;
+	maxForcaMilitar = outro.maxForcaMilitar;
+	armazem = outro.armazem;
+	cofre = outro.cofre;
+	forcaMilitar = outro.forcaMilitar;
+	tecno = new Tecnologias(*outro.tecno);
+
+	return *this;
+}
+
+
 int Imperio::obtemArmazem() const
 {
 	return armazem;

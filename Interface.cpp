@@ -17,9 +17,10 @@ void Interface::cmdCarrega(istringstream& iss)
 {
 	string nomeFicheiro;
 	iss >> nomeFicheiro;
-	if (iss.fail())
+	if (iss.fail()) {
 		std::cerr << "[FAIL] Impossivel obter nome de ficheiro" << endl;
-
+		return;
+	}
 	// ABRIR FICHEIRO E LER LINHA A LINHA
 	abreFicheiro(nomeFicheiro);
 }
@@ -74,8 +75,6 @@ void Interface::cmdFevento(istringstream& iss)
 {
 	string nome;
 	iss >> nome;
-	Mundo* a = mundo;
-	delete a;
 }
 
 void Interface::cmdMaisMilitar()
@@ -116,6 +115,36 @@ void Interface::cmdModifica(istringstream& iss)
 
 }
 
+void Interface::cmdGrava(istringstream& iss)
+{
+	string nome;
+	iss >> nome;
+
+	Mundo* novo = new Mundo(*mundo);
+	gravacoes.insert(std::pair<string, Mundo*>(nome, novo));
+
+	cout << "Foi gravada uma copia do jogo segundo o nome " << nome << endl;
+
+	for (auto it = gravacoes.cbegin(); it != gravacoes.cend(); ++it)
+		cout << it->first << " " << *(it->second) << endl;
+}
+
+void Interface::cmdListaGravacoes(istringstream& iss)
+{
+	string nome;
+	iss >> nome;
+	if (iss.fail()) {
+		cout << "Gravacoes disponiveis: " << endl;
+		for (auto it = gravacoes.cbegin(); it != gravacoes.cend(); ++it)
+			cout << it->first << endl;
+	}
+	else
+		for (auto it = gravacoes.cbegin(); it != gravacoes.cend(); ++it)
+			if(it->first == nome)
+				cout << "\n" << *(it->second) << endl;
+			
+}
+
 bool Interface::comandos(const string& linha)
 {
 	string comando;
@@ -124,7 +153,7 @@ bool Interface::comandos(const string& linha)
 
 	// Comandos de Debug
 	if (comando == "modifica") { cmdModifica(iss); return true; }
-
+	
 	// Comandos gerais do jogo
 	if (comando == "avanca" || comando == "passar") { 
 		cout << mundo->avancaTempo();
@@ -132,7 +161,8 @@ bool Interface::comandos(const string& linha)
 	}
 	if (comando == "lista") { cmdLista(iss); return true; }
 	if (comando == "fevento") { cmdFevento(iss); return true; }
-	// Comando sair --> mundo->fimJogo(); --> Mundo termina o jogo
+	if (comando == "grava") { cmdGrava(iss); return true; }
+	if (comando == "mostra") { cmdListaGravacoes(iss); return true; }
 	
 	// Seletor de comandos das fases
 	switch (mundo->obtemFase()) {

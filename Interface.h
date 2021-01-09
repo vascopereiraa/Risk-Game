@@ -8,6 +8,7 @@ using std::istringstream;
 class Interface
 {
 	Mundo* mundo;
+	map<string, Mundo*> gravacoes;
 
 private:
 	void cmdCarrega(istringstream& iss);
@@ -21,6 +22,8 @@ private:
 	void cmdMaisOuro();
 	void cmdMaisProd();
 	void cmdModifica(istringstream& iss);
+	void cmdGrava(istringstream& iss);
+	void cmdListaGravacoes(istringstream& iss);
 	bool comandos(const string& iss);
 
 public:

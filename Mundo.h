@@ -35,7 +35,7 @@ public:
 	Mundo(const Mundo& orig);
 	~Mundo();
 	Mundo& operator=(const Mundo& orig);
-	
+
 	// Dados da classe
 	int obtemAno() const;
 	int obtemTurno() const;
@@ -61,6 +61,8 @@ public:
 	// Funcoes para Debug
 	void acrescentaOuroImperio(const int& valor);
 	void acrescentaProdImperio(const int& valor);
+
+	int obtemNumeroTerrImp() const;
 };
 
 ostream& operator<<(ostream& out, const Mundo& novoM);

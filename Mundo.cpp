@@ -76,13 +76,21 @@ Mundo& Mundo::operator=(const Mundo& orig)
 	// Esvaziar o vector e dados
 	territorios.clear();
 	delete jogador;
+	delete eventos;
+
+	// eventos = new Eventos(*orig.eventos);
+	jogador = new Imperio(*orig.jogador);
+
+	ano = orig.ano;
+	turno = orig.turno;
+	fase = orig.fase;
 
 	// Copiar a informacao de orig, duplicando o objeto
-	jogador = orig.jogador;
-
 	for (int i = 0; i < orig.territorios.size(); i++) {
 		Territorio* p = orig.territorios[i]->duplica();
 		territorios.emplace_back(p);
+		if (orig.jogador->procuraTerritorio(p->obtemNome()) != nullptr)
+			jogador->adicionaTerritorio(p);
 	}
 
 	return *this;
@@ -250,7 +258,8 @@ string Mundo::avancaTempo()
 		turno = 1;
 	}
 
-	out << obtemTempo();
+	if(ano < 3)
+		out << obtemTempo();
 	if (fase == 2 || fase == 4) {
 		out << controlaFase();
 	}
@@ -302,6 +311,10 @@ bool Mundo::verificaFimJogo() const
 {
 	if (jogador->obtemNumeroTerritorios() == 0)
 		return true;
+	if (jogador->obtemNumeroTerritorios() == territorios.size() && fase > 0)
+		return true;
+	if (ano == 3)
+		return true;
 	return false;
 }
 
@@ -313,6 +326,11 @@ void Mundo::acrescentaOuroImperio(const int& valor)
 void Mundo::acrescentaProdImperio(const int& valor)
 {
 	jogador->acrescentaProduto(valor);
+}
+
+int Mundo::obtemNumeroTerrImp() const
+{
+	return jogador->obtemNumeroTerritorios();
 }
 
 ostream& operator<<(ostream& out, const Mundo& novoM) {
