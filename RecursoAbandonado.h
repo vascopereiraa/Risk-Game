@@ -2,13 +2,13 @@
 #ifndef __RECURSO_ABANDONADO__
 #define __RECURSO_ABANDONADO__
 
-#include "Eventos.h"
+#include "Evento.h"
 #include "Imperio.h"
 
-class RecursoAbandonado : public Eventos
+class RecursoAbandonado : public Evento
 {
 public:
-	bool acaoEvento(Imperio* imp, const int& ano);
+	string acaoEvento(Imperio* imperio, const int& ano, Mundo* mundo) override;
 };
 
 #endif //__RECURSO_ABANDONADO__

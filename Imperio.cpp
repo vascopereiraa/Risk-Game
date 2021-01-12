@@ -1,5 +1,6 @@
 
 #include "Imperio.h"
+#include "Mundo.h"
 
 #include <iostream>
 #include <sstream>
@@ -24,8 +25,6 @@ Imperio& Imperio::operator=(const Imperio& outro)
 {
 	if (this == &outro)
 		return *this;
-
-	imperio.clear();
 	
 	capacidadeArmazem = outro.capacidadeArmazem;
 	capacidadeCofre = outro.capacidadeCofre;
@@ -74,7 +73,7 @@ int Imperio::obtemNumeroTerritorios() const
 	return imperio.size();
 }
 
-int Imperio::verificaTecnologia(const string& nomeTecno) const
+bool Imperio::verificaTecnologia(const string& nomeTecno) const
 {
 	return tecno->verificaTecnologia(nomeTecno);
 }
@@ -144,7 +143,7 @@ void Imperio::perderForcaMilitar(const int factor)
 		forcaMilitar -= factor;
 }
 
-bool Imperio::conquistaTerritorio(Territorio* territorioConquista)
+bool Imperio::conquistaTerritorio(Territorio* territorioConquista, Mundo* mundo)
 {
 	// Se o territorio nao pertencer ao imperio
 	if (procuraTerritorio(territorioConquista->obtemNome()) == nullptr) {
@@ -152,7 +151,7 @@ bool Imperio::conquistaTerritorio(Territorio* territorioConquista)
 			int resAtacado = territorioConquista->obtemResistencia();
 
 			// Gera um numero aleatorio entre 1 e 6
-			int fatorRand = rand() % (6 - 1 + 1) + 1;
+			int fatorRand = mundo->geraAleatorio(1, 6);
 			int forcaAtaque = fatorRand + obtemForcaMilitar();
 
 			if (forcaAtaque >= resAtacado) {
@@ -165,6 +164,8 @@ bool Imperio::conquistaTerritorio(Territorio* territorioConquista)
 				return false;
 			}
 		}
+		else
+			return false;
 	}
 	else
 		return false;
@@ -210,6 +211,18 @@ int Imperio::acrescentaProduto(const int& produto)
 	else {
 		armazem += produto;
 		return produto;
+	}
+}
+
+int Imperio::acrescentaForcaMilitar(const int& forca)
+{
+	if (forcaMilitar + forca >= maxForcaMilitar) {
+		forcaMilitar = maxForcaMilitar;
+		return maxForcaMilitar - (forcaMilitar - forca);
+	}
+	else {
+		forcaMilitar += forca;
+		return forca;
 	}
 }
 

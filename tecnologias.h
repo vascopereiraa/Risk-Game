@@ -14,7 +14,7 @@ public:
 	Tecnologias();
 
 	// Obter dados da Classe
-	int verificaTecnologia(const string& nomeTecno) const;
+	bool verificaTecnologia(const string& nomeTecno) const;
 	string obtemNomeTecnologias() const;
 	int obtemPrecoDrone() const;
 	int obtemPrecoMisseis() const;

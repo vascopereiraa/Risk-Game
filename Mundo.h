@@ -4,7 +4,7 @@
 
 #include "Territorio.h"
 #include "Imperio.h"
-#include "Eventos.h"
+#include "Evento.h"
 
 #include <vector>
 #include <string>
@@ -23,7 +23,8 @@ class Mundo
 
 	vector<Territorio*> territorios;
 	Imperio* jogador;
-	Eventos* eventos;
+	
+	int ultimoAleatorio;
 
 private:
 	Territorio* procuraTerritorioMundo(const string& nome);
@@ -57,11 +58,11 @@ public:
 	string geraEvento();
 	string recolheOuroProdutos();
 	bool verificaFimJogo() const;
+	int geraAleatorio(const int& min, const int& max);
 
 	// Funcoes para Debug
 	void acrescentaOuroImperio(const int& valor);
 	void acrescentaProdImperio(const int& valor);
-
 	int obtemNumeroTerrImp() const;
 };
 

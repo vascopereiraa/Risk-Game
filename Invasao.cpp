@@ -1,21 +1,24 @@
 #include "Invasao.h"
 #include "Imperio.h"
 
-bool Invasao::acaoEvento(Imperio* imp, const int& ano)
+string Invasao::acaoEvento(Imperio* imperio, const int& ano, Mundo* mundo)
 {
-	Territorio* alvo = imp->procuraTerritorio(imp->obtemNomeUltimoTerritorio());
+	string info{ "Ocorreu o evento \"Invasao\"\n" };
+	Territorio* alvo = imperio->procuraTerritorio(imperio->obtemNomeUltimoTerritorio());
 	int forcaAtaque;
-	int fatorRand = rand() % (6 - 1 + 1) + 1;
+	int fatorRand = mundo->geraAleatorio(1, 6);
 
 	if (ano == 1)
 		forcaAtaque = fatorRand + 2;
 	else
 		forcaAtaque = fatorRand + 3;
 
-	if (forcaAtaque >= alvo->obtemResistencia() + imp->verificaTecnologia("defesas")) {
-		if (imp->removeTerritorio(alvo))
-			return true;
+	if (forcaAtaque >= alvo->obtemResistencia() + imperio->verificaTecnologia("defesas")) {
+		if (imperio->removeTerritorio(alvo))
+			info += "O territorio " + alvo->obtemNome() + " foi tomado de assalto durante o Evento!\n";
 		else
-			return false;
+			info += "A tua defesa permaneceu intacta!\n";
 	}
+
+	return info;
 }

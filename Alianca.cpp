@@ -1,7 +1,7 @@
 #include "Alianca.h"
 
-bool Alianca::acaoEvento(Imperio* imp, const int& ano)
+string Alianca::acaoEvento(Imperio* imperio, const int& ano, Mundo* mundo)
 {
-    imp->maisMilitar();
-    return true;
+    imperio->acrescentaForcaMilitar(1);
+    return string{ "Ocorreu o evento \"Alianca Diplomatica\"\nFoi acrecentada uma unidade de Forca à Forca Militar\n" };
 }

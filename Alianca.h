@@ -3,13 +3,13 @@
 #define __ALIANCA__
 
 
-#include "Eventos.h"
+#include "Evento.h"
 #include "Imperio.h"
 
-class Alianca : public Eventos
+class Alianca : public Evento
 {
 public:
-	bool acaoEvento(Imperio* imp, const int& ano);
+	string acaoEvento(Imperio* imperio, const int& ano, Mundo* mundo) override;
 };
 
 #endif //__ALIANCA__ 

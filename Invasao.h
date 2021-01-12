@@ -2,12 +2,12 @@
 #ifndef __INVASAO__
 #define __INVASAO__
 
-#include "Eventos.h"
+#include "Evento.h"
 
-class Invasao : public Eventos
+class Invasao : public Evento
 {
 public:
-	bool acaoEvento(Imperio* imp, const int& ano);
+	string acaoEvento(Imperio* imperio, const int& ano, Mundo* mundo) override;
 
 };
 

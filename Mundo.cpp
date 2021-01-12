@@ -14,6 +14,7 @@
 #include <iostream>
 #include <sstream>
 #include <random>
+#include <memory>
 
 using std::endl;
 using std::ostringstream;
@@ -37,14 +38,11 @@ Territorio* Mundo::procuraTerritorioImperio(const string& nome)
 }
 
 /* FUNCOES PUBLICAS */
-Mundo::Mundo() : ano(1), fase(0), turno(1)
+Mundo::Mundo() : ano(1), fase(0), turno(1), ultimoAleatorio(0)
 {
 	// Imperio
 	jogador = new Imperio();
 	jogador->adicionaTerritorio(criaTerritorio("Territorio Inicial"));
-	
-	// Eventos
-	eventos = new Eventos();
 }
 
 Mundo::Mundo(const Mundo& orig)
@@ -55,7 +53,7 @@ Mundo::Mundo(const Mundo& orig)
 Mundo::~Mundo()
 {
 	// Apagar os territórios que pertencem ao mundo (composição)
-	for (int i = 0; i < territorios.size(); i++)
+	for (unsigned int i = 0; i < territorios.size(); i++)
 		delete territorios[i];
 
 	// Apagar o jogador
@@ -69,24 +67,23 @@ Mundo& Mundo::operator=(const Mundo& orig)
 		return *this;
 
 	// Libertar mem. din. velha
-	for (int i = 0; i < territorios.size(); i++) {
+	for (unsigned int i = 0; i < territorios.size(); i++) {
 		delete territorios[i];
 	}
 
 	// Esvaziar o vector e dados
 	territorios.clear();
 	delete jogador;
-	delete eventos;
 
-	// eventos = new Eventos(*orig.eventos);
 	jogador = new Imperio(*orig.jogador);
 
 	ano = orig.ano;
 	turno = orig.turno;
 	fase = orig.fase;
+	ultimoAleatorio = orig.ultimoAleatorio;
 
 	// Copiar a informacao de orig, duplicando o objeto
-	for (int i = 0; i < orig.territorios.size(); i++) {
+	for (unsigned int i = 0; i < orig.territorios.size(); i++) {
 		Territorio* p = orig.territorios[i]->duplica();
 		territorios.emplace_back(p);
 		if (orig.jogador->procuraTerritorio(p->obtemNome()) != nullptr)
@@ -120,6 +117,7 @@ Territorio* Mundo::criaTerritorio(const string& tipo)
 		territorios.emplace_back(novo);
 		return novo;
 	}
+	
 	//Continentes
 	if (tipo == "Duna") {
 		novo = new Duna;
@@ -151,6 +149,7 @@ Territorio* Mundo::criaTerritorio(const string& tipo)
 		territorios.emplace_back(novo);
 		return novo;
 	}
+	
 	//Ilhas
 	if (tipo == "Pescaria") {
 		novo = new Pescaria;
@@ -163,7 +162,7 @@ Territorio* Mundo::criaTerritorio(const string& tipo)
 		return novo;
 	}
 	else {
-		std::cout << "\nTIPO: " << tipo << " AINDA NAO CRIADO\n";
+		std::cout << "\nTipo " << tipo << " inexistente!\n";
 		return nullptr;
 	}
 }
@@ -191,7 +190,7 @@ string Mundo::verificaTerritorioConquista(const string& territorio)
 	// Se o territorio existir no Mundo
 	Territorio* procuraMundo = procuraTerritorioMundo(territorio);
 	if (procuraMundo != nullptr) {
-		if (jogador->conquistaTerritorio(procuraMundo))
+		if (jogador->conquistaTerritorio(procuraMundo, this))
 			return string{ "O territorio " + territorio + " foi conquistado!\n" };
 		else
 			return string{ "Nao foi possivel conquistar o territorio " + territorio + "\n" };
@@ -217,10 +216,9 @@ string Mundo::verificaTecnologiaAdquirir(const string& nomeTecno)
 	
 	case 1:
 		return string{ "A tecnologia " + nomeTecno + " ja tinha sido adquirida pelo imperio\n" };
-	
-	default:
-		return string{ "A tecnologia " + nomeTecno + " nao existe no jogo!\n" };
 	}
+
+	return string{ "A tecnologia " + nomeTecno + " nao existe no jogo!\n" };
 }
 
 bool Mundo::adquireForcaMilitar()
@@ -296,7 +294,8 @@ string Mundo::obtemTempo() const
 
 string Mundo::geraEvento()
 {
-	return eventos->lancaEvento(jogador, ano);
+	std::unique_ptr<Evento> e{ Evento::sorteiaEvento(this) };
+	return e->acaoEvento(jogador, ano, this);
 }
 
 string Mundo::recolheOuroProdutos()
@@ -316,6 +315,12 @@ bool Mundo::verificaFimJogo() const
 	if (ano == 3)
 		return true;
 	return false;
+}
+
+int Mundo::geraAleatorio(const int& min, const int& max)
+{
+	ultimoAleatorio = rand() % max + min;
+	return ultimoAleatorio;
 }
 
 void Mundo::acrescentaOuroImperio(const int& valor)

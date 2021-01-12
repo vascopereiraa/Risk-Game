@@ -17,12 +17,12 @@ Tecnologias::Tecnologias()
 	tecnologias["banco"] = false;
 }
 
-int Tecnologias::verificaTecnologia(const string& nomeTecno) const
+bool Tecnologias::verificaTecnologia(const string& nomeTecno) const
 {
 	for (auto it = tecnologias.cbegin(); it != tecnologias.cend(); ++it)
 		if (it->first == nomeTecno)
 			return it->second;
-	return 2;
+	return false;
 }
 
 string Tecnologias::obtemNomeTecnologias() const

@@ -1,10 +1,17 @@
 #include "RecursoAbandonado.h"
 
-bool RecursoAbandonado::acaoEvento(Imperio* imp, const int& ano)
+
+string RecursoAbandonado::acaoEvento(Imperio* imperio, const int& ano, Mundo* mundo)
 {
-	if (ano == 1)
-		imp->acrescentaProduto(1);
-	else
-		imp->acrescentaOuro(1);
-	return true;
+	string info{ "Ocorreu o evento \"Recurso Abandonado\"\n" };
+	if (ano == 1) {
+		imperio->acrescentaProduto(1);
+		info += "Foi acrescentada uma unidade de produto ao Armazem do Império!\n";
+	}
+	else {
+		imperio->acrescentaOuro(1);
+		info += "Foi acrescentada uma unidade de ouro ao Cofre do Império!\n";
+	}
+
+	return info;
 }
