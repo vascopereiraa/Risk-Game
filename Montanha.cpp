@@ -23,7 +23,6 @@ int Montanha::obtemResistencia() const
 
 int Montanha::obtemCriacaoProdutos(const int& ano, const int& turno) const
 {
-	// check
 	return 0;
 }
 

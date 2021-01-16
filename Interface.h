@@ -17,15 +17,22 @@ private:
 	void cmdConquista(istringstream& iss);
 	void cmdLista(istringstream& iss);
 	void cmdAdquire(istringstream& iss);
-	void cmdFevento(istringstream& iss);
 	void cmdMaisMilitar();
 	void cmdMaisOuro();
 	void cmdMaisProd();
+	//Debug
 	void cmdModifica(istringstream& iss);
+	void cmdFevento(istringstream& iss);
+	void cmdToma(istringstream& iss);
+	//Gravacoes
 	void cmdGrava(istringstream& iss);
 	void cmdAtiva(istringstream& iss);
+	void cmdApaga(istringstream& iss);
 	void cmdListaGravacoes(istringstream& iss);
+	//Leitura de comandos
 	bool comandos(const string& iss);
+
+	void terminaJogo(const int& verificaFim);
 
 public:
 	Interface(Mundo* m);

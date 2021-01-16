@@ -13,7 +13,7 @@ int Ilha::obtemPontosVitoria() const
 bool Ilha::podeConquistar(const Imperio& jogador)
 {
     // Possuir pelo menos 5 territorios e tecnologia misseis
-    if (jogador.verificaTecnologia("missil") == true)
+    if (jogador.verificaExisteTecnologiaImperio("missil") == true)
         if (jogador.obtemNumeroTerritorios() >= 5)
             return true;
     

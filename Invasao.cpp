@@ -13,12 +13,15 @@ string Invasao::acaoEvento(Imperio* imperio, const int& ano, Mundo* mundo)
 	else
 		forcaAtaque = fatorRand + 3;
 
-	if (forcaAtaque >= alvo->obtemResistencia() + imperio->verificaTecnologia("defesas")) {
+	if (forcaAtaque >= alvo->obtemResistencia() + imperio->verificaExisteTecnologiaImperio("defesas")) {
 		if (imperio->removeTerritorio(alvo))
 			info += "O territorio " + alvo->obtemNome() + " foi tomado de assalto durante o Evento!\n";
 		else
 			info += "A tua defesa permaneceu intacta!\n";
 	}
+	else			
+		info += "A invasao fracassou!\n";
+
 
 	return info;
 }

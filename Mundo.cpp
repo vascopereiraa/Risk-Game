@@ -45,7 +45,7 @@ Mundo::Mundo() : ano(1), fase(0), turno(1), ultimoAleatorio(0)
 	jogador->adicionaTerritorio(criaTerritorio("Territorio Inicial"));
 }
 
-Mundo::Mundo(const Mundo& orig)
+Mundo::Mundo(const Mundo& orig):ano(orig.ano),turno(orig.turno),fase(orig.fase),ultimoAleatorio(orig.ultimoAleatorio)
 {
 	*this = orig;
 }
@@ -77,10 +77,10 @@ Mundo& Mundo::operator=(const Mundo& orig)
 
 	jogador = new Imperio(*orig.jogador);
 
-	ano = orig.ano;
+	/*ano = orig.ano;
 	turno = orig.turno;
 	fase = orig.fase;
-	ultimoAleatorio = orig.ultimoAleatorio;
+	ultimoAleatorio = orig.ultimoAleatorio;*/
 
 	// Copiar a informacao de orig, duplicando o objeto
 	for (unsigned int i = 0; i < orig.territorios.size(); i++) {
@@ -191,12 +191,12 @@ string Mundo::verificaTerritorioConquista(const string& territorio)
 	Territorio* procuraMundo = procuraTerritorioMundo(territorio);
 	if (procuraMundo != nullptr) {
 		if (jogador->conquistaTerritorio(procuraMundo, this))
-			return string{ "O territorio " + territorio + " foi conquistado!\n" };
+			return string{ "\nO territorio " + territorio + " foi conquistado!\n" };
 		else
-			return string{ "Nao foi possivel conquistar o territorio " + territorio + "\n" };
+			return string{ "\nNao foi possivel conquistar o territorio " + territorio + "\n" };
 	}
 	else
-		return string{ "O Territorio " + territorio + " nao existe no mundo\n" };
+		return string{ "\nO Territorio " + territorio + " nao existe no mundo\n" };
 }
 
 string Mundo::obtemTerritoriosImperioString() const
@@ -206,7 +206,7 @@ string Mundo::obtemTerritoriosImperioString() const
 
 string Mundo::verificaTecnologiaAdquirir(const string& nomeTecno)
 {
-	switch (jogador->verificaTecnologia(nomeTecno))
+	switch (jogador->verificaExisteTecnologiaImperio(nomeTecno))
 	{
 	case 0: 
 		if (jogador->adquireTecnologia(nomeTecno))
@@ -275,12 +275,14 @@ string Mundo::controlaFase()
 		istringstream iss{ recolheOuroProdutos() };
 		iss >> ouro >> prod;
 		out << "Ouro recolhido: " << ouro << "\tProdutos recolhidos: " << prod << endl;
-		out << avancaTempo();
+		if (jogador->verificaExisteTecnologiaImperio("bolsa"))
+			return out.str();
+		out << "As trocas nao sao permitidas pois nao possui a tecnologia \"Bolsa de Valores\"\n"<< avancaTempo();
 	}
 	if (fase == 4) {
 		out << "\nFase aleatoria dos eventos!" << endl;
 		out << geraEvento();
-		if(verificaFimJogo() == false)
+		if(verificaFimJogo() == 0)
 			out << avancaTempo();
 
 	}
@@ -298,6 +300,12 @@ string Mundo::geraEvento()
 	return e->acaoEvento(jogador, ano, this);
 }
 
+string Mundo::acionaEvento(const string& evento)
+{
+	std::unique_ptr<Evento> e{ Evento::lancaEvento(evento) };
+	return e->acaoEvento(jogador, ano, this);
+}
+
 string Mundo::recolheOuroProdutos()
 {
 	ostringstream oss;
@@ -306,15 +314,26 @@ string Mundo::recolheOuroProdutos()
 	return oss.str();
 }
 
-bool Mundo::verificaFimJogo() const
+int Mundo::verificaFimJogo() const
 {
 	if (jogador->obtemNumeroTerritorios() == 0)
-		return true;
+		return 1;
 	if (jogador->obtemNumeroTerritorios() == territorios.size() && fase > 0)
-		return true;
+		return 2;
 	if (ano == 3)
-		return true;
-	return false;
+		return 3;
+	return 0;
+}
+
+int Mundo::calculaPontuacao()
+{
+	int pontuacao = 0;
+	return pontuacao = jogador->obtemPontuacaoTerritorios(this) + jogador->obtemPontuacaoTecnologias();
+}
+
+int Mundo::obtemNumeroTerritoriosMundo() const
+{
+	return static_cast<unsigned int>(territorios.size());
 }
 
 int Mundo::geraAleatorio(const int& min, const int& max)
@@ -336,6 +355,31 @@ void Mundo::acrescentaProdImperio(const int& valor)
 int Mundo::obtemNumeroTerrImp() const
 {
 	return jogador->obtemNumeroTerritorios();
+}
+
+string Mundo::adicionaTerritorioImperio(const string& nome)
+{
+	Territorio* alvo = procuraTerritorioMundo(nome);
+	if (alvo != nullptr) {
+		if (procuraTerritorioImperio(nome) == nullptr) {
+			jogador->adicionaTerritorio(procuraTerritorioMundo(nome));
+			return string{ "O territorio " + nome + " foi adicionado ao Imperio\n" };
+		}
+		else
+			return string{ "O territorio " + nome + " ja faz parte do Imperio\n" };
+	}
+	else
+		return string{ "O territorio " + nome + " nao existe no mundo\n" };
+}
+
+string Mundo::adicionaTecnologiaImperio(const string& nomeTecno)
+{
+	if (jogador->verificaExisteTecnologiaImperio(nomeTecno))
+		return string{ "O jogador ja obteve a tecnologia " + nomeTecno + "\n" };
+	if (!jogador->verificaExisteTecnologia(nomeTecno))
+		return string{ "Nao existe a tecnologia com o nome: " + nomeTecno + "\n" };
+	jogador->adicionaTecnologia(nomeTecno);
+	return string{ "\nA tecnologia " + nomeTecno + " foi adicionada ao Imperio\n" };
 }
 
 ostream& operator<<(ostream& out, const Mundo& novoM) {

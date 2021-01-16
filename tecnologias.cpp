@@ -17,7 +17,7 @@ Tecnologias::Tecnologias()
 	tecnologias["banco"] = false;
 }
 
-bool Tecnologias::verificaTecnologia(const string& nomeTecno) const
+bool Tecnologias::verificaTecnologiaImperio(const string& nomeTecno) const
 {
 	for (auto it = tecnologias.cbegin(); it != tecnologias.cend(); ++it)
 		if (it->first == nomeTecno)
@@ -25,13 +25,52 @@ bool Tecnologias::verificaTecnologia(const string& nomeTecno) const
 	return false;
 }
 
+bool Tecnologias::verificaTecnologiaExiste(const string& nomeTecno) const
+{
+	for (auto it = tecnologias.cbegin(); it != tecnologias.cend(); ++it)
+		if (it->first == nomeTecno)
+			return true;
+	return false;
+}
+
+int Tecnologias::obtemNumeroTecnologias() const
+{
+	int pontuacao = 0;
+	for (auto it = tecnologias.cbegin(); it != tecnologias.cend(); ++it)
+		if (it->second)
+			++pontuacao;
+	if (pontuacao == 5)
+		++pontuacao;
+	return pontuacao;
+}
+
 string Tecnologias::obtemNomeTecnologias() const
 {
 	ostringstream oss;
-	for (auto it = tecnologias.cbegin(); it != tecnologias.cend(); ++it)
-		oss << "Tecnologia: " << it->first << endl;
+	for (auto it = tecnologias.cbegin(); it != tecnologias.cend(); ++it) {
+		oss << "\nTecnologia: " << it->first
+			<< "\tPreco: " << obterPrecoTecnologia(it->first)
+			<< "\nDescricao: " << obtemObjetivoTecnologias(it->first);
+		if (it->second == true)
+			oss << "Tecnologia ja foi adquirida" << endl;
+		else
+			oss << "Tecnologia ainda nao foi adquirida" << endl;
+	}
 
 	return oss.str();
+}
+string Tecnologias::obtemObjetivoTecnologias(const string& nome) const{
+	if (nome == "drones")
+		return string{ "Limite maximo de forca militar aumentado para 5\n" };
+	if (nome == "misseis")
+		return string{ "Jogador passa a ter a capacidade de atacar ilhas\n" };
+	if (nome == "defesas")
+		return string{ "Acrescenta 1 unidade de resistencia ao territorio caso seja invadido\n" };
+	if (nome == "bolsa")
+		return string{ "Torna possivel a troca entre produtos e ouro\n" };
+	if (nome == "banco")
+		return string{ "A capacidade de armazenar produtos e ouro passa a ter um limite de 5\n" };
+	return string{ "" };
 }
 
 int Tecnologias::obtemPrecoDrone() const

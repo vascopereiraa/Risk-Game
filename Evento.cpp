@@ -20,7 +20,7 @@ Evento* Evento::sorteiaEvento(Mundo* mundo)
 		return lancaEvento("Alianca");
 
 	if (num == 3)
-		return lancaEvento("Recurso Abandonado");
+		return lancaEvento("RecursoAbandonado");
 
 	if (num == 4)
 		return lancaEvento("Nenhum");
@@ -36,7 +36,7 @@ Evento* Evento::lancaEvento(const string& evento)
 	if (evento == "Alianca")
 		return new Alianca;
 
-	if (evento == "Recurso Abandonado")
+	if (evento == "RecursoAbandonado")
 		return new RecursoAbandonado;
 
 	if (evento == "Nenhum")

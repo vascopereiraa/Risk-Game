@@ -17,6 +17,9 @@ Imperio::Imperio() : armazem(0), cofre(0), forcaMilitar(0),
 }
 
 Imperio::Imperio(const Imperio& original)
+	:capacidadeArmazem(original.capacidadeArmazem),capacidadeCofre(original.capacidadeArmazem),
+	maxForcaMilitar(original.maxForcaMilitar),armazem(original.armazem),cofre(original.cofre),
+	forcaMilitar(original.forcaMilitar)
 {
 	*this = original;
 }
@@ -26,12 +29,6 @@ Imperio& Imperio::operator=(const Imperio& outro)
 	if (this == &outro)
 		return *this;
 	
-	capacidadeArmazem = outro.capacidadeArmazem;
-	capacidadeCofre = outro.capacidadeCofre;
-	maxForcaMilitar = outro.maxForcaMilitar;
-	armazem = outro.armazem;
-	cofre = outro.cofre;
-	forcaMilitar = outro.forcaMilitar;
 	tecno = new Tecnologias(*outro.tecno);
 
 	return *this;
@@ -70,12 +67,17 @@ int Imperio::obtemMaxForcaMilitar() const
 
 int Imperio::obtemNumeroTerritorios() const
 {
-	return imperio.size();
+	return static_cast<unsigned int>(imperio.size());
 }
 
-bool Imperio::verificaTecnologia(const string& nomeTecno) const
+bool Imperio::verificaExisteTecnologiaImperio(const string& nomeTecno) const
 {
-	return tecno->verificaTecnologia(nomeTecno);
+	return tecno->verificaTecnologiaImperio(nomeTecno);
+}
+
+bool Imperio::verificaExisteTecnologia(const string& nomeTecno) const
+{
+	return tecno->verificaTecnologiaExiste(nomeTecno);
 }
 
 string Imperio::obtemImperioString(const int& ano, const int& fase) const
@@ -94,12 +96,31 @@ string Imperio::obtemImperioString(const int& ano, const int& fase) const
 	for (auto it = imperio.begin(); it != imperio.end(); it++) {
 		oss << (*it)->obtemTerritorioString(ano, fase) << endl;
 	}
+
+	oss << "\n" << tecno->obtemNomeTecnologias() << endl;
+
 	return oss.str();
 }
 
 string Imperio::obtemNomeUltimoTerritorio() const
 {
 	return imperio[imperio.size() - 1]->obtemNome();
+}
+
+int Imperio::obtemPontuacaoTerritorios(Mundo* mundo)
+{
+	int pontuacao = 0;
+	for (auto it = imperio.begin(); it != imperio.end(); it++) {
+		pontuacao += (*it)->obtemPontosVitoria();
+	}
+	if (mundo->obtemNumeroTerritoriosMundo() == imperio.size())
+		pontuacao += 3;
+	return pontuacao;
+}
+
+int Imperio::obtemPontuacaoTecnologias() const
+{
+	return tecno->obtemNumeroTecnologias();
 }
 
 void Imperio::adicionaTerritorio(Territorio* novo)
@@ -113,7 +134,6 @@ bool Imperio::removeTerritorio(Territorio* apaga)
 	it = imperio.begin();
 	while (it != imperio.end()) {
 		if ((*it)->obtemNome() == apaga->obtemNome()) {
-			std::cout << "\n\n[DEBUG]Foi Eliminado o territorio " << (*it)->obtemNome() << endl << endl;
 			imperio.erase(it);
 			return true;
 		}
@@ -281,4 +301,9 @@ bool Imperio::maisOuro()
 		return false;
 	}
 	return false;
+}
+
+void Imperio::adicionaTecnologia(const string& nomeTecno)
+{
+	tecno->adicionaTecnologia(nomeTecno);
 }

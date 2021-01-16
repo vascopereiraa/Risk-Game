@@ -13,7 +13,7 @@ string Territorio::obtemTerritorioString(int ano, int fase) const
 		"    Resistencia: " << obtemResistencia() << 
 		"    Criacao Produtos: " << obtemCriacaoProdutos(ano, fase) << 
 		"    Criacao Ouro: " << obtemCriacaoOuro(ano, fase) << 
-		"    Pontos Vitoria: " << obtemPontosVitoria() << endl;
+		"    Pontos Vitoria: " << obtemPontosVitoria();
 	return oss.str();
 }
 

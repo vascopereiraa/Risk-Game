@@ -49,21 +49,29 @@ public:
 	string verificaTerritorioConquista(const string& territorio);
 	string obtemTerritoriosImperioString() const;
 	string verificaTecnologiaAdquirir(const string& nomeTecno);
+	string obtemTempo() const;
+	//
 	bool adquireForcaMilitar();
 	bool adquireOuro();
 	bool adquireProduto();
 	string avancaTempo();
 	string controlaFase();
-	string obtemTempo() const;
 	string geraEvento();
+	string acionaEvento(const string& evento);
 	string recolheOuroProdutos();
-	bool verificaFimJogo() const;
 	int geraAleatorio(const int& min, const int& max);
+
+	//Fim do jogo
+	int verificaFimJogo() const;
+	int calculaPontuacao();
+	int obtemNumeroTerritoriosMundo() const;
 
 	// Funcoes para Debug
 	void acrescentaOuroImperio(const int& valor);
 	void acrescentaProdImperio(const int& valor);
 	int obtemNumeroTerrImp() const;
+	string adicionaTerritorioImperio(const string& nome);
+	string adicionaTecnologiaImperio(const string& nomeTecno);
 };
 
 ostream& operator<<(ostream& out, const Mundo& novoM);

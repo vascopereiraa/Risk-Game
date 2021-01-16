@@ -48,9 +48,13 @@ public:
 	int obtemCapacidadeCofre() const;
 	int obtemMaxForcaMilitar() const;
 	int obtemNumeroTerritorios() const;
-	bool verificaTecnologia(const string& nomeTecno) const;
+	bool verificaExisteTecnologiaImperio(const string& nomeTecno) const;
+	bool verificaExisteTecnologia(const string& nomeTecno) const;
 	string obtemImperioString(const int& ano, const int& fase) const;
 	string obtemNomeUltimoTerritorio() const;
+	//Fim de jogo
+	int obtemPontuacaoTerritorios(Mundo* mundo);
+	int obtemPontuacaoTecnologias() const;
 
 	// Logica do Jogo
 	Territorio* procuraTerritorio(const string& nome);
@@ -68,6 +72,10 @@ public:
 	bool maisMilitar();
 	bool maisProduto();
 	bool maisOuro();
+
+	// Debug
+	void adicionaTecnologia(const string& nomeTecno);
+
 };
 
 

@@ -21,7 +21,7 @@ void Interface::cmdCarrega(istringstream& iss)
 		std::cerr << "[FAIL] Impossivel obter nome de ficheiro" << endl;
 		return;
 	}
-	// ABRIR FICHEIRO E LER LINHA A LINHA
+	//Abertura de ficheiro para leitura linha a linha
 	abreFicheiro(nomeFicheiro);
 }
 
@@ -34,6 +34,8 @@ void Interface::abreFicheiro(const string& nome)
 		while (getline(ficheiro, linha)) {
 			comandos(linha);
 		}
+	else
+		cout << "Nao existe nenhum ficheiro com esse nome" << endl;
 	ficheiro.close();
 }
 
@@ -43,7 +45,9 @@ void Interface::cmdCria(istringstream& iss)
 	int num;
 	iss >> tipo >> num;
 	for (int i = 0; i < num; i++)
-		mundo->criaTerritorio(tipo);
+		//Evita escrita da mensagem "tipo ... nao existe" num vezes
+		if (mundo->criaTerritorio(tipo) == nullptr)
+			break;
 }
 
 void Interface::cmdConquista(istringstream& iss)
@@ -51,6 +55,7 @@ void Interface::cmdConquista(istringstream& iss)
 	string nome;
 	iss >> nome;
 	cout << mundo->verificaTerritorioConquista(nome);
+	cout << mundo->avancaTempo();
 }
 
 void Interface::cmdLista(istringstream& iss)
@@ -61,7 +66,6 @@ void Interface::cmdLista(istringstream& iss)
 		cout << *mundo << endl;
 	else
 		cout << mundo->obtemDadosTerritorioMundoString(nome) << endl;
-	
 }
 
 void Interface::cmdAdquire(istringstream& iss)
@@ -75,6 +79,26 @@ void Interface::cmdFevento(istringstream& iss)
 {
 	string nome;
 	iss >> nome;
+	if (iss.fail()) {
+		cout << "Nao foi inserido o nome do evento a ocorrer" << endl;
+		return;
+	}
+	cout << mundo->acionaEvento(nome) << endl;
+}
+
+void Interface::cmdToma(istringstream& iss)
+{
+	string qual, nome;
+	iss >> qual >> nome;
+	if (iss.fail()) {
+		cout << "Tem que inserir o que quer tomar de assalto e o seu nome" << endl;
+		return;
+	}
+	if (qual == "terr")
+		cout << mundo->adicionaTerritorioImperio(nome);
+	if (qual == "tec")
+		cout << mundo->adicionaTecnologiaImperio(nome);
+	return;
 }
 
 void Interface::cmdMaisMilitar()
@@ -83,6 +107,7 @@ void Interface::cmdMaisMilitar()
 		cout << "Forca Militar aumentada!" << endl;
 	else
 		cout << "Nao foi possivel aumentar a forca militar" << endl;
+	cout << mundo->avancaTempo();
 }
 
 void Interface::cmdMaisOuro()
@@ -91,6 +116,7 @@ void Interface::cmdMaisOuro()
 		cout << "Ouro adquirido!" << endl;
 	else
 		cout << "Nao foi possivel adquirir ouro" << endl;
+	cout << mundo->avancaTempo();
 }
 
 void Interface::cmdMaisProd()
@@ -99,6 +125,7 @@ void Interface::cmdMaisProd()
 		cout << "Produto adquirido!" << endl;
 	else
 		cout << "Nao foi possivel adquirir produto" << endl;
+	cout << mundo->avancaTempo();
 }
 
 void Interface::cmdModifica(istringstream& iss)
@@ -134,10 +161,11 @@ void Interface::cmdGrava(istringstream& iss)
 	Mundo* novo = new Mundo(*mundo);
 	gravacoes.insert(std::pair<string, Mundo*>(nome, novo));
 
-	cout << "Foi gravada uma copia do jogo segundo o nome " << nome << endl;
+	cout << "\nFoi gravada uma copia do jogo segundo o nome: " << nome << endl;
 
 	for (auto it = gravacoes.cbegin(); it != gravacoes.cend(); ++it)
-		cout << it->first << " " << *(it->second) << endl;
+		cout << "A gravacao \"" << it->first << "\" foi gravada com os seguintes dados: \n" 
+		<< *(it->second) << endl;
 }
 
 void Interface::cmdAtiva(istringstream& iss)
@@ -151,6 +179,7 @@ void Interface::cmdAtiva(istringstream& iss)
 	}
 
 	auto it = gravacoes.find(nome);
+	//Caso o mundo exista, o mundo atual é substituido pelo escolhido, e a gravação deixa de existir
 	if(it != gravacoes.end())
 	{
 		delete mundo;
@@ -158,7 +187,24 @@ void Interface::cmdAtiva(istringstream& iss)
 		gravacoes.erase(nome);
 		return;
 	}
-	
+	cout << "Nao existe nenhuma gravacao com esse nome" << endl;
+}
+
+void Interface::cmdApaga(istringstream& iss)
+{
+	string nome;
+	iss >> nome;
+	if (iss.fail()) {
+		cout << "Nao foi inserido nome do mundo a apagar" << endl;
+		return;
+	}
+	for (auto it = gravacoes.begin(); it != gravacoes.end(); ++it)
+		if (it->first == nome) {
+			gravacoes.erase(it);
+			cout << "A gravacao " + nome + " foi apagada com sucesso" << endl;
+			return;
+		}
+	cout << "Nao existem gravacoes com esse nome" << endl;
 }
 
 void Interface::cmdListaGravacoes(istringstream& iss)
@@ -169,12 +215,15 @@ void Interface::cmdListaGravacoes(istringstream& iss)
 		cout << "Gravacoes disponiveis: " << endl;
 		for (auto it = gravacoes.cbegin(); it != gravacoes.cend(); ++it)
 			cout << it->first << endl;
+		return;
 	}
 	else
 		for (auto it = gravacoes.cbegin(); it != gravacoes.cend(); ++it)
-			if(it->first == nome)
-				cout << "\n" << *(it->second) << endl;
-			
+			if (it->first == nome) {
+				cout << endl << *(it->second) << endl;
+				return;
+			}
+	cout << "Nao existe uma gravacao com esse nome" << endl;
 }
 
 bool Interface::comandos(const string& linha)
@@ -185,17 +234,18 @@ bool Interface::comandos(const string& linha)
 
 	// Comandos de Debug
 	if (comando == "modifica") { cmdModifica(iss); return true; }
-	
-	// Comandos gerais do jogo
-	if (comando == "avanca" || comando == "passar") { 
-		cout << mundo->avancaTempo();
-		return true; 
-	}
-	if (comando == "lista") { cmdLista(iss); return true; }
 	if (comando == "fevento") { cmdFevento(iss); return true; }
+	if (comando == "toma") { cmdToma(iss); return true; }
+	// Comandos gerais do jogo
+	if (comando == "avanca" && mundo->obtemFase() != 1) {
+		cout << mundo->avancaTempo();
+		return true; }
+	if (comando == "lista") { cmdLista(iss); return true; }
+	//Gravações
 	if (comando == "grava") { cmdGrava(iss); return true; }
 	if (comando == "mostra") { cmdListaGravacoes(iss); return true; }
 	if (comando == "ativa") { cmdAtiva(iss); return true; }
+	if (comando == "apaga") { cmdApaga(iss); return true; }
 	
 	// Seletor de comandos das fases
 	switch (mundo->obtemFase()) {
@@ -205,11 +255,17 @@ bool Interface::comandos(const string& linha)
 		break;
 	case 1:
 		if (comando == "conquista") { cmdConquista(iss); return true; }
+		if (comando == "passa") {
+			cout << "O jogador decidiu nao conquistar nenhum territorio \n" << mundo->avancaTempo();
+			return true;
+		}
+		break;
+	case 2:
+		if (comando == "maisouro") { cmdMaisOuro(); return true; }
+		if (comando == "maisprod") { cmdMaisProd(); return true; }
 		break;
 	case 3:
 		if (comando == "maismilitar") { cmdMaisMilitar(); return true; }
-		if (comando == "maisouro") { cmdMaisOuro(); return true; }
-		if (comando == "maisprod") { cmdMaisProd(); return true; }
 		if (comando == "adquire") { cmdAdquire(iss);  return true; }
 		break;
 	default:
@@ -219,6 +275,18 @@ bool Interface::comandos(const string& linha)
 	return false;
 }
 
+void Interface::terminaJogo(const int& verificaFim)
+{
+	if (verificaFim == 1)
+		cout << "\nO imperio foi derrotado !" << endl;
+	if (verificaFim == 2) {
+		cout << "\nO jogador conquistou todos os territorios do mundo!" << endl;
+	}
+	if (verificaFim == 3 || verificaFim == 0)
+		cout << "\nChegou ao fim do jogo " << endl;
+	cout << "O jogador obteve a pontuacao " << mundo->calculaPontuacao() << endl;
+}
+
 Interface::Interface(Mundo* m) : mundo(m)
 {
 }
@@ -226,6 +294,7 @@ Interface::Interface(Mundo* m) : mundo(m)
 void Interface::menu()
 {
 	string linha;
+	int verificaFim;
 	cout << mundo->obtemTempo();
 	do 
 	{
@@ -235,7 +304,9 @@ void Interface::menu()
 			cout << "[AVISO] O comando que introduziu nao esta disponivel!" << endl;
 			cout << "Comando: " << linha << endl << endl;
 		}
-	} while (!mundo->verificaFimJogo() && linha != "sair");
+		verificaFim = mundo->verificaFimJogo();
+	} while (verificaFim == 0 && linha != "sair");
 
+	terminaJogo(verificaFim);
 	return;
 }

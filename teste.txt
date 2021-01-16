@@ -1,5 +1,31 @@
-cria Duna 5
-cria Pescaria 1
+cria Castelo 1
+cria Duna 2
+cria Fortaleza 3
+cria Mina 4
+cria Montanha 5
+cria Planicie 6
+cria Pescaria 7
+cria Refugio 8
 avanca
 lista
+conquista Duna1
 avanca
+conquista Fortaleza3
+modifica ouro 5
+modifica prod 5
+toma tec banco
+toma terr Pescaria2
+modifica
+lista
+avanca
+conquista Pescaria1
+avanca
+conquista Duna1
+avanca
+maismilitar
+avanca
+conquista Mina1
+avanca
+mais militar
+conquista Mina1
+
