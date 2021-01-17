@@ -77,11 +77,6 @@ Mundo& Mundo::operator=(const Mundo& orig)
 
 	jogador = new Imperio(*orig.jogador);
 
-	/*ano = orig.ano;
-	turno = orig.turno;
-	fase = orig.fase;
-	ultimoAleatorio = orig.ultimoAleatorio;*/
-
 	// Copiar a informacao de orig, duplicando o objeto
 	for (unsigned int i = 0; i < orig.territorios.size(); i++) {
 		Territorio* p = orig.territorios[i]->duplica();
@@ -384,6 +379,7 @@ string Mundo::adicionaTecnologiaImperio(const string& nomeTecno)
 	if (!jogador->verificaExisteTecnologia(nomeTecno))
 		return string{ "Nao existe a tecnologia com o nome: " + nomeTecno + "\n" };
 	jogador->adicionaTecnologia(nomeTecno);
+	jogador->alteraImperio(nomeTecno);
 	return string{ "\nA tecnologia " + nomeTecno + " foi adicionada ao Imperio\n" };
 }
 

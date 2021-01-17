@@ -20,7 +20,7 @@ lista
 avanca
 conquista Pescaria1
 avanca
-conquista Duna1
+conquista Duna2
 avanca
 maismilitar
 avanca

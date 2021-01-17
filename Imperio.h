@@ -49,10 +49,12 @@ public:
 	int obtemCapacidadeCofre() const;
 	int obtemMaxForcaMilitar() const;
 	int obtemNumeroTerritorios() const;
-	bool verificaExisteTecnologiaImperio(const string& nomeTecno) const;
-	bool verificaExisteTecnologia(const string& nomeTecno) const;
 	string obtemImperioString(const int& ano, const int& fase) const;
 	string obtemNomeUltimoTerritorio() const;
+
+	bool verificaExisteTecnologiaImperio(const string& nomeTecno) const;
+	bool verificaExisteTecnologia(const string& nomeTecno) const;
+	
 	//Fim de jogo
 	int obtemPontuacaoTerritorios(Mundo* mundo);
 	int obtemPontuacaoTecnologias() const;

@@ -4,7 +4,6 @@
 
 
 #include "Evento.h"
-#include "Imperio.h"
 
 class Alianca : public Evento
 {

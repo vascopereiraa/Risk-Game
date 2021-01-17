@@ -3,7 +3,6 @@
 #define __RECURSO_ABANDONADO__
 
 #include "Evento.h"
-#include "Imperio.h"
 
 class RecursoAbandonado : public Evento
 {

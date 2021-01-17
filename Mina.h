@@ -19,8 +19,10 @@ public:
 	// Obter dados da Classe
 	string obtemNome() const;
 	int obtemResistencia() const;
-	int obtemCriacaoProdutos(const int& ano, const int& fase) const;
-	int obtemCriacaoOuro(const int& ano, const int& fase) const;
+	int obtemCriacaoProdutos(const int& ano, const int& turno) const;
+	int obtemCriacaoOuro(const int& ano, const int& turno) const;
+	
+	// Logica do Jogo
 	Territorio* duplica() const;
 };
 

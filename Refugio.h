@@ -19,6 +19,8 @@ public:
 	string obtemNome() const;
 	int obtemCriacaoProdutos(const int& ano, const int& turno) const;
 	int obtemCriacaoOuro(const int& ano, const int& turno) const;
+
+	// Logica do Jogo
 	Territorio* duplica() const;
 
 };
