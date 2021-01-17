@@ -23,7 +23,7 @@ int main()
 	Interface* interface = new Interface{ mundo };
 
 	// Chamada a interface
-	interface->menu();
+	mundo = interface->menu();
 
 	// Apagar objetos em memoria dinâmica
 	delete mundo;

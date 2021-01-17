@@ -9,13 +9,14 @@ class Continente : public Territorio
 {
 
 public:
-	// Construtores
-
 	// Obter dados da Classe
 	int obtemPontosVitoria() const;
 
 	// Logica do Jogo
 	bool podeConquistar(const Imperio& jogador);
+
+	// Destrutor
+	virtual ~Continente() = default;
 };
 
 #endif //CONTINENTE_H

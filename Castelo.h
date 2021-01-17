@@ -16,7 +16,6 @@ public:
 	// Construtores
 	Castelo();
 	
-
 	// Obter dados da Classe
 	string obtemNome() const;
 	int obtemResistencia() const;

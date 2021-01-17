@@ -162,10 +162,6 @@ void Interface::cmdGrava(istringstream& iss)
 	gravacoes.insert(std::pair<string, Mundo*>(nome, novo));
 
 	cout << "\nFoi gravada uma copia do jogo segundo o nome: " << nome << endl;
-
-	for (auto it = gravacoes.cbegin(); it != gravacoes.cend(); ++it)
-		cout << "A gravacao \"" << it->first << "\" foi gravada com os seguintes dados: \n" 
-		<< *(it->second) << endl;
 }
 
 void Interface::cmdAtiva(istringstream& iss)
@@ -179,12 +175,13 @@ void Interface::cmdAtiva(istringstream& iss)
 	}
 
 	auto it = gravacoes.find(nome);
-	//Caso o mundo exista, o mundo atual é substituido pelo escolhido, e a gravação deixa de existir
+	// Caso o mundo exista, o mundo atual é substituido pelo escolhido e a gravação deixa de existir
 	if(it != gravacoes.end())
 	{
 		delete mundo;
 		mundo = (it->second);
 		gravacoes.erase(nome);
+		cout << "A gravacao " << nome << " foi ativada com sucesso!" << endl;
 		return;
 	}
 	cout << "Nao existe nenhuma gravacao com esse nome" << endl;
@@ -226,6 +223,16 @@ void Interface::cmdListaGravacoes(istringstream& iss)
 	cout << "Nao existe uma gravacao com esse nome" << endl;
 }
 
+void Interface::cmdPassa() {
+	cout << "O jogador decidiu nao conquistar nenhum territorio \n" << mundo->avancaTempo();
+}
+
+void Interface::cmdAvanca()
+{
+	if(mundo->obtemFase() != 1)
+		cout << mundo->avancaTempo();
+}
+
 bool Interface::comandos(const string& linha)
 {
 	string comando;
@@ -236,11 +243,11 @@ bool Interface::comandos(const string& linha)
 	if (comando == "modifica") { cmdModifica(iss); return true; }
 	if (comando == "fevento") { cmdFevento(iss); return true; }
 	if (comando == "toma") { cmdToma(iss); return true; }
+	
 	// Comandos gerais do jogo
-	if (comando == "avanca" && mundo->obtemFase() != 1) {
-		cout << mundo->avancaTempo();
-		return true; }
+	if (comando == "avanca") { cmdAvanca(); return true; }
 	if (comando == "lista") { cmdLista(iss); return true; }
+	
 	//Gravações
 	if (comando == "grava") { cmdGrava(iss); return true; }
 	if (comando == "mostra") { cmdListaGravacoes(iss); return true; }
@@ -255,10 +262,7 @@ bool Interface::comandos(const string& linha)
 		break;
 	case 1:
 		if (comando == "conquista") { cmdConquista(iss); return true; }
-		if (comando == "passa") {
-			cout << "O jogador decidiu nao conquistar nenhum territorio \n" << mundo->avancaTempo();
-			return true;
-		}
+		if (comando == "passa") { cmdPassa(); return true; }
 		break;
 	case 2:
 		if (comando == "maisouro") { cmdMaisOuro(); return true; }
@@ -291,7 +295,7 @@ Interface::Interface(Mundo* m) : mundo(m)
 {
 }
 
-void Interface::menu()
+Mundo* Interface::menu()
 {
 	string linha;
 	int verificaFim;
@@ -308,5 +312,5 @@ void Interface::menu()
 	} while (verificaFim == 0 && linha != "sair");
 
 	terminaJogo(verificaFim);
-	return;
+	return mundo;
 }

@@ -41,6 +41,7 @@ public:
 	int obtemAno() const;
 	int obtemTurno() const;
 	int obtemFase() const;
+	int obtemUltimoAleatorio() const;
 
 	// Logica do Jogo
 	Territorio* criaTerritorio(const string& tipo);
@@ -50,7 +51,6 @@ public:
 	string obtemTerritoriosImperioString() const;
 	string verificaTecnologiaAdquirir(const string& nomeTecno);
 	string obtemTempo() const;
-	//
 	bool adquireForcaMilitar();
 	bool adquireOuro();
 	bool adquireProduto();

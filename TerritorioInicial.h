@@ -8,8 +8,6 @@ class TerritorioInicial : public Territorio
 {
 
 public:
-	// Construtores
-
 	// Obter dados da Classe
 	string obtemNome() const;
 	int obtemResistencia() const;

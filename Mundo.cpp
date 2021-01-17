@@ -108,6 +108,11 @@ int Mundo::obtemFase() const
 	return fase;
 }
 
+int Mundo::obtemUltimoAleatorio() const
+{
+	return ultimoAleatorio;
+}
+
 
 Territorio* Mundo::criaTerritorio(const string& tipo)
 {
@@ -384,7 +389,8 @@ string Mundo::adicionaTecnologiaImperio(const string& nomeTecno)
 
 ostream& operator<<(ostream& out, const Mundo& novoM) {
 
-	out << "\nTerritorios do Mundo: " << endl;
+	out << "\nUltimo Aleatorio: " << novoM.obtemUltimoAleatorio() << endl;
+	out << "Territorios do Mundo: " << endl;
 	out << novoM.obtemTerritoriosMundoString();
 
 	out << "-----------------------------------------------------------"

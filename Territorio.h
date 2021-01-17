@@ -12,8 +12,6 @@ class Territorio
 {
 
 public:
-	// Construtores
-
 	// Obter dados da Classe
 	virtual string obtemNome() const = 0;
 	virtual int obtemResistencia() const = 0;
@@ -25,6 +23,9 @@ public:
 	// Logica do Jogo
 	virtual bool podeConquistar(const Imperio& jogador) = 0;
 	virtual Territorio* duplica() const = 0;
+
+	// Destrutores
+	virtual ~Territorio() = default;
 };
 
 

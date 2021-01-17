@@ -15,7 +15,7 @@ string Duna::obtemNome() const
 
 int Duna::obtemResistencia() const
 {
-	return 0;
+	return 4;
 }
 
 int Duna::obtemCriacaoProdutos(const int& ano, const int& turno) const
