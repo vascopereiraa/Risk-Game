@@ -28,6 +28,7 @@ class Imperio
 public:
 	// Construtores
 	Imperio();
+	~Imperio();
 
 	/*
 	*		O Construtor por Cópia do Imperio apenas faz sentido no conceito do Mundo,

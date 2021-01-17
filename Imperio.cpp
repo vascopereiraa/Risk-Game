@@ -16,6 +16,11 @@ Imperio::Imperio() : armazem(0), cofre(0), forcaMilitar(0),
 	tecno = novo;
 }
 
+Imperio::~Imperio()
+{
+	delete tecno;
+}
+
 Imperio::Imperio(const Imperio& original)
 	:capacidadeArmazem(original.capacidadeArmazem),capacidadeCofre(original.capacidadeArmazem),
 	maxForcaMilitar(original.maxForcaMilitar),armazem(original.armazem),cofre(original.cofre),
